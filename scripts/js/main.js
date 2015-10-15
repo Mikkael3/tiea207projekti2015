@@ -54,6 +54,17 @@ var Listaus = React.createClass({
     }
 });
 
+var ListaElementti = React.createClass({
+    render:function(){
+	return(
+	   <li><div>
+           <img src="http://placehold.it/250x150"/> 
+           <p>elokuvan nimi</p>
+	   <p>jotain muuta</p>
+	   </div>
+	   </li>)
+    }
+}); 
 
 ReactDOM.render(
       <Kehys/>,
