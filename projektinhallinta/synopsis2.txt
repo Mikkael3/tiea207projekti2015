@@ -1,0 +1,24 @@
+Ryhmän prosessisuunnitelma
+
+Viestintään käytetään sähköpostilistaa, whatsapp-ryhmää ja slack kanavaa.
+Joonas vastaa viestinnästä ohjaajien suuntaan.
+
+Lähdekoodi ja muut dokumentit sijoitetaan github repoon.
+
+Tehtävälista sijaitsee Trellossa. Tehtävälista päivitetään ryhmän tapaamisissa
+tarpeen vaatiessa. Listasta ryhmän jäsenet tekevät tehtäviä oman maun mukaan.
+Lisäksi ryhmän tapaamisissa tarkistetaan edellisen tapaamisen jälkeen tehdyt
+tehtävät ja arvioidaan ovatko ne riittävän hyvin tehtyjä.
+
+Slack kanavan integraatiot mahdollistavat committien ja Trellon muutosten
+seuraamisen reaaliajassa. Tämä helpottaa tehtävien edistymisen seuraamista.
+
+Tapaamisia pidetään minimissään kaksi viikossa.
+Tapaamiset voidaan järjestää internetin yli jos yhteisen ajan löytyminen
+osoittautuu mahdottomaksi, mutta tälläisiä tilanteita vältetään viimeiseen
+asti.
+
+Ohjaustapaamisista tai ryhmän palavereista ei kirjoiteta muistioita.
+
+Ongelmatilanteissa järjestetään kriisipalaveri jossa tutkitaan mahdolliset
+jatkotoimenpiteet. Kriisipalaveriin on mahdollista kutsua myös ohjaajat.
