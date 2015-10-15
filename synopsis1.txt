@@ -1,0 +1,19 @@
+web-sovellus, jossa on ideana yhdistää Yle Areenasta löytyvä ohjelmisto
+ja niiden sisältämä metadata sekä Open Movie Databasesta saatavat tarkemmat
+tiedot tiettyyn ohjelmaan liittyen. Mahdollista on myös nimikkeiden lajittelu,
+hakeminen ja tarkempi tarkastelu, jossa näkyy mahdollisesti Yle Areenasta saatu
+videoupote, nimikkeen traileri jos se on saatavilla sekä nimikkeen saamat arvostelut.
+Käyttäjälle tarjotaan myös mahdollisuus antaa nimikkeestä oma arvostelu. 
+Nimikkeitä on mahdollista lajitella paremmuusjärjestykseen IMDB-ratingin perusteella ja hakea nimellä. 
+
+Kohderyhmänä ovat suomalaiset käyttäjät.
+Sovellus sopii käyttäjille, joilla on aiempaa harrastuneisuutta elokuvien ja sarjojen parissa. 
+
+Projektissa käytetään rajapintoina Yle Areena APIA, OMDB APIA ja Trailer Addict APIA.
+Yle rajoittaa API:nsa käytön vain ei-kaupallisiin sovelluksiin.
+Sovelluksessa on myös oltava esillä Ylen brändielementit.
+Muista rajapinnoista ei mainittavia rajoituksia löytynyt.
+Data on JSONina Yle Areenassa ja OMDB:ssä ja XML:nä Trailer Addictissa. 
+
+Ohjelmointikielenä toimii JavaScript ja kirjastoina alustavasti React ja JQuery.
+Projektin tavoitteena on tuottaa sovellus, joka on projektin päättyessä toimiva. 
