@@ -22,35 +22,12 @@ var Hakupalkki = React.createClass({
 var Listaus = React.createClass({
     render:function(){
 	return(    <ul>
-		   <li>
-		   <div>
-		   <img src="http://placehold.it/250x150"/>
-		   <p>elokuvan nimi</p>
-		   <p>jotain muuta</p>
-		   </div>
-		   </li>
-		   <li>
-		   <div>
-		   <img src="http://placehold.it/250x150"/>
-		   <p>elokuvan nimi</p>
-		   <p>jotain muuta</p>
-		   </div>
-		   </li>
-		   <li>
-		   <div>
-		   <img src="http://placehold.it/250x150"/>
-		   <p>elokuvan nimi</p>
-		   <p>jotain muuta</p>
-		   </div>
-		   </li>
-		   <li>
-		   <div>
-		   <img src="http://placehold.it/250x150"/>
-		   <p>elokuvan nimi</p>
-		   <p>jotain muuta</p>
-		   </div>
-		   </li>
-		   </ul>);
+        <ListaElementti/>
+        <ListaElementti/>
+        <ListaElementti/>
+        <ListaElementti/>
+        <ListaElementti/>
+       </ul>);
     }
 });
 
@@ -58,13 +35,13 @@ var ListaElementti = React.createClass({
     render:function(){
 	return(
 	   <li><div>
-           <img src="http://placehold.it/250x150"/> 
+           <img src="http://placehold.it/250x150"/>
            <p>elokuvan nimi</p>
 	   <p>jotain muuta</p>
 	   </div>
 	   </li>)
     }
-}); 
+});
 
 ReactDOM.render(
       <Kehys/>,
