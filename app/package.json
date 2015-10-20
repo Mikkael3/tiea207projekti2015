@@ -1,0 +1,20 @@
+{
+  "name": "kolosseum",
+  "version": "1.0.0",
+  "description": "Tiea218 kurssin opiskelijaprojekti",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tiea207"
+  ],
+  "author": "jovivavi,mapeilmu,nikheihe",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^11.2.0",
+    "express": "^4.13.3",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  }
+}
