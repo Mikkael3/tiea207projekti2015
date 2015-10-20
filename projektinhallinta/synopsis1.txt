@@ -1,4 +1,4 @@
-web-sovellus, jossa on ideana yhdistää Yle Areenasta löytyvä ohjelmisto
+Web-sovellus, jossa on ideana yhdistää Yle Areenasta löytyvä ohjelmisto
 ja niiden sisältämä metadata sekä Open Movie Databasesta saatavat tarkemmat
 tiedot tiettyyn ohjelmaan liittyen. Mahdollista on myös nimikkeiden lajittelu,
 hakeminen ja tarkempi tarkastelu, jossa näkyy mahdollisesti Yle Areenasta saatu
@@ -15,5 +15,5 @@ Sovelluksessa on myös oltava esillä Ylen brändielementit.
 Muista rajapinnoista ei mainittavia rajoituksia löytynyt.
 Data on JSONina Yle Areenassa ja OMDB:ssä ja XML:nä Trailer Addictissa. 
 
-Ohjelmointikielenä toimii JavaScript ja kirjastoina alustavasti React ja JQuery.
+Ohjelmointikielenä toimii JavaScript ja kirjastoina alustavasti React,NodeJs ja JQuery.
 Projektin tavoitteena on tuottaa sovellus, joka on projektin päättyessä toimiva. 
