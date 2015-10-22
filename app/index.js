@@ -1,4 +1,3 @@
-
 var http = require('http');
 var React = require('react');
 var express = require('express');
@@ -11,7 +10,7 @@ var Kehys = require('./views/index.jsx');
 app.get('/',function(req,res){
  
 res.setHeader('Content-Type', 'text/html');
-  res.end(ReactDOMServer.renderToStaticMarkup(
+    res.end(ReactDOMServer.renderToStaticMarkup(
     React.DOM.body(
       null,
       React.DOM.div({ id: 'app',dangerouslySetInnerHTML: {__html: ReactDOMServer.renderToString(React.createElement(Kehys))}}),

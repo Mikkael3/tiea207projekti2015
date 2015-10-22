@@ -1,9 +1,13 @@
 var React = require('react'),  DOM = React.DOM, div = DOM.div, button = DOM.button, ul = DOM.ul, li = DOM.li,label=DOM.label,form= DOM.form
 var ReactDomServer = require('react-dom/server');
 
+var hapaStyle = { float:'left',
+                  width:'100%'
+                };
+
 var HakupalkkiClass = React.createClass({
     render:function(){
-	return div(null,form(null,label(null,'Hakusana'), DOM.input({type:'text'}) ,DOM.select(null,DOM.option(null,'Vuosi'))),DOM.input({type:'submit' ,value:'Hae!'}));
+	return form({style:hapaStyle},label(null,'Hakusana'), DOM.input({type:'text'}) ,DOM.select(null,DOM.option(null,'Vuosi')),DOM.input({type:'submit' ,value:'Hae!'}));
     }
 });
 
