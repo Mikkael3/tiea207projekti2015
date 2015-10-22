@@ -1,3 +1,4 @@
+
 var http = require('http');
 var React = require('react');
 var express = require('express');
@@ -18,16 +19,6 @@ res.setHeader('Content-Type', 'text/html');
       React.DOM.script({src: '/bundle.js'}))
   ));
 
-});
-
-app.use('/bundle.js', function(req, res) {  
-  res.setHeader('content-type', 'application/javascript');
-  browserify('./app.js', {
-    debug: true
-  })
-  .transform('reactify')
-  .bundle()
-  .pipe(res);
 });
 
 var server = app.listen(3333, function() {  
