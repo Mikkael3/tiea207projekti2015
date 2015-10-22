@@ -9,28 +9,26 @@ var HakupalkkiClass = React.createClass({
 
 var Hakupalkki = React.createFactory(HakupalkkiClass);
 
-var ListausClass = React.createClass({
+var OhjelmaKehysClass = React.createClass({
     render:function(){
-	return div(null,ListausElementti(null),ListausElementti(null),ListausElementti(null),ListausElementti(null));
+	return div(null,MainOhjelma(null));
     }
 });
 
-var Listaus = React.createFactory(ListausClass);
+var Ohjelma = React.createFactory(OhjelmaKehysClass);
 
-var ListausElementtiClass = React.createClass({
+var MainOhjelmaClass = React.createClass({
     render:function(){
-	return li(null,div(null,DOM.a({href:"./ohjelma"},DOM.img({src:"http://placehold.it/250x150"})),DOM.p(null,'Elokuvana nimi'),DOM.p(null,'Jotain muuta')));
+	return div(null,div(null,DOM.img({src:"http://placehold.it/450x250"}),DOM.p(null,'Elokuvana nimi'),DOM.p(null,'Jotain muuta')));
     }
 });
 
-var ListausElementti = React.createFactory(ListausElementtiClass);
+var MainOhjelma = React.createFactory(MainOhjelmaClass);
 
 module.exports = React.createClass({
     render: function() {
 
-        return div(null,Hakupalkki(null),Listaus(null));
+        return div(null,Hakupalkki(null),Ohjelma(null));
     }
 });
-
-
 
