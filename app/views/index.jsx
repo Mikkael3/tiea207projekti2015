@@ -14,6 +14,7 @@ var HakupalkkiClass = React.createClass({
     render:function(){
 	return form({style:hapaStyle},label(null,'Hakusana'), DOM.input({type:'text'}) ,DOM.select(null,DOM.option(null,'Vuosi')),DOM.input({type:'submit' ,value:'Hae!'}));
     }
+
 });
 
 var Hakupalkki = React.createFactory(HakupalkkiClass);
@@ -28,7 +29,7 @@ var Listaus = React.createFactory(ListausClass);
 
 var ListausElementtiClass = React.createClass({
     render:function(){
-	return li({style:liStyle},div(null,DOM.a({href:"./ohjelma"},DOM.img({src:"http://placehold.it/250x150"})),DOM.p(null,'Elokuvana nimi'),DOM.p(null,'Jotain muuta')));
+	return li({style:liStyle,id:"tt0372461"},div(null,DOM.a({href:"./ohjelma"},DOM.img({src:"http://placehold.it/250x150"})),DOM.p(null,'Elokuvana nimi'),DOM.p(null,'Jotain muuta')));
     }
 });
 
