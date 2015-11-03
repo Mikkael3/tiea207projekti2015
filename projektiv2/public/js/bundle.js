@@ -19,6 +19,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Haku = require('./Haku');
+
+var _Haku2 = _interopRequireDefault(_Haku);
+
 var App = (function (_React$Component) {
 	_inherits(App, _React$Component);
 
@@ -34,7 +38,8 @@ var App = (function (_React$Component) {
 			return _react2['default'].createElement(
 				'div',
 				null,
-				this.props.children
+				this.props.children,
+				_react2['default'].createElement(_Haku2['default'], null)
 			);
 		}
 	}]);
@@ -45,7 +50,90 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"react":"react"}],2:[function(require,module,exports){
+},{"./Haku":2,"react":"react"}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+			value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
+
+var Haku = (function (_React$Component) {
+			_inherits(Haku, _React$Component);
+
+			function Haku() {
+						_classCallCheck(this, Haku);
+
+						_get(Object.getPrototypeOf(Haku.prototype), 'constructor', this).apply(this, arguments);
+			}
+
+			_createClass(Haku, [{
+						key: 'render',
+						value: function render() {
+									return _react2['default'].createElement(
+												'form',
+												null,
+												_react2['default'].createElement(
+															'label',
+															null,
+															'Hakusana'
+												),
+												_react2['default'].createElement('input', { type: 'text' }),
+												_react2['default'].createElement(
+															'label',
+															null,
+															'Hakuehto'
+												),
+												_react2['default'].createElement(
+															'select',
+															null,
+															_react2['default'].createElement(
+																		'option',
+																		null,
+																		'Vuosi'
+															)
+												),
+												_react2['default'].createElement(
+															'label',
+															null,
+															'Näytettävät kohteet'
+												),
+												_react2['default'].createElement(
+															'select',
+															null,
+															_react2['default'].createElement(
+																		'option',
+																		null,
+																		'5'
+															)
+												),
+												_react2['default'].createElement('input', { type: 'submit', value: 'Hae' })
+									);
+						}
+			}]);
+
+			return Haku;
+})(_react2['default'].Component);
+
+exports['default'] = Haku;
+module.exports = exports['default'];
+
+},{"react":"react","react-router":"react-router"}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -81,7 +169,7 @@ var Home = (function (_React$Component) {
       return _react2['default'].createElement(
         'div',
         { className: 'alert alert-info' },
-        'Hello from Home Component'
+        'Hello from Home Component test'
       );
     }
   }]);
@@ -92,7 +180,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"react":"react"}],3:[function(require,module,exports){
+},{"react":"react"}],4:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -125,7 +213,7 @@ _reactDom2['default'].render(_react2['default'].createElement(
   _routes2['default']
 ), document.getElementById('app'));
 
-},{"./routes":4,"history/lib/createBrowserHistory":11,"react":"react","react-dom":"react-dom","react-router":"react-router"}],4:[function(require,module,exports){
+},{"./routes":5,"history/lib/createBrowserHistory":12,"react":"react","react-dom":"react-dom","react-router":"react-router"}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -148,6 +236,10 @@ var _componentsHome = require('./components/Home');
 
 var _componentsHome2 = _interopRequireDefault(_componentsHome);
 
+var _componentsHaku = require('./components/Haku');
+
+var _componentsHaku2 = _interopRequireDefault(_componentsHaku);
+
 exports['default'] = _react2['default'].createElement(
   _reactRouter.Route,
   { component: _componentsApp2['default'] },
@@ -155,7 +247,7 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/App":1,"./components/Home":2,"react":"react","react-router":"react-router"}],5:[function(require,module,exports){
+},{"./components/App":1,"./components/Haku":2,"./components/Home":3,"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -248,7 +340,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * Indicates that navigation was caused by a call to history.push.
  */
@@ -280,7 +372,7 @@ exports['default'] = {
   REPLACE: REPLACE,
   POP: POP
 };
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -307,7 +399,7 @@ function loopAsync(turns, work, callback) {
 
   next();
 }
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*eslint-disable no-empty */
 'use strict';
 
@@ -356,7 +448,7 @@ function readState(key) {
 
   return null;
 }
-},{"warning":22}],9:[function(require,module,exports){
+},{"warning":23}],10:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -432,13 +524,13 @@ function supportsGoWithoutReloadUsingHash() {
   var ua = navigator.userAgent;
   return ua.indexOf('Firefox') === -1;
 }
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 exports.canUseDOM = canUseDOM;
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -611,7 +703,7 @@ function createBrowserHistory() {
 
 exports['default'] = createBrowserHistory;
 module.exports = exports['default'];
-},{"./Actions":6,"./DOMStateStorage":8,"./DOMUtils":9,"./ExecutionEnvironment":10,"./createDOMHistory":12,"invariant":21}],12:[function(require,module,exports){
+},{"./Actions":7,"./DOMStateStorage":9,"./DOMUtils":10,"./ExecutionEnvironment":11,"./createDOMHistory":13,"invariant":22}],13:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -652,7 +744,7 @@ function createDOMHistory(options) {
 
 exports['default'] = createDOMHistory;
 module.exports = exports['default'];
-},{"./DOMUtils":9,"./ExecutionEnvironment":10,"./createHistory":13,"invariant":21}],13:[function(require,module,exports){
+},{"./DOMUtils":10,"./ExecutionEnvironment":11,"./createHistory":14,"invariant":22}],14:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -900,7 +992,7 @@ function createHistory() {
 
 exports['default'] = createHistory;
 module.exports = exports['default'];
-},{"./Actions":6,"./AsyncUtils":7,"./createLocation":14,"./deprecate":15,"./runTransitionHook":17,"deep-equal":18}],14:[function(require,module,exports){
+},{"./Actions":7,"./AsyncUtils":8,"./createLocation":15,"./deprecate":16,"./runTransitionHook":18,"deep-equal":19}],15:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -937,7 +1029,7 @@ function createLocation() {
 
 exports['default'] = createLocation;
 module.exports = exports['default'];
-},{"./Actions":6,"./parsePath":16}],15:[function(require,module,exports){
+},{"./Actions":7,"./parsePath":17}],16:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -957,7 +1049,7 @@ function deprecate(fn, message) {
 
 exports['default'] = deprecate;
 module.exports = exports['default'];
-},{"warning":22}],16:[function(require,module,exports){
+},{"warning":23}],17:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1006,7 +1098,7 @@ function parsePath(path) {
 
 exports['default'] = parsePath;
 module.exports = exports['default'];
-},{"warning":22}],17:[function(require,module,exports){
+},{"warning":23}],18:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1031,7 +1123,7 @@ function runTransitionHook(hook, location, callback) {
 
 exports['default'] = runTransitionHook;
 module.exports = exports['default'];
-},{"warning":22}],18:[function(require,module,exports){
+},{"warning":23}],19:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -1127,7 +1219,7 @@ function objEquiv(a, b, opts) {
   return typeof a === typeof b;
 }
 
-},{"./lib/is_arguments.js":19,"./lib/keys.js":20}],19:[function(require,module,exports){
+},{"./lib/is_arguments.js":20,"./lib/keys.js":21}],20:[function(require,module,exports){
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
@@ -1149,7 +1241,7 @@ function unsupported(object){
     false;
 };
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
 
@@ -1160,7 +1252,7 @@ function shim (obj) {
   return keys;
 }
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -1217,7 +1309,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this,require('_process'))
-},{"_process":5}],22:[function(require,module,exports){
+},{"_process":6}],23:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -1281,4 +1373,4 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = warning;
 
 }).call(this,require('_process'))
-},{"_process":5}]},{},[3]);
+},{"_process":6}]},{},[4]);
