@@ -8,4 +8,4 @@ bower install
 
 gulp
 npm start watch
-
+testing slack integretion
