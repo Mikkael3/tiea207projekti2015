@@ -28,3 +28,4 @@ build/Release
 app/node_modules
 projektiv2/node_modules
 projektiv2/bower_components
+database/node_modules
