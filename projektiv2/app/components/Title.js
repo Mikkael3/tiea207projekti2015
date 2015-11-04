@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import TitleStore from '../stores/TitleStore';
-import TItleActions from '../actions/TitleActions';
+import TitleActions from '../actions/TitleActions';
 
 
 class Title extends React.Component {
@@ -19,6 +19,7 @@ class Title extends React.Component {
 
 	componentWillUnmount() {
 		TitleStore.unlisten(this.onChange);
+
 
 	}
 
@@ -39,9 +40,9 @@ class Title extends React.Component {
     	return (
       		<div className='alert alert-info'>
         	<h2>{this.state.name}</h2>
-          <h2>{this.state.bio}</h2>
-          <h2>{this.state.titleId}</h2>
-          <h2>{this.state.balance}</h2>
+          <h2>Bio: {this.state.bio}</h2>
+          <h2>ID: {this.state.titleId}</h2>
+          <h2>Balance: {this.state.balance}</h2>
 
       		</div>
     	);

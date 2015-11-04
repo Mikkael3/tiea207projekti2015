@@ -203,14 +203,17 @@ var Footer = (function (_React$Component) {
   	this.state = FooterStore.getState();
   	this.onChange = this.onChange.bind(this);
   }
-  	componentDidMount() {
+  
+  componentDidMount() {
   	FooterStore.listen(this.onChange);
   	FooterActions.
   }
-  	componentWillUnmount() {
+  
+  componentWillUnmount() {
   	FooterStore.unlisten(this.onChange);
   }
-  	onChange(state) {
+  
+  onChange(state) {
   	this.setState(state);
   }
   */
@@ -457,7 +460,7 @@ var Title = (function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _storesTitleStore2['default'].listen(this.onChange);
-      TitleActions.getTitle();
+      _actionsTitleActions2['default'].getTitle();
     }
   }, {
     key: 'componentWillUnmount',
@@ -468,7 +471,7 @@ var Title = (function (_React$Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
       if (prevProps.params.titleId !== this.props.params.titleId) {
-        TitleActions.getTitle(this.props.params.titleId);
+        _actionsTitleActions2['default'].getTitle(this.props.params.titleId);
       }
     }
   }, {
@@ -491,16 +494,19 @@ var Title = (function (_React$Component) {
         _react2['default'].createElement(
           'h2',
           null,
+          'Bio: ',
           this.state.bio
         ),
         _react2['default'].createElement(
           'h2',
           null,
+          'ID: ',
           this.state.titleId
         ),
         _react2['default'].createElement(
           'h2',
           null,
+          'Balance: ',
           this.state.balance
         )
       );
@@ -658,7 +664,7 @@ var TitleStore = (function () {
 		this.bindActions(_actionsTitleActions2['default']);
 		this.titleId = '0';
 		this.name = 'testi';
-		this.bio = '';
+		this.bio = 'a';
 		this.balance = '';
 	}
 
@@ -666,6 +672,8 @@ var TitleStore = (function () {
 		key: 'onGetTitleSuccess',
 		value: function onGetTitleSuccess(data) {
 			(0, _underscore.assign)(this, data);
+
+			this.bio = data.bio;
 		}
 	}, {
 		key: 'onGetTitleFail',

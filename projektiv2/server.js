@@ -23,19 +23,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/api/titles/:id', function(req, res, next) {
     var id = req.params.id;
     var testititle = {
-    "index": 0,
-    "guid": "0e38baef-a371-4cd9-893f-a1e12fce83d5",
     "name": "Battle Bird",
     "picture": "http://placehold.it/32x32",
-    "gender": "male",
-    "age": 33,
     "titleId": "5639fa22c6d47ccc3902f480",
-    "email": "battlebird@zidant.com",
-    "phone": "+1 (943) 533-2422",
     "bio": "brown",
-    "balance": "$2,934.07",
-    "company": "ZIDANT",
-    "isActive": true
+    "balance": "$2,934.07"
+
   };
 
      res.send(testititle);
