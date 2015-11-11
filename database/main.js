@@ -1,10 +1,10 @@
 var request = require('request');
-//var async = require('async');
+1;3409;0c//var async = require('async');
 var myJSON = require('JSON');
 var sql = require('mysql');
 
-var id =
-var key =
+var id ="";
+var key ="";
 var off = 0;
 var testjson ="";
 
@@ -17,7 +17,7 @@ function getMyBody(url, callback) {
 	if (error || response.statusCode !== 200) {
 	    return callback(error || {statusCode: response.statusCode});
 	}
-	callback(null, body);  
+	return callback(null, body);
     });
 }
 
@@ -41,7 +41,7 @@ function listaa(limit){
             var con = sql.createConnection({
 		 host     : 'localhost',
 		 user     : 'root',
-		 password : '',
+		 password : 'kissa',
 		 database : 'db'
 
 	    });
@@ -50,18 +50,27 @@ function listaa(limit){
                 if(!err){
 		    console.log("homma kusee");}
 		else{
-		    console.log(err)}
+		    console.log(err);
+		}
 	    }));
 
             for(var i = 0; i < 100; i++){
 		var suomiNimi = body.data[i].title.fi;
-		var id = body.data[i].id;
+		var oid = body.data[i].id;
 		var imageId =  body.data[i].image.id;
 		var orgTitle = body.data[i].originalTitle.unknown;
-		//onnection.query('INSERT INTO elokuvat VALUES ('+ id + ',' + orgTitle + ',' + suomiNimi +','+ imageId+');');
-		con.query('INSERT INTO elokuvat VALUES (asdfasdfs,asdfdsa,asdafds,adsfdas);');
+
+		var post = {
+                    id:oid,
+		    orginalnimi:orgTitle,
+		    suominimi:suomiNimi,
+		    imgid:imageId
+		};
+		//con.query('INSERT INTO elokuvat VALUES ('+ id + ',' + orgTitle + ',' + suomiNimi +','+ imageId+');');
+		con.query('INSERT INTO elokuvat SET ?;',[post]);
+		//con.query('INSERT INTO elokuvat VALUES (id,orkkis,suomis,image);');
 	    }
-	    
+	  con.end();   
 
 
 	}
