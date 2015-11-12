@@ -2,8 +2,8 @@ var request = require('request');
 var myJSON = require('JSON');
 var sql = require('mysql');
 var lite = require('sqlite3').verbose();
-var id ="";
-var key ="";
+var id ="596b81cc";
+var key ="bbf2b9d190f8c2a85188df0dce9d0ca5";
 var off = 0;
 var testjson ="";
 var fs = require('fs');
@@ -33,7 +33,7 @@ function getMyBody(url, callback) {
     });
 }
 
-function kissa(){
+function ajaKantaan(){
 getMyBody('https://external.api.yle.fi/v1/programs/items.json?app_id=' + id + '&app_key='+ key + '&category=5-131&availability=ondemand&mediaobject=video&type=TVProgram', function(err, body) {
     if (err) {
 	console.log(err);
@@ -78,13 +78,10 @@ function listaa(off){
                     body.data[i].id;
 		}
                 catch(err){continue;}
-                var oid = body.data[i].id;
-		
-
-
-
-		
+                var oid = body.data[i].id;		
 		db.run('INSERT OR IGNORE INTO elokuvat (id,orginalnimi,suominimi,imgid) VALUES(?,?,?,?)',oid,orgt,smn,iid);
+		db.run('INSERT OR IGNORE INTO omdb (orginalnimi,rating,imdbid) VALUES(?,?,?)',orgt,'7.7',oid+'2');
+                
 	    }
 
 
@@ -94,5 +91,5 @@ function listaa(off){
     });}
 
 
-kissa();
+ajaKantaan();
 //db.close();

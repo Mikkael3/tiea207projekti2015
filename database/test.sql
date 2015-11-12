@@ -8,3 +8,10 @@ CREATE TABLE elokuvat (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE omdb(
+  orginalnimi varchar(100) NOT NULL,
+  rating double NOT NULL,
+  imdbid varchar(30) NOT NULL,
+  PRIMARY KEY(imdbid)
+);
+
