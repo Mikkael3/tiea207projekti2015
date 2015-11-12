@@ -6,15 +6,15 @@ class TitleStore {
 	constructor() {
 		this.bindActions(TitleActions);
 		this.titleId = '0';
-    	this.name = 'testi';
-    	this.bio = 'a';
+    	this.name = '';
+    	this.bio = '';
     	this.balance = '';
 	}
 
 	onGetTitleSuccess(data) {
 		assign(this, data);
-		
-		this.bio = data.bio;
+
+		//this.bio = data.bio;
 	}
 
 	onGetTitleFail(jqXhr) {

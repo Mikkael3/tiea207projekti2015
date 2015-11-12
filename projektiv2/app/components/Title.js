@@ -14,7 +14,7 @@ class Title extends React.Component {
 
 	componentDidMount() {
 		TitleStore.listen(this.onChange);
-		TitleActions.getTitle();
+		TitleActions.getTitle(this.props.params.id);
 	}
 
 	componentWillUnmount() {
@@ -24,7 +24,9 @@ class Title extends React.Component {
 	}
 
   componentDidUpdate(prevProps) {
+
     if (prevProps.params.titleId !== this.props.params.titleId) {
+
       TitleActions.getTitle(this.props.params.titleId);
     }
 
@@ -39,10 +41,14 @@ class Title extends React.Component {
 
     	return (
       		<div className='alert alert-info'>
-        	<h2>{this.state.name}</h2>
+        	<h2>Name: {this.state.name}</h2>
           <h2>Bio: {this.state.bio}</h2>
           <h2>ID: {this.state.titleId}</h2>
           <h2>Balance: {this.state.balance}</h2>
+					<a href={'http://areena.yle.fi/' + this.state.titleId}>
+						<img src={'http://placehold.it/350x150'} />
+						<p>{this.state.name}</p>
+					</a>
 
       		</div>
     	);
