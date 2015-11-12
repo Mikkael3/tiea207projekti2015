@@ -2,8 +2,8 @@ var request = require('request');
 var myJSON = require('JSON');
 var sql = require('mysql');
 var lite = require('sqlite3').verbose();
-var id ="596b81cc";
-var key ="bbf2b9d190f8c2a85188df0dce9d0ca5";
+var id ="";
+var key ="";
 var off = 0;
 var testjson ="";
 var fs = require('fs');
@@ -44,7 +44,7 @@ getMyBody('https://external.api.yle.fi/v1/programs/items.json?app_id=' + id + '&
      while(count > offset)
      {
 	 
-	     console.log("juuh");
+
 	     listaa(offset);
 	     offset = offset +100;
      }
@@ -80,16 +80,46 @@ function listaa(off){
                 catch(err){continue;}
                 var oid = body.data[i].id;		
 		db.run('INSERT OR IGNORE INTO elokuvat (id,orginalnimi,suominimi,imgid) VALUES(?,?,?,?)',oid,orgt,smn,iid);
-		db.run('INSERT OR IGNORE INTO omdb (orginalnimi,rating,imdbid) VALUES(?,?,?)',orgt,'7.7',oid+'2');
-                
+		haeOmdb(orgt,smn);
 	    }
+	}});}
 
-
-
-
-	}
-    });}
-
+function haeOmdb(orgio,smn){
+    if(orgio != 'undefined'){
+	getMyBody('http://www.omdbapi.com/?t='+ orgio +'=&plot=short&r=json', function(err, body) {
+	    if (err) {
+		console.log(err);
+                console.log(orgio+ "vika ei toimi");
+	    } else {
+                try{
+		    console.log(body.imdbID);
+		    console.log(body.imdbRating);
+		    
+                }
+                catch(err){
+                    console.log("ei toimi" + orgio);
+		    return;  
+                }
+		db.run('INSERT OR IGNORE INTO omdb (orginalnimi,rating,imdbid) VALUES(?,?,?)',orgio,body.imdbRating,body.imdbID);
+	    }});}
+    if(smn != 'undefined'){
+	getMyBody('http://www.omdbapi.com/?t='+ smn +'=&plot=short&r=json', function(err, body) {
+	    if (err) {
+		console.log(err);
+                console.log(orgio+ "vika ei toimi");
+	    } else {
+                try{
+		    console.log(body.imdbID);
+		    console.log(body.imdbRating);
+		    
+                }
+                catch(err){
+                    console.log("ei toimi" + smn);
+		    return;  
+                }
+		db.run('INSERT OR IGNORE INTO omdb (orginalnimi,rating,imdbid) VALUES(?,?,?)',smn,body.imdbRating,body.imdbID);
+	    }});}
+}
 
 ajaKantaan();
 //db.close();
