@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var async = require('async');
 
 var swig  = require('swig');
 var React = require('react');
@@ -22,6 +23,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
+app.get('/api/titles/all', function(req, res, next) {
+    var lista = [];
+    var finish = function() {
+      res.send(lista);
+    }
+
+      db.all('Select * from elokuvat', function(err,row) {
+          /*var title = {
+            "name": row.orginalnimi,
+            "titleId" : row.id,
+            "bio": row.suominimi
+          };
+
+          lista.push(title);
+*/
+        res.send(row);
+      });
+
+
+
+
+
+});
 
 app.get('/api/titles/:id', function(req, res, next) {
     var id = req.params.id;

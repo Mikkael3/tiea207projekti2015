@@ -31,10 +31,11 @@ class Home extends React.Component {
 
   		let titles = this.state.titles.map((title) => {
   			return (
-  				<li key={title.titleId}>
-  					<Link to={'/titles/' + title.titleId}>
-  						<img src={'http://placehold.it/350x150'} />
-  						<p>{title.company}</p>
+  				<li key={title.id}>
+  					<Link to={'/titles/' + title.id}>
+  						<img src={'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png"} />
+							<p>{title.orginalnimi}</p>
+  						<p>{title.suominimi}</p>
   					</Link>
   				</li>
 

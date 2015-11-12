@@ -10,7 +10,7 @@ class HomeActions {
 
 	getTitles() {
 		//Tehty json generaattorilla
-		$.ajax({ url: 'http://www.json-generator.com/api/json/get/bMWSkViUSW?indent=2'})
+		$.ajax({ url: '/api/titles/all'})
 		 .done((data) => {
 		 	this.actions.getTitlesSuccess(data)
 		 })

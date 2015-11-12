@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 /*import FooterStore from '../stores/FooterStore';
 import FooterActions from '../actions/FooterActions';
 */
-class Footer extends React.Component {
+class Header extends React.Component {
 	/*
 	constructor(props) {
 		super(props);
@@ -26,14 +26,14 @@ class Footer extends React.Component {
 */
 	render() {
 		return (
-			<footer>
-			<p>Hello from footer!</p>
+			<header>
+			<p>Hello from header!</p>
 			<p/>
-			</footer>
+			</header>
 			);
 	}
 
 
 }
 
-export default Footer;
+export default Header;
