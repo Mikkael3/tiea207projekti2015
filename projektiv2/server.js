@@ -10,6 +10,9 @@ var Router = require('react-router');
 var RoutingContext = Router.RoutingContext;
 var routes = require('./app/routes');
 
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('../database/database');
+
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
@@ -22,16 +25,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/titles/:id', function(req, res, next) {
     var id = req.params.id;
+
+    //var id = req.params.id;
     var testititle = {
-    "name": "Battle Bird",
-    "picture": "http://placehold.it/32x32",
-    "titleId": "5639fa22c6d47ccc3902f480",
-    "bio": "brown",
-    "balance": "$2,934.07"
+    "name": "",
+    "picture": "",
+    "titleId": "",
+    "bio": "",
+    "balance": "$2,934.07"};
 
-  };
 
-     res.send(testititle);
+
+    db.get('Select * from elokuvat where id = ?', id, function(err, row) {
+      console.log("mitä asdfasdf "+ row.id);
+
+      res.json({ "name": row.orginalnimi,
+                  "titleId": row.id,
+                  "bio": row.suominimi
+      });
+    });
+
+
+
+
 
 
 });

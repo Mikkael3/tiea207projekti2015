@@ -72,6 +72,7 @@ var TitleActions = (function () {
 			var _this = this;
 
 			//Tehty json generaattorilla
+
 			$.ajax({ url: '/api/titles/' + titleId }).done(function (data) {
 				_this.actions.getTitleSuccess(data);
 			}).fail(function (jqXhr) {
@@ -203,17 +204,14 @@ var Footer = (function (_React$Component) {
   	this.state = FooterStore.getState();
   	this.onChange = this.onChange.bind(this);
   }
-  
-  componentDidMount() {
+  	componentDidMount() {
   	FooterStore.listen(this.onChange);
   	FooterActions.
   }
-  
-  componentWillUnmount() {
+  	componentWillUnmount() {
   	FooterStore.unlisten(this.onChange);
   }
-  
-  onChange(state) {
+  	onChange(state) {
   	this.setState(state);
   }
   */
@@ -418,7 +416,7 @@ module.exports = exports['default'];
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
-  value: true
+	value: true
 });
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -446,74 +444,87 @@ var _actionsTitleActions = require('../actions/TitleActions');
 var _actionsTitleActions2 = _interopRequireDefault(_actionsTitleActions);
 
 var Title = (function (_React$Component) {
-  _inherits(Title, _React$Component);
+	_inherits(Title, _React$Component);
 
-  function Title(props) {
-    _classCallCheck(this, Title);
+	function Title(props) {
+		_classCallCheck(this, Title);
 
-    _get(Object.getPrototypeOf(Title.prototype), 'constructor', this).call(this, props);
-    this.state = _storesTitleStore2['default'].getState();
-    this.onChange = this.onChange.bind(this);
-  }
+		_get(Object.getPrototypeOf(Title.prototype), 'constructor', this).call(this, props);
+		this.state = _storesTitleStore2['default'].getState();
+		this.onChange = this.onChange.bind(this);
+	}
 
-  _createClass(Title, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      _storesTitleStore2['default'].listen(this.onChange);
-      _actionsTitleActions2['default'].getTitle();
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _storesTitleStore2['default'].unlisten(this.onChange);
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      if (prevProps.params.titleId !== this.props.params.titleId) {
-        _actionsTitleActions2['default'].getTitle(this.props.params.titleId);
-      }
-    }
-  }, {
-    key: 'onChange',
-    value: function onChange(state) {
-      this.setState(state);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
+	_createClass(Title, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			_storesTitleStore2['default'].listen(this.onChange);
+			_actionsTitleActions2['default'].getTitle(this.props.params.id);
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			_storesTitleStore2['default'].unlisten(this.onChange);
+		}
+	}, {
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate(prevProps) {
 
-      return _react2['default'].createElement(
-        'div',
-        { className: 'alert alert-info' },
-        _react2['default'].createElement(
-          'h2',
-          null,
-          this.state.name
-        ),
-        _react2['default'].createElement(
-          'h2',
-          null,
-          'Bio: ',
-          this.state.bio
-        ),
-        _react2['default'].createElement(
-          'h2',
-          null,
-          'ID: ',
-          this.state.titleId
-        ),
-        _react2['default'].createElement(
-          'h2',
-          null,
-          'Balance: ',
-          this.state.balance
-        )
-      );
-    }
-  }]);
+			if (prevProps.params.titleId !== this.props.params.titleId) {
 
-  return Title;
+				_actionsTitleActions2['default'].getTitle(this.props.params.titleId);
+			}
+		}
+	}, {
+		key: 'onChange',
+		value: function onChange(state) {
+			this.setState(state);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+
+			return _react2['default'].createElement(
+				'div',
+				{ className: 'alert alert-info' },
+				_react2['default'].createElement(
+					'h2',
+					null,
+					'Name: ',
+					this.state.name
+				),
+				_react2['default'].createElement(
+					'h2',
+					null,
+					'Bio: ',
+					this.state.bio
+				),
+				_react2['default'].createElement(
+					'h2',
+					null,
+					'ID: ',
+					this.state.titleId
+				),
+				_react2['default'].createElement(
+					'h2',
+					null,
+					'Balance: ',
+					this.state.balance
+				),
+				_react2['default'].createElement(
+					'a',
+					{ href: 'http://areena.yle.fi/' + this.state.titleId },
+					_react2['default'].createElement('img', { src: 'http://placehold.it/350x150' }),
+					_react2['default'].createElement(
+						'p',
+						null,
+						this.state.name
+					)
+				)
+			);
+		}
+	}]);
+
+	return Title;
 })(_react2['default'].Component);
 
 exports['default'] = Title;
@@ -663,8 +674,8 @@ var TitleStore = (function () {
 
 		this.bindActions(_actionsTitleActions2['default']);
 		this.titleId = '0';
-		this.name = 'testi';
-		this.bio = 'a';
+		this.name = '';
+		this.bio = '';
 		this.balance = '';
 	}
 
@@ -673,7 +684,7 @@ var TitleStore = (function () {
 		value: function onGetTitleSuccess(data) {
 			(0, _underscore.assign)(this, data);
 
-			this.bio = data.bio;
+			//this.bio = data.bio;
 		}
 	}, {
 		key: 'onGetTitleFail',
