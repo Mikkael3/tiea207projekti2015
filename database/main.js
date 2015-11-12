@@ -1,12 +1,24 @@
 var request = require('request');
-1;3409;0c//var async = require('async');
 var myJSON = require('JSON');
 var sql = require('mysql');
-
+var lite = require('sqlite3').verbose();
 var id ="";
 var key ="";
 var off = 0;
 var testjson ="";
+var fs = require('fs');
+var db = new lite.Database('database');
+ 
+fs.exists('DB', function (exists) {
+  console.info('Creating database. This may take a while...');
+    fs.readFile('test.sql', 'utf8', function (err, data) {
+      if (err) throw err;
+      db.exec(data, function (err) {
+        if (err) throw err;
+        console.info('Done.');
+      });
+    });
+});
 
 function getMyBody(url, callback) {
     request({
@@ -27,50 +39,55 @@ getMyBody('https://external.api.yle.fi/v1/programs/items.json?app_id=' + id + '&
 	console.log(err);
     } else {
         console.log(body.meta.count);
-	listaa( body.meta.count);
+     var count = body.meta.count;
+     var offset = 0;
+     while(count > offset)
+     {
+	 
+	     console.log("juuh");
+	     listaa(offset);
+	     offset = offset +100;
+     }
+	
+      
     }
 });
 }
 
-function listaa(limit){
-    getMyBody('https://external.api.yle.fi/v1/programs/items.json?app_id=' + id + '&app_key='+ key + '&category=5-131&availability=ondemand&mediaobject=video&type=TVProgram&offset=650&limit=' + 100, function(err, body) {
+function listaa(off){
+    getMyBody('https://external.api.yle.fi/v1/programs/items.json?app_id=' + id + '&app_key='+ key + '&category=5-131&availability=ondemand&mediaobject=video&type=TVProgram&offset='+off+ '&limit=' + 100, function(err, body) {
 	if (err) {
 	    console.log(err);
 	} else {
 
-            var con = sql.createConnection({
-		 host     : 'localhost',
-		 user     : 'root',
-		 password : 'kissa',
-		 database : 'db'
-
-	    });
-
-	    con.connect((function(err) {
-                if(!err){
-		    console.log("homma kusee");}
-		else{
-		    console.log(err);
-		}
-	    }));
 
             for(var i = 0; i < 100; i++){
-		var suomiNimi = body.data[i].title.fi;
-		var oid = body.data[i].id;
-		var imageId =  body.data[i].image.id;
-		var orgTitle = body.data[i].originalTitle.unknown;
+                var smn = "";
+                var iid = "";
+		var orgt = "";
 
-		var post = {
-                    id:oid,
-		    orginalnimi:orgTitle,
-		    suominimi:suomiNimi,
-		    imgid:imageId
-		};
-		//con.query('INSERT INTO elokuvat VALUES ('+ id + ',' + orgTitle + ',' + suomiNimi +','+ imageId+');');
-		con.query('INSERT INTO elokuvat SET ?;',[post]);
-		//con.query('INSERT INTO elokuvat VALUES (id,orkkis,suomis,image);');
+                try{
+		    iid =  body.data[i].image.id;
+                    smn = body.data[i].title.fi;
+		    orgt = body.data[i].originalTitle.unknown;
+                }
+                catch(err){
+                    //
+                }
+		try{
+                    body.data[i].id;
+		}
+                catch(err){continue;}
+                var oid = body.data[i].id;
+		
+
+
+
+		
+		db.run('INSERT OR IGNORE INTO elokuvat (id,orginalnimi,suominimi,imgid) VALUES(?,?,?,?)',oid,orgt,smn,iid);
 	    }
-	  con.end();   
+
+
 
 
 	}
@@ -78,3 +95,4 @@ function listaa(limit){
 
 
 kissa();
+//db.close();

@@ -1,4 +1,4 @@
-DROP TABLE elokuvat;
+
 
 CREATE TABLE elokuvat (
   id varchar(20) NOT NULL,
