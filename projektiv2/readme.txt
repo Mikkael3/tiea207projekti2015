@@ -2,6 +2,8 @@ http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongod
 
 How to run:
 
+(0.) Windows-koneella taitaa vaatia pythonin(2.7 toimii).
+
 1. Asenna nodejs ja npm
 2. Asenna bower, npm install -g bower
 3. Asenna gulp,  npm install -g gulp
