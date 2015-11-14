@@ -3,20 +3,42 @@ var myJSON = require('JSON');
 var lite = require('sqlite3').verbose();
 var id ="";
 var key ="";
-var testjson ="";
 var fs = require('fs');
+var jsxml = require("node-jsxml");
+var exists = fs.existsSync('database');
 var db = new lite.Database('database');
+var Namespace = jsxml.Namespace,
+    QName = jsxml.QName,
+    XML = jsxml.XML,
+    XMLList = jsxml.XMLList;
 
 // ajetaaan tiettokannan luontilauseet
-fs.exists('DB', function (exists) {
-    console.info('Creating database. This may take a while...');
-    fs.readFile('test.sql', 'utf8', function (err, data) {
-	if (err) throw err;
-	db.exec(data, function (err) {
-            if (err) throw err;
-            console.info('Done.');
+db.serialize(function(){
+    console.log("Luodaan kanta");
+    if(!exists){
+	fs.readFile('test.sql', 'utf8', function (err, data) {
+	    if (err) throw err;
+	    db.exec(data, function (err) {
+		if (err) throw err;
+		console.info('Done.');
+	    });
 	});
-    });
+
+    }
+    
+    else{
+	db.run('DROP TABLE elokuvat;');
+	db.run('DROP TABLE trailers;');
+	db.run('DROP TABLE omdb;');
+	fs.readFile('test.sql', 'utf8', function (err, data) {
+	    if (err) throw err;
+	    db.exec(data, function (err) {
+		if (err) throw err;
+		console.info('Done.');
+	    });
+	});
+    }
+    
 });
 
 //haetaan requestilla body
@@ -73,7 +95,11 @@ function kirjoitaYLE(off){
                     var m =  body.data[i].id;
 		}
                 catch(err){continue;}
-                var oid = body.data[i].id;		
+                var oid = body.data[i].id;
+		if(smn == ""  || smn == null)
+		    smn = '-';
+		if(orgt == "" || orgt == null)
+		    orgt = '-';
 		db.run('INSERT OR IGNORE INTO elokuvat (id,orginalnimi,suominimi,imgid) VALUES(?,?,?,?)',oid,orgt,smn,iid);
 		haeOmdb(orgt,smn);
 	    }
@@ -81,7 +107,7 @@ function kirjoitaYLE(off){
 
 //hakee ja kirja omdbsta saatavan tiedon
 function haeOmdb(orgio,smn){
-    if(orgio != 'undefined'){
+    if(orgio != '-'){
 	getMyBody('http://www.omdbapi.com/?t='+ orgio +'=&plot=short&r=json', function(err, body) {
 	    if (err) {
 		console.log("haetaan omdb" + err);
@@ -97,7 +123,7 @@ function haeOmdb(orgio,smn){
 		db.run('INSERT OR IGNORE INTO omdb (orginalnimi,rating,imdbid) VALUES(?,?,?)',orgio,body.imdbRating,body.imdbID);
 		haeTraileri(body.imdbID);
 	    }});}
-    else if(smn != 'undefined'){
+    else if(smn != '-'){
 	getMyBody('http://www.omdbapi.com/?t='+ smn +'=&plot=short&r=json', function(err, body) {
 	    if (err) {
 		console.log("haetaa omdb" + err);
@@ -122,24 +148,37 @@ function haeTraileri(imdbid){
     }catch(err){
 	return;
     }
-    
-    getMyBodyXml("http://api.traileraddict.com/?imdb="+imdbid.substring(2) +"&count=4&width=680", function(err, body) {
+    getMyBodyXml("http://api.traileraddict.com/?imdb="+imdbid.substring(2), function(err, body) {
 	if (err) {
 	    console.log("trailerissa jopa " + err);
 	} else {
+	    var link = '';
             try{
-		//TODO
-            }
+		var xml = new XML(body);
+		link = xml.child('trailer').child('link').toString();
+		if(link.length > 0)
+		    console.log(link);
+	    }
             catch(err){
+		//console.log(imdbid);
 		return;  
             }
-	  //  db.run('INSERT OR IGNORE INTO omdb (orginalnimi,rating,imdbid) VALUES(?,?,?)',smn,body.imdbRating,body.imdbID);
+	    if(link.length > 0)
+		db.run('INSERT OR IGNORE INTO trailers (imdbid,link) VALUES(?,?)',imdbid,link);
 	}});}
 
 
 //Hakee xml-rungon
 function getMyBodyXml(url, callback){
-return;
+    request({
+	url: url,
+	async:false
+    }, function (error, response, body) {
+	if (error || response.statusCode !== 200) {
+	    return callback(error || {statusCode: response.statusCode});
+	}
+	return callback(null, body);
+    });
 }
 
 
