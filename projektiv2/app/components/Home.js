@@ -44,7 +44,7 @@ class Home extends React.Component {
   		});
 
     	return (
-      		<div className='alert alert-info'>
+      		<div className='content'>
         	Hello from Home Component
         	{titles}
 

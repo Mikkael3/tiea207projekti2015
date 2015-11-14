@@ -209,21 +209,24 @@ var Footer = (function (_React$Component) {
   	this.state = FooterStore.getState();
   	this.onChange = this.onChange.bind(this);
   }
-  	componentDidMount() {
+  
+  componentDidMount() {
   	FooterStore.listen(this.onChange);
   	FooterActions.
   }
-  	componentWillUnmount() {
+  
+  componentWillUnmount() {
   	FooterStore.unlisten(this.onChange);
   }
-  	onChange(state) {
+  
+  onChange(state) {
   	this.setState(state);
   }
   */
 		value: function render() {
 			return _react2['default'].createElement(
 				'footer',
-				null,
+				{ id: 'footer' },
 				_react2['default'].createElement(
 					'p',
 					null,
@@ -368,21 +371,24 @@ var Header = (function (_React$Component) {
   	this.state = FooterStore.getState();
   	this.onChange = this.onChange.bind(this);
   }
-  	componentDidMount() {
+  
+  componentDidMount() {
   	FooterStore.listen(this.onChange);
   	FooterActions.
   }
-  	componentWillUnmount() {
+  
+  componentWillUnmount() {
   	FooterStore.unlisten(this.onChange);
   }
-  	onChange(state) {
+  
+  onChange(state) {
   	this.setState(state);
   }
   */
 		value: function render() {
 			return _react2['default'].createElement(
 				'header',
-				null,
+				{ id: 'header' },
 				_react2['default'].createElement(
 					'p',
 					null,
@@ -485,7 +491,7 @@ var Home = (function (_React$Component) {
 
       return _react2['default'].createElement(
         'div',
-        { className: 'alert alert-info' },
+        { className: 'content' },
         'Hello from Home Component',
         titles
       );
@@ -571,35 +577,29 @@ var Title = (function (_React$Component) {
 
 			return _react2['default'].createElement(
 				'div',
-				{ className: 'alert alert-info' },
+				{ className: 'content' },
 				_react2['default'].createElement(
 					'h2',
 					null,
-					'Name: ',
-					this.state.name
+					'Originalnimi: ',
+					this.state.originalnimi
 				),
 				_react2['default'].createElement(
 					'h2',
 					null,
-					'Bio: ',
-					this.state.bio
+					'Suominimi: ',
+					this.state.suominimi
 				),
 				_react2['default'].createElement(
 					'h2',
 					null,
 					'ID: ',
-					this.state.titleId
-				),
-				_react2['default'].createElement(
-					'h2',
-					null,
-					'Balance: ',
-					this.state.balance
+					this.state.id
 				),
 				_react2['default'].createElement(
 					'a',
-					{ href: 'http://areena.yle.fi/' + this.state.titleId },
-					_react2['default'].createElement('img', { src: 'http://placehold.it/350x150' }),
+					{ href: 'http://areena.yle.fi/' + this.state.id },
+					_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" }),
 					_react2['default'].createElement(
 						'p',
 						null,
@@ -759,16 +759,20 @@ var TitleStore = (function () {
 		_classCallCheck(this, TitleStore);
 
 		this.bindActions(_actionsTitleActions2['default']);
-		this.titleId = '0';
-		this.name = '';
-		this.bio = '';
-		this.balance = '';
+		this.id = '';
+		this.originalnimi = '';
+		this.suominimi = '';
+		this.imgid = '';
 	}
 
 	_createClass(TitleStore, [{
 		key: 'onGetTitleSuccess',
 		value: function onGetTitleSuccess(data) {
-			(0, _underscore.assign)(this, data);
+
+			this.id = data.id;
+			this.originalnimi = data.originalnimi;
+			this.suominimi = data.suominimi;
+			this.imgid = data.imgid;
 
 			//this.bio = data.bio;
 		}

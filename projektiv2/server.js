@@ -53,20 +53,21 @@ app.get('/api/titles/:id', function(req, res, next) {
 
     //var id = req.params.id;
     var testititle = {
-    "name": "",
-    "picture": "",
-    "titleId": "",
-    "bio": "",
-    "balance": "$2,934.07"};
+    "originalnimi": "",
+    "imgid": "",
+    "id": "",
+    "suominimi": ""
+    };
 
 
 
     db.get('Select * from elokuvat where id = ?', id, function(err, row) {
       console.log("mitä asdfasdf "+ row.id);
 
-      res.json({ "name": row.orginalnimi,
-                  "titleId": row.id,
-                  "bio": row.suominimi
+      res.json({ "originalnimi": row.orginalnimi,
+                  "id": row.id,
+                  "suominimi": row.suominimi,
+                  "imgid" : row.imgid
       });
     });
 

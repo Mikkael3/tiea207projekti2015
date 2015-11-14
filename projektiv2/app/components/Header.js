@@ -26,7 +26,7 @@ class Header extends React.Component {
 */
 	render() {
 		return (
-			<header>
+			<header id="header">
 			<p>Hello from header!</p>
 			<p/>
 			</header>

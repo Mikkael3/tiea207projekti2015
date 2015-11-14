@@ -5,14 +5,18 @@ import TitleActions from '../actions/TitleActions';
 class TitleStore {
 	constructor() {
 		this.bindActions(TitleActions);
-		this.titleId = '0';
-    	this.name = '';
-    	this.bio = '';
-    	this.balance = '';
+		this.id = '';
+    	this.originalnimi = '';
+    	this.suominimi = '';
+        this.imgid = '';
 	}
 
 	onGetTitleSuccess(data) {
-		assign(this, data);
+
+		this.id = data.id;
+		this.originalnimi = data.originalnimi;
+		this.suominimi = data.suominimi;
+		this.imgid = data.imgid;
 
 		//this.bio = data.bio;
 	}

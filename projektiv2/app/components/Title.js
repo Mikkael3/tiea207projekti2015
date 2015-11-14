@@ -40,14 +40,15 @@ class Title extends React.Component {
   	render() {
 
     	return (
-      		<div className='alert alert-info'>
-        	<h2>Name: {this.state.name}</h2>
-          <h2>Bio: {this.state.bio}</h2>
-          <h2>ID: {this.state.titleId}</h2>
-          <h2>Balance: {this.state.balance}</h2>
-					<a href={'http://areena.yle.fi/' + this.state.titleId}>
-						<img src={'http://placehold.it/350x150'} />
-						<p>{this.state.name}</p>
+      		<div className='content'>
+            
+        	   <h2>Originalnimi: {this.state.originalnimi}</h2>
+                <h2>Suominimi: {this.state.suominimi}</h2>
+                <h2>ID: {this.state.id}</h2>
+            	
+				<a href={'http://areena.yle.fi/' + this.state.id}>
+					<img src={'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png"} />
+					<p>{this.state.name}</p>
 					</a>
 
       		</div>
