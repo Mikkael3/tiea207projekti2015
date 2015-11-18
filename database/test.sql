@@ -1,13 +1,15 @@
 CREATE TABLE elokuvat (
   id varchar(20) NOT NULL,
-  orginalnimi varchar(100),
+  originalnimi varchar(100),
   suominimi varchar(100) ,
   imgid varchar(12),
+  endtime varchar (100),
+  starttime varchar (100),
   PRIMARY KEY (id)
 );
 
 CREATE TABLE omdb(
-  orginalnimi varchar(100) NOT NULL,
+  originalnimi varchar(100) NOT NULL,
   rating double NOT NULL,
   imdbid varchar(30) NOT NULL,
   PRIMARY KEY(imdbid)

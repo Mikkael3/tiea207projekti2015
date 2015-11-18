@@ -83,11 +83,28 @@ function kirjoitaYLE(off){
                 var smn = "";
                 var iid = "";
 		var orgt = "";
+                var endt = '-';
+                var stat = '-';
+		try{
+		    body.data[i].publicationEvent.length;
+		}
+                catch(err){continue;}
+                for(var n = 0; n < body.data[i].publicationEvent.length; n++){
+                    try{
+			if( body.data[i].publicationEvent[n].temporalStatus == "currently"){
+                            endt = body.data[i].publicationEvent[n].endTime;
+                            stat = body.data[i].publicationEvent[n].startTime;
+                            break;
+			}
+		    }catch(err){continue;}
+		}
 
+		
                 try{
 		    iid =  body.data[i].image.id;
                     smn = body.data[i].title.fi;
 		    orgt = body.data[i].originalTitle.unknown;
+                    
                 }
                 catch(err){
                 }
@@ -100,7 +117,7 @@ function kirjoitaYLE(off){
 		    smn = '-';
 		if(orgt == "" || orgt == null)
 		    orgt = '-';
-		db.run('INSERT OR IGNORE INTO elokuvat (id,orginalnimi,suominimi,imgid) VALUES(?,?,?,?)',oid,orgt,smn,iid);
+		db.run('INSERT OR IGNORE INTO elokuvat (id,originalnimi,suominimi,imgid,endtime,starttime) VALUES(?,?,?,?,?,?)',oid,orgt,smn,iid,endt,stat);
 		haeOmdb(orgt,smn);
 	    }
 	}});}
@@ -120,7 +137,7 @@ function haeOmdb(orgio,smn){
                 catch(err){
 		    return;  
                 }
-		db.run('INSERT OR IGNORE INTO omdb (orginalnimi,rating,imdbid) VALUES(?,?,?)',orgio,body.imdbRating,body.imdbID);
+		db.run('INSERT OR IGNORE INTO omdb (originalnimi,rating,imdbid) VALUES(?,?,?)',orgio,body.imdbRating,body.imdbID);
 		haeTraileri(body.imdbID);
 	    }});}
     else if(smn != '-'){
@@ -136,7 +153,7 @@ function haeOmdb(orgio,smn){
                 catch(err){
 		    return;  
                 }
-		db.run('INSERT OR IGNORE INTO omdb (orginalnimi,rating,imdbid) VALUES(?,?,?)',smn,body.imdbRating,body.imdbID);
+		db.run('INSERT OR IGNORE INTO omdb (originalnimi,rating,imdbid) VALUES(?,?,?)',smn,body.imdbRating,body.imdbID);
 		haeTraileri(body.imdbID);
 	    }});}
 }
@@ -156,11 +173,8 @@ function haeTraileri(imdbid){
             try{
 		var xml = new XML(body);
 		link = xml.child('trailer').child('link').toString();
-		if(link.length > 0)
-		    console.log(link);
 	    }
             catch(err){
-		//console.log(imdbid);
 		return;  
             }
 	    if(link.length > 0)
