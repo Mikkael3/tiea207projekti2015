@@ -1,11 +1,16 @@
 import alt from '../alt';
 import HomeActions from '../actions/HomeActions';
+import {sortBy} from 'underscore';
 
 class HomeStore {
 	constructor() {
 		this.bindActions(HomeActions);
 		this.titles = [];
 
+	}
+
+	onHandleSort() {
+		this.titles = sortBy(this.titles, 'endtime');
 	}
 
 	onGetTitlesSuccess(data) {

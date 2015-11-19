@@ -19,10 +19,15 @@ var HomeActions = (function () {
 	function HomeActions() {
 		_classCallCheck(this, HomeActions);
 
-		this.generateActions('getTitlesSuccess', 'getTitlesFail');
+		this.generateActions('getTitlesSuccess', 'getTitlesFail', 'handleSort');
 	}
 
 	_createClass(HomeActions, [{
+		key: 'handleSort',
+		value: function handleSort() {
+			this.actions.handleSort();
+		}
+	}, {
 		key: 'getTitles',
 		value: function getTitles() {
 			var _this = this;
@@ -459,6 +464,11 @@ var Home = (function (_React$Component) {
       _storesHomeStore2['default'].unlisten(this.onChange);
     }
   }, {
+    key: 'handleSort',
+    value: function handleSort() {
+      _actionsHomeActions2['default'].handleSort();
+    }
+  }, {
     key: 'onChange',
     value: function onChange(state) {
       this.setState(state);
@@ -478,12 +488,22 @@ var Home = (function (_React$Component) {
             _react2['default'].createElement(
               'p',
               null,
-              title.orginalnimi
+              title.originalnimi
             ),
             _react2['default'].createElement(
               'p',
               null,
               title.suominimi
+            ),
+            _react2['default'].createElement(
+              'p',
+              null,
+              title.starttime
+            ),
+            _react2['default'].createElement(
+              'p',
+              null,
+              title.endtime
             )
           )
         );
@@ -493,6 +513,11 @@ var Home = (function (_React$Component) {
         'div',
         { className: 'content' },
         'Hello from Home Component',
+        _react2['default'].createElement(
+          'button',
+          { onClick: this.handleSort },
+          'Järjestä'
+        ),
         titles
       );
     }
@@ -705,6 +730,8 @@ var _actionsHomeActions = require('../actions/HomeActions');
 
 var _actionsHomeActions2 = _interopRequireDefault(_actionsHomeActions);
 
+var _underscore = require('underscore');
+
 var HomeStore = (function () {
 	function HomeStore() {
 		_classCallCheck(this, HomeStore);
@@ -714,6 +741,11 @@ var HomeStore = (function () {
 	}
 
 	_createClass(HomeStore, [{
+		key: 'onHandleSort',
+		value: function onHandleSort() {
+			this.titles = (0, _underscore.sortBy)(this.titles, 'endtime');
+		}
+	}, {
 		key: 'onGetTitlesSuccess',
 		value: function onGetTitlesSuccess(data) {
 			this.titles = data;
@@ -731,7 +763,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":1,"../alt":3}],13:[function(require,module,exports){
+},{"../actions/HomeActions":1,"../alt":3,"underscore":"underscore"}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {

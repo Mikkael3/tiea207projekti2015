@@ -4,8 +4,13 @@ class HomeActions {
 	constructor() {
 		this.generateActions(
 			'getTitlesSuccess',
-			'getTitlesFail'
+			'getTitlesFail',
+			'handleSort'
 		);
+	}
+
+	handleSort() {
+		this.actions.handleSort();
 	}
 
 	getTitles() {

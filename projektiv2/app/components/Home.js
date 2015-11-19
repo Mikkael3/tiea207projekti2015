@@ -22,6 +22,10 @@ class Home extends React.Component {
 
 	}
 
+  handleSort() {
+    HomeActions.handleSort();
+  }
+
 	onChange(state) {
 		this.setState(state);
 	}
@@ -34,8 +38,10 @@ class Home extends React.Component {
   				<li key={title.id}>
   					<Link to={'/titles/' + title.id}>
   						<img src={'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png"} />
-							<p>{title.orginalnimi}</p>
+							<p>{title.originalnimi}</p>
   						<p>{title.suominimi}</p>
+              <p>{title.starttime}</p>
+              <p>{title.endtime}</p>
   					</Link>
   				</li>
 
@@ -46,6 +52,8 @@ class Home extends React.Component {
     	return (
       		<div className='content'>
         	Hello from Home Component
+          <button onClick={this.handleSort}>Järjestä</button>
+
         	{titles}
 
       		</div>

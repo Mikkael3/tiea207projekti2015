@@ -64,7 +64,7 @@ app.get('/api/titles/:id', function(req, res, next) {
     db.get('Select * from elokuvat where id = ?', id, function(err, row) {
       console.log("mitä asdfasdf "+ row.id);
 
-      res.json({ "originalnimi": row.orginalnimi,
+      res.json({ "originalnimi": row.originalnimi,
                   "id": row.id,
                   "suominimi": row.suominimi,
                   "imgid" : row.imgid
