@@ -69,6 +69,7 @@ function ajaKantaan(){
 		kirjoitaYLE(offset);
 		offset = offset +100;
 	    }
+	    
 	}
     });
 }
@@ -78,13 +79,17 @@ function kirjoitaYLE(off){
     getMyBody('https://external.api.yle.fi/v1/programs/items.json?app_id=' + id + '&app_key='+ key + '&category=5-131&availability=ondemand&mediaobject=video&type=TVProgram&offset='+off+ '&limit=' + 100, function(err, body) {
 	if (err) {
 	    console.log("ylessä " + err);
+	    kirjoitaYLE(off);
 	} else {
+	    
             for(var i = 0; i < 100; i++){
                 var smn = "";
                 var iid = "";
-		var orgt = "";
+        	var orgt = "";
                 var endt = '-';
                 var stat = '-';
+		var genre = '-';
+		var kuvaus = '-';
 		try{
 		    body.data[i].publicationEvent.length;
 		}
@@ -99,11 +104,21 @@ function kirjoitaYLE(off){
 		    }catch(err){continue;}
 		}
 
-		
+		try{
+		    genre = body.data[i].partOfSeries.subject[0].title.fi;
+		}
+		catch(err){
+                   
+		}
+	
                 try{
+                     
 		    iid =  body.data[i].image.id;
                     smn = body.data[i].title.fi;
 		    orgt = body.data[i].originalTitle.unknown;
+		    kuvaus = body.data[i].description.fi;
+		    
+                 
                     
                 }
                 catch(err){
@@ -112,22 +127,25 @@ function kirjoitaYLE(off){
                     var m =  body.data[i].id;
 		}
                 catch(err){continue;}
+		
                 var oid = body.data[i].id;
 		if(smn == ""  || smn == null)
 		    smn = '-';
 		if(orgt == "" || orgt == null)
 		    orgt = '-';
-		db.run('INSERT OR IGNORE INTO elokuvat (id,originalnimi,suominimi,imgid,endtime,starttime) VALUES(?,?,?,?,?,?)',oid,orgt,smn,iid,endt,stat);
+		db.run('INSERT OR IGNORE INTO elokuvat (id,originalnimi,suominimi,imgid,genre,kuvaus,endtime,starttime) VALUES(?,?,?,?,?,?,?,?)',oid,orgt,smn,iid,genre,kuvaus,endt,stat);
 		haeOmdb(orgt,smn);
 	    }
+	    
 	}});}
 
 //hakee ja kirja omdbsta saatavan tiedon
-function haeOmdb(orgio,smn){
-    if(orgio != '-'){
-	getMyBody('http://www.omdbapi.com/?t='+ orgio +'=&plot=short&r=json', function(err, body) {
+function haeOmdb(originalnimi,smn){
+    if(originalnimi != '-'){
+	getMyBody('http://www.omdbapi.com/?t='+ originalnimi +'=&plot=short&r=json', function(err, body) {
 	    if (err) {
 		console.log("haetaan omdb" + err);
+		haeOmdb(originalnimi,smn);
 	    } else {
                 try{
 		    var a = (body.imdbID);
@@ -137,13 +155,14 @@ function haeOmdb(orgio,smn){
                 catch(err){
 		    return;  
                 }
-		db.run('INSERT OR IGNORE INTO omdb (originalnimi,rating,imdbid) VALUES(?,?,?)',orgio,body.imdbRating,body.imdbID);
+		db.run('INSERT OR IGNORE INTO omdb (originalnimi,rating,imdbid) VALUES(?,?,?)',originalnimi,body.imdbRating,body.imdbID);
 		haeTraileri(body.imdbID);
 	    }});}
     else if(smn != '-'){
 	getMyBody('http://www.omdbapi.com/?t='+ smn +'=&plot=short&r=json', function(err, body) {
 	    if (err) {
 		console.log("haetaa omdb" + err);
+		haeOmdb(originalnimi,smn);
 	    } else {
                 try{
 		    var a = (body.imdbID);
@@ -167,7 +186,7 @@ function haeTraileri(imdbid){
     }
     getMyBodyXml("http://api.traileraddict.com/?imdb="+imdbid.substring(2), function(err, body) {
 	if (err) {
-	    console.log("trailerissa jopa " + err);
+	    console.log("trailerissa" + err);
 	} else {
 	    var link = '';
             try{
@@ -197,4 +216,4 @@ function getMyBodyXml(url, callback){
 
 
 ajaKantaan();
-//db.close();
+

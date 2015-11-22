@@ -3,6 +3,8 @@ CREATE TABLE elokuvat (
   originalnimi varchar(100),
   suominimi varchar(100) ,
   imgid varchar(12),
+  genre varchar(30),
+  kuvaus varchar(200),
   endtime varchar (100),
   starttime varchar (100),
   PRIMARY KEY (id)
