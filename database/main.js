@@ -28,6 +28,7 @@ db.serialize(function(){
 	db.run('DROP TABLE elokuvat;');
 	db.run('DROP TABLE trailers;');
 	db.run('DROP TABLE omdb;');
+	db.run('DROP TABLE genres;');
 	fs.readFile('test.sql', 'utf8', function (err, data) {
 	    if (err) throw err;
 	    db.exec(data, function (err) {
@@ -84,7 +85,6 @@ function kirjoitaYLE(off){
         	var orgt = "";
                 var endt = '-';
                 var stat = '-';
-		var genre = '-';
 		var kuvaus = '-';
 		var pmtl = '-';
 		try{
@@ -101,17 +101,6 @@ function kirjoitaYLE(off){
 		    }catch(err){continue;}
 		}
 
-		try{
-		    genre = "";
-		    for(n=0; n < body.data[i].partOfSeries.subject.length; n++){
-			if(body.data[i].partOfSeries.subject[n].key != undefined)
-			    genre += body.data[i].partOfSeries.subject[n].key + " ";
-		    }
-		    
-		}
-		catch(err){
-                   
-		}
 	
                 try{
                      
@@ -130,11 +119,23 @@ function kirjoitaYLE(off){
                 catch(err){continue;}
 		
                 var oid = body.data[i].id;
+
+		try{
+		    for(n=0; n < body.data[i].partOfSeries.subject.length; n++){
+			if(body.data[i].partOfSeries.subject[n].key != undefined)
+			    db.run('INSERT OR IGNORE INTO genres (id,genre) VALUES(?,?)',oid,body.data[i].partOfSeries.subject[n].key);
+		    }
+		    
+		}
+		catch(err){
+                   
+		}
+
 		if(smn == ""  || smn == null)
 		    smn = '-';
 		if(orgt == "" || orgt == null)
 		    orgt = '-';
-		db.run('INSERT OR IGNORE INTO elokuvat (id,originalnimi,suominimi,imgid,genre,kuvaus,endtime,starttime,promotiontitle) VALUES(?,?,?,?,?,?,?,?,?)',oid,orgt,smn,iid,genre,kuvaus,endt,stat,pmtl);
+		db.run('INSERT OR IGNORE INTO elokuvat (id,originalnimi,suominimi,imgid,kuvaus,endtime,starttime,promotiontitle) VALUES(?,?,?,?,?,?,?,?)',oid,orgt,smn,iid,kuvaus,endt,stat,pmtl);
 		haeOmdb(orgt,smn);
 	    }  
 	}});}

@@ -3,7 +3,6 @@ CREATE TABLE elokuvat (
   originalnimi varchar(100),
   suominimi varchar(100) ,
   imgid varchar(12),
-  genre varchar(300),
   kuvaus varchar(200),
   endtime varchar (100),
   starttime varchar (100),
@@ -22,4 +21,10 @@ CREATE TABLE trailers(
        imdbid varchar(30) NOT NULL,
        link  varchar(300) NOT NULL,
        PRIMARY KEY(link)
+);
+
+CREATE TABLE genres(
+       id varchar(20) NOT NULL,
+       genre varchar(100),
+       PRIMARY KEY(id,genre)
 );
