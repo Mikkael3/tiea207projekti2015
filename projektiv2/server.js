@@ -25,22 +25,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/api/titles/all', function(req, res, next) {
-    var lista = [];
-    var finish = function() {
-      res.send(lista);
-    }
+		var lista = [];
+		var finish = function() {
+			res.send(lista);
+		}
 
-      db.all('Select * from elokuvat', function(err,row) {
-          /*var title = {
-            "name": row.orginalnimi,
-            "titleId" : row.id,
-            "bio": row.suominimi
-          };
+			db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi', function(err,row) {
+					/*var title = {
+						"name": row.orginalnimi,
+						"titleId" : row.id,
+						"bio": row.suominimi
+					};
 
-          lista.push(title);
+					lista.push(title);
 */
-        res.send(row);
-      });
+				
+				res.send(row);
+			});
 
 
 
@@ -49,27 +50,31 @@ app.get('/api/titles/all', function(req, res, next) {
 });
 
 app.get('/api/titles/:id', function(req, res, next) {
-    var id = req.params.id;
+		var id = req.params.id;
 
-    //var id = req.params.id;
-    var testititle = {
-    "originalnimi": "",
-    "imgid": "",
-    "id": "",
-    "suominimi": ""
-    };
+		//var id = req.params.id;
+		var testititle = {
+		"originalnimi": "",
+		"imgid": "",
+		"id": "",
+		"suominimi": ""
+		};
 
 
 
-    db.get('Select * from elokuvat where id = ?', id, function(err, row) {
-      console.log("mitä asdfasdf "+ row.id);
+		db.get('SELECT * FROM elokuvat where id = ?', id, function(err, row) {
+			console.log("mitä asdfasdf "+ row.id);
 
-      res.json({ "originalnimi": row.originalnimi,
-                  "id": row.id,
-                  "suominimi": row.suominimi,
-                  "imgid" : row.imgid
-      });
-    });
+			res.json({ "originalnimi": row.originalnimi,
+									"id": row.id,
+									"suominimi": row.suominimi,
+									"imgid" : row.imgid,
+									"kuvaus" : row.kuvaus,
+									"endtime" : row.endtime,
+									"starttime" : row.starttime,
+									"promotiontitle" : row.promotiontitle
+			});
+		});
 
 
 
@@ -79,39 +84,39 @@ app.get('/api/titles/:id', function(req, res, next) {
 });
 
 app.use(function(req, res) {
-  Router.match({ routes: routes, location: req.url }, function(err, redirectLocation, renderProps) {
-    if (err) {
-      res.status(500).send(err.message)
-    } else if (redirectLocation) {
-      res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
-    } else if (renderProps) {
-      var html = ReactDOM.renderToString(<RoutingContext {...renderProps} />);
-      var page = swig.renderFile('views/index.html', { html: html });
-      res.status(200).send(page);
-    } else {
-      res.status(404).send('Page Not Found')
-    }
-  });
+	Router.match({ routes: routes, location: req.url }, function(err, redirectLocation, renderProps) {
+		if (err) {
+			res.status(500).send(err.message)
+		} else if (redirectLocation) {
+			res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
+		} else if (renderProps) {
+			var html = ReactDOM.renderToString(<RoutingContext {...renderProps} />);
+			var page = swig.renderFile('views/index.html', { html: html });
+			res.status(200).send(page);
+		} else {
+			res.status(404).send('Page Not Found')
+		}
+	});
 });
 /*
 app.get('/api/getTitles') {
-  //tarkistaa onko haettu viim 24h
-  //jos on jatketaan
-  //jos ei ni haetaan uudestaan
-  //hakee dbsta
-  //muuttaa json
-  //palauttaa tiedoston
+	//tarkistaa onko haettu viim 24h
+	//jos on jatketaan
+	//jos ei ni haetaan uudestaan
+	//hakee dbsta
+	//muuttaa json
+	//palauttaa tiedoston
 }
 
 haeylejaombd() {
-  //haetiedot
-  //$.ajax(yleltä)
-  //syötetään db
-  //sama omdb
+	//haetiedot
+	//$.ajax(yleltä)
+	//syötetään db
+	//sama omdb
 }
 
 */
 
 app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
+	console.log('Express server listening on port ' + app.get('port'));
 });

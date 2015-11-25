@@ -26,6 +26,11 @@ class Home extends React.Component {
     HomeActions.handleSort();
   }
 
+  removeNoRating() {
+    
+    HomeActions.removeNoRating();
+  }
+
 	onChange(state) {
 		this.setState(state);
 	}
@@ -40,7 +45,7 @@ class Home extends React.Component {
   						<img src={'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png"} />
 							<p>{title.originalnimi}</p>
   						<p>{title.suominimi}</p>
-              <p>{title.starttime}</p>
+              <p>{title.rating}</p>
               <p>{title.endtime}</p>
   					</Link>
   				</li>
@@ -53,6 +58,7 @@ class Home extends React.Component {
       		<div className='content'>
         	Hello from Home Component
           <button onClick={this.handleSort}>Järjestä</button>
+          <button onClick={this.removeNoRating}>Näytä vain arvostellut</button>
 
         	{titles}
 

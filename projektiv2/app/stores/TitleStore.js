@@ -12,7 +12,7 @@ class TitleStore {
 	}
 
 	onGetTitleSuccess(data) {
-
+		assign(this,data);
 		this.id = data.id;
 		this.originalnimi = data.originalnimi;
 		this.suominimi = data.suominimi;

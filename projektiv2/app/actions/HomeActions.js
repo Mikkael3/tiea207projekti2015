@@ -5,12 +5,17 @@ class HomeActions {
 		this.generateActions(
 			'getTitlesSuccess',
 			'getTitlesFail',
-			'handleSort'
+			'handleSort',
+			'removeNoRating'
 		);
 	}
 
 	handleSort() {
 		this.actions.handleSort();
+	}
+
+	removeNoRating() {
+		this.actions.removeNoRating();
 	}
 
 	getTitles() {

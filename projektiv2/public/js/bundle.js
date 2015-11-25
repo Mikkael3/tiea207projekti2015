@@ -19,13 +19,18 @@ var HomeActions = (function () {
 	function HomeActions() {
 		_classCallCheck(this, HomeActions);
 
-		this.generateActions('getTitlesSuccess', 'getTitlesFail', 'handleSort');
+		this.generateActions('getTitlesSuccess', 'getTitlesFail', 'handleSort', 'removeNoRating');
 	}
 
 	_createClass(HomeActions, [{
 		key: 'handleSort',
 		value: function handleSort() {
 			this.actions.handleSort();
+		}
+	}, {
+		key: 'removeNoRating',
+		value: function removeNoRating() {
+			this.actions.removeNoRating();
 		}
 	}, {
 		key: 'getTitles',
@@ -469,6 +474,12 @@ var Home = (function (_React$Component) {
       _actionsHomeActions2['default'].handleSort();
     }
   }, {
+    key: 'removeNoRating',
+    value: function removeNoRating() {
+
+      _actionsHomeActions2['default'].removeNoRating();
+    }
+  }, {
     key: 'onChange',
     value: function onChange(state) {
       this.setState(state);
@@ -498,7 +509,7 @@ var Home = (function (_React$Component) {
             _react2['default'].createElement(
               'p',
               null,
-              title.starttime
+              title.rating
             ),
             _react2['default'].createElement(
               'p',
@@ -517,6 +528,11 @@ var Home = (function (_React$Component) {
           'button',
           { onClick: this.handleSort },
           'Järjestä'
+        ),
+        _react2['default'].createElement(
+          'button',
+          { onClick: this.removeNoRating },
+          'Näytä vain arvostellut'
         ),
         titles
       );
@@ -622,14 +638,33 @@ var Title = (function (_React$Component) {
 					this.state.id
 				),
 				_react2['default'].createElement(
+					'p',
+					null,
+					'Kuvaus: ',
+					this.state.kuvaus
+				),
+				_react2['default'].createElement(
+					'p',
+					null,
+					'Kuvaus: ',
+					this.state.promotiontitle
+				),
+				_react2['default'].createElement(
+					'p',
+					null,
+					'Kuvaus: ',
+					this.state.endtime
+				),
+				_react2['default'].createElement(
+					'p',
+					null,
+					'Kuvaus: ',
+					this.state.starttime
+				),
+				_react2['default'].createElement(
 					'a',
 					{ href: 'http://areena.yle.fi/' + this.state.id },
-					_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" }),
-					_react2['default'].createElement(
-						'p',
-						null,
-						this.state.name
-					)
+					_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" })
 				)
 			);
 		}
@@ -746,6 +781,14 @@ var HomeStore = (function () {
 			this.titles = (0, _underscore.sortBy)(this.titles, 'endtime');
 		}
 	}, {
+		key: 'onRemoveNoRating',
+		value: function onRemoveNoRating() {
+			alert("toimii");
+			this.titles = (0, _underscore.filter)(this.titles, function (title) {
+				return title.rating > 0;
+			});
+		}
+	}, {
 		key: 'onGetTitlesSuccess',
 		value: function onGetTitlesSuccess(data) {
 			this.titles = data;
@@ -800,7 +843,7 @@ var TitleStore = (function () {
 	_createClass(TitleStore, [{
 		key: 'onGetTitleSuccess',
 		value: function onGetTitleSuccess(data) {
-
+			(0, _underscore.assign)(this, data);
 			this.id = data.id;
 			this.originalnimi = data.originalnimi;
 			this.suominimi = data.suominimi;

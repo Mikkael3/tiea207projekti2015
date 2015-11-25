@@ -1,6 +1,6 @@
 import alt from '../alt';
 import HomeActions from '../actions/HomeActions';
-import {sortBy} from 'underscore';
+import {sortBy,filter} from 'underscore';
 
 class HomeStore {
 	constructor() {
@@ -11,6 +11,13 @@ class HomeStore {
 
 	onHandleSort() {
 		this.titles = sortBy(this.titles, 'endtime');
+	}
+
+	onRemoveNoRating() {
+		alert("toimii");
+		this.titles = filter(this.titles,function(title) {
+			return title.rating > 0;
+		});
 	}
 
 	onGetTitlesSuccess(data) {
