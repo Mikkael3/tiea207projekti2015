@@ -4,3 +4,12 @@
 11.10. 1h
 12.10. 2h
 15.10. 1h
+
+tapaamisajat:
+
+12.10. 1h    tapaaminen
+19.10. 1h    tapaaminen
+3.11.  1h    tapaaminen
+10.11. 1h
+17.11. 10min tapaaminen
+24.11. 10min tapaaminen
