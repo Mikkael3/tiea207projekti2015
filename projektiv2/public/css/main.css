@@ -24,3 +24,13 @@ body {
    height: 3em;   /* Height of the footer */
    background:#6cf;
 }
+
+.title {
+   list-style: none;
+   /*background-color: #000000;*/
+   float: left;
+}
+
+#controls {
+   clear: both;
+}
