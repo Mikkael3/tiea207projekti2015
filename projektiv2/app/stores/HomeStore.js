@@ -14,7 +14,7 @@ class HomeStore {
 	}
 
 	onRemoveNoRating() {
-		alert("toimii");
+		
 		this.titles = filter(this.titles,function(title) {
 			return title.rating > 0;
 		});
