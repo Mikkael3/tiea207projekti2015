@@ -26,10 +26,10 @@ class Title extends React.Component {
 
 	componentDidUpdate(prevProps) {
 
-	if (prevProps.params.titleId !== this.props.params.titleId) {
+		if (prevProps.params.titleId !== this.props.params.titleId) {
 
-	  TitleActions.getTitle(this.props.params.titleId);
-	}
+			TitleActions.getTitle(this.props.params.titleId);
+		}
 
 	}
 
@@ -43,22 +43,22 @@ class Title extends React.Component {
 		return (
 			<div className='content'>
 
-				<h2>Originalnimi: {this.state.originalnimi}</h2>
-				<h2>Suominimi: {this.state.suominimi}</h2>
-				<h2>ID: {this.state.id}</h2>
-				<p>Kuvaus: {this.state.kuvaus}</p>
+			<h2>Originalnimi: {this.state.originalnimi}</h2>
+			<h2>Suominimi: {this.state.suominimi}</h2>
+			<h2>ID: {this.state.id}</h2>
+			<p>Kuvaus: {this.state.kuvaus}</p>
 
-				<p>Promotion title: {this.state.promotiontitle}</p>
-				<p>Aloitusaika: {this.state.starttime}</p>
-				<p>Lopetusaika: {this.state.endtime}</p>
-				<a href={'http://areena.yle.fi/' + this.state.id}>
-					<img src={'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png"} />
+			<p>Promotion title: {this.state.promotiontitle}</p>
+			<p>Aloitusaika: {this.state.starttime}</p>
+			<p>Lopetusaika: {this.state.endtime}</p>
+			<a href={'http://areena.yle.fi/' + this.state.id}>
+			<img src={'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png"} />
 
-				</a>
-<Arvostelu yleid={this.state.id} />
+			</a>
+			<Arvostelu yleid={this.state.id} />
 			</div>
 		);
-  }
+	}
 }
 
 export default Title;

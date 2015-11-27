@@ -614,16 +614,24 @@ var Home = (function (_React$Component) {
 		value: function render() {
 
 			var titlet = this.state.titles;
-			var counts = {};
+			var ogNimet = {};
+			var suomiNimet = {};
 			for (var i = 0; i < titlet.length; i++) {
 				var num = titlet[i].originalnimi;
-				counts[num] = counts[num] ? counts[num] + 1 : 1;
+
+				var num2 = titlet[i].suominimi;
+				ogNimet[num] = ogNimet[num] ? ogNimet[num] + 1 : 1;
+				suomiNimet[num2] = suomiNimet[num2] ? suomiNimet[num2] + 1 : 1;
 			}
-			//alert(counts["House of Anubis"]);
 
 			var titles = this.state.titles.map(function (title) {
-				if (counts[title.originalnimi] > 1) {
-					counts[title.originalnimi] = -1;
+				if (ogNimet[title.originalnimi] > 1 || suomiNimet[title.suominimi] > 1) {
+					if (ogNimet[title.originalnimi] === -1) {
+						suomiNimet[title.suominimi] = -1;
+						return;
+					}
+					ogNimet[title.originalnimi] = -1;
+					suomiNimet[title.suominimi] = -1;
 
 					return _react2['default'].createElement(
 						'li',
@@ -660,7 +668,7 @@ var Home = (function (_React$Component) {
 						)
 					);
 				}
-				if (counts[title.originalnimi] === 1) {
+				if (ogNimet[title.originalnimi] > 0 || suomiNimet[title.suominimi] > 0) {
 					return _react2['default'].createElement(
 						'li',
 						{ className: 'title', key: title.id },

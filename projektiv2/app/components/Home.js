@@ -27,7 +27,7 @@ class Home extends React.Component {
 	}
 
 	removeNoRating() {
-		
+
 		HomeActions.removeNoRating();
 	}
 
@@ -40,17 +40,26 @@ class Home extends React.Component {
 	render() {
 
 			var titlet = this.state.titles;
-			var counts = {};
+			var ogNimet = {};
+			var suomiNimet = {};
 			for (var i =0; i<titlet.length; i++) {
 				var num = titlet[i].originalnimi;
-				counts[num] = counts[num] ? counts[num] + 1 : 1; 
+
+				var num2 = titlet[i].suominimi;
+				ogNimet[num] = ogNimet[num] ? ogNimet[num] + 1 : 1;
+				suomiNimet[num2] = suomiNimet[num2] ? suomiNimet[num2] + 1 : 1;
 			}
-			//alert(counts["House of Anubis"]);
+
 
 			let titles = this.state.titles.map((title) => {
-				if(counts[title.originalnimi] >1) {
-					counts[title.originalnimi] = -1;
-					
+				if(ogNimet[title.originalnimi] >1 || suomiNimet[title.suominimi] > 1) {
+          if(ogNimet[title.originalnimi] === -1){
+					      suomiNimet[title.suominimi] = -1;
+								return;	
+					}
+					ogNimet[title.originalnimi] = -1;
+					suomiNimet[title.suominimi] = -1;
+
 					return(
 						<li className="title" key={title.id}>
 						<Link to={'/titles/' + title.id}>
@@ -64,7 +73,7 @@ class Home extends React.Component {
 					</li>
 						)
 				}
-				if(counts[title.originalnimi] === 1){
+				if(ogNimet[title.originalnimi] > 0 || suomiNimet[title.suominimi] > 0){
 					return (
 						<li className="title" key={title.id}>
 							<Link to={'/titles/' + title.id}>
@@ -83,7 +92,7 @@ class Home extends React.Component {
 
 			return (
 					<div className='content'>
-					
+
 					<div id="controls">
 						<button onClick={this.handleSort}>Järjestä</button>
 						<button onClick={this.removeNoRating}>Näytä vain arvostellut</button>
