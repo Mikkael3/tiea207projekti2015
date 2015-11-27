@@ -9,8 +9,8 @@ class TitleActions {
 	}
 
 	getTitle(titleId) {
-		//Tehty json generaattorilla
 		
+
 		$.ajax({ url: '/api/titles/' + titleId})
 		 .done((data) => {
 		 	this.actions.getTitleSuccess(data)

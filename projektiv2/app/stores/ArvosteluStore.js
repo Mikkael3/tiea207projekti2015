@@ -13,15 +13,16 @@ class ArvosteluStore {
 //	this.titles = sortBy(this.titles, 'endtime');
 //}
 
-	
-	handleArvostelu() {
-     alert("moi");
+
+	onHandleArvostelu(id) {
+		alert(id);
+     
      console.log("moi");
     //var db = new sqlite3.Database('../../../database/arvosteludb');
     //db.run('INSERT OR IGNORE INTO arvostelu (yleid,arvolause,arvosteluteksti) VALUES(?,?,?)',yleid,arvolause,arvosteluteksti);
     //db.end();
- 
-    }   
+
+    }
 
 }
 

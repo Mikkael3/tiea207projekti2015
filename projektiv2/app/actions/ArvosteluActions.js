@@ -1,6 +1,4 @@
 import alt from '../alt';
-var sqlite3 = require('sqlite3').verbose();
-
 
 
 
@@ -10,9 +8,9 @@ class ArvosteluActions {
             'handleArvostelu'
 		);
 	}
-    
-    handleArvostelu() {
-		this.actions.handleArvostelu();
+
+    handleArvostelu(id) {
+		this.actions.handleArvostelu(id);
 	}
 
 }
