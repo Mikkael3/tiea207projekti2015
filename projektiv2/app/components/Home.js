@@ -97,7 +97,7 @@ class Home extends React.Component {
 			});
 
 			return (
-					<div className='content'>
+					<div id='container'>
 
 					<div id="controls">
 						<button onClick={this.handleSort}>{this.state.sorted ? 'Palauta' : 'Järjestä'}</button>
