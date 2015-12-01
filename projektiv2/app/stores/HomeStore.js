@@ -36,7 +36,9 @@ class HomeStore {
 			this.sortedByRated = true;
 		}
 		else {
-			this.titles = this.prevTitles;
+			this.titles = sortBy(this.titles, function(title) {
+				return title.rating;
+			});
 			this.sortedByRated = false;
 		}
 }
@@ -57,7 +59,10 @@ class HomeStore {
 	}
 
 	onGetTitlesSuccess(data) {
-		this.titles = data;
+
+		this.titles = sortBy(data, function(title) {
+			return title.starttime;
+		});
 		this.originalTitles = data;
 	}
 

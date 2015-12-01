@@ -73,6 +73,7 @@ class Home extends React.Component {
 							<p>{title.suominimi}</p>
 							<p>{title.rating}</p>
 							<p>{title.endtime}</p>
+							<p>{title.starttime}</p>
 						</Link>
 					</li>
 						)
@@ -86,6 +87,7 @@ class Home extends React.Component {
 								<p>{title.suominimi}</p>
 								<p>{title.rating}</p>
 								<p>{title.endtime}</p>
+								<p>{title.starttime}</p>
 							</Link>
 						</li>
 
@@ -98,9 +100,9 @@ class Home extends React.Component {
 					<div className='content'>
 
 					<div id="controls">
-						<button onClick={this.handleSort}>Järjestä</button>
-						<button onClick={this.removeNoRating}>Näytä vain arvostellut</button>
-						<button onClick={this.handleSortByReview}>Järjestä arvosanan mukaan</button>
+						<button onClick={this.handleSort}>{this.state.sorted ? 'Palauta' : 'Järjestä'}</button>
+						<button onClick={this.removeNoRating}>{this.state.rated ? 'Näytä kaikki' : 'Näytä vain arvostellut'}</button>
+						<button onClick={this.handleSortByReview}>{this.state.sortedByRated ? 'Laskeva' : 'Nouseva'}</button>
 					</div>
 					{titles}
 

@@ -674,6 +674,11 @@ var Home = (function (_React$Component) {
 								'p',
 								null,
 								title.endtime
+							),
+							_react2['default'].createElement(
+								'p',
+								null,
+								title.starttime
 							)
 						)
 					);
@@ -705,6 +710,11 @@ var Home = (function (_React$Component) {
 								'p',
 								null,
 								title.endtime
+							),
+							_react2['default'].createElement(
+								'p',
+								null,
+								title.starttime
 							)
 						)
 					);
@@ -720,17 +730,17 @@ var Home = (function (_React$Component) {
 					_react2['default'].createElement(
 						'button',
 						{ onClick: this.handleSort },
-						'Järjestä'
+						this.state.sorted ? 'Palauta' : 'Järjestä'
 					),
 					_react2['default'].createElement(
 						'button',
 						{ onClick: this.removeNoRating },
-						'Näytä vain arvostellut'
+						this.state.rated ? 'Näytä kaikki' : 'Näytä vain arvostellut'
 					),
 					_react2['default'].createElement(
 						'button',
 						{ onClick: this.handleSortByReview },
-						'Järjestä arvosanan mukaan'
+						this.state.sortedByRated ? 'Laskeva' : 'Nouseva'
 					)
 				),
 				titles
@@ -1058,7 +1068,9 @@ var HomeStore = (function () {
 				});
 				this.sortedByRated = true;
 			} else {
-				this.titles = this.prevTitles;
+				this.titles = (0, _underscore.sortBy)(this.titles, function (title) {
+					return title.rating;
+				});
 				this.sortedByRated = false;
 			}
 		}
@@ -1079,7 +1091,10 @@ var HomeStore = (function () {
 	}, {
 		key: 'onGetTitlesSuccess',
 		value: function onGetTitlesSuccess(data) {
-			this.titles = data;
+
+			this.titles = (0, _underscore.sortBy)(data, function (title) {
+				return title.starttime;
+			});
 			this.originalTitles = data;
 		}
 	}, {
