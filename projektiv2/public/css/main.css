@@ -4,7 +4,7 @@ body {
    padding:0;
    height:100%;
 }
-#app {
+ls#app {
    min-height:100%;
    position:relative;
 }
@@ -25,7 +25,13 @@ body {
    background:#6cf;
 }
 
+.content{
+margin: 1%;
+}
+
 .title {
+   height:250px;
+   width:25%;
    list-style: none;
    /*background-color: #000000;*/
    float: left;
