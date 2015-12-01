@@ -6,7 +6,8 @@ class HomeActions {
 			'getTitlesSuccess',
 			'getTitlesFail',
 			'handleSort',
-			'removeNoRating'
+			'removeNoRating',
+			'handleSortByReview'
 		);
 	}
 
@@ -16,6 +17,10 @@ class HomeActions {
 
 	removeNoRating() {
 		this.actions.removeNoRating();
+	}
+
+	handleSortByReview() {
+		this.actions.handleSortByReview();
 	}
 
 	getTitles() {

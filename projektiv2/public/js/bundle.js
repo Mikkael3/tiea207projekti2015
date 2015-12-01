@@ -56,7 +56,7 @@ var HomeActions = (function () {
 	function HomeActions() {
 		_classCallCheck(this, HomeActions);
 
-		this.generateActions('getTitlesSuccess', 'getTitlesFail', 'handleSort', 'removeNoRating');
+		this.generateActions('getTitlesSuccess', 'getTitlesFail', 'handleSort', 'removeNoRating', 'handleSortByReview');
 	}
 
 	_createClass(HomeActions, [{
@@ -68,6 +68,11 @@ var HomeActions = (function () {
 		key: 'removeNoRating',
 		value: function removeNoRating() {
 			this.actions.removeNoRating();
+		}
+	}, {
+		key: 'handleSortByReview',
+		value: function handleSortByReview() {
+			this.actions.handleSortByReview();
 		}
 	}, {
 		key: 'getTitles',
@@ -600,6 +605,11 @@ var Home = (function (_React$Component) {
 			_actionsHomeActions2['default'].handleSort();
 		}
 	}, {
+		key: 'handleSortByReview',
+		value: function handleSortByReview() {
+			_actionsHomeActions2['default'].handleSortByReview();
+		}
+	}, {
 		key: 'removeNoRating',
 		value: function removeNoRating() {
 
@@ -717,6 +727,11 @@ var Home = (function (_React$Component) {
 						'button',
 						{ onClick: this.removeNoRating },
 						'Näytä vain arvostellut'
+					),
+					_react2['default'].createElement(
+						'button',
+						{ onClick: this.handleSortByReview },
+						'Järjestä arvosanan mukaan'
 					)
 				),
 				titles
@@ -1014,25 +1029,59 @@ var HomeStore = (function () {
 
 		this.bindActions(_actionsHomeActions2['default']);
 		this.titles = [];
+		this.originalTitles = [];
+		this.prevTitles = [];
+		this.sorted = false;
+		this.rated = false;
+		this.sortedByRated = false;
 	}
 
 	_createClass(HomeStore, [{
 		key: 'onHandleSort',
 		value: function onHandleSort() {
-			this.titles = (0, _underscore.sortBy)(this.titles, 'endtime');
+			if (!this.sorted) {
+				this.prevTitles = this.titles;
+				this.titles = (0, _underscore.sortBy)(this.titles, 'endtime');
+				this.sorted = true;
+			} else {
+				this.titles = this.prevTitles;
+				this.sorted = false;
+			}
+		}
+	}, {
+		key: 'onHandleSortByReview',
+		value: function onHandleSortByReview() {
+
+			if (!this.sortedByRated) {
+				this.prevTitles = this.titles;
+				this.titles = (0, _underscore.sortBy)(this.titles, function (title) {
+					return -1 * title.rating;
+				});
+				this.sortedByRated = true;
+			} else {
+				this.titles = this.prevTitles;
+				this.sortedByRated = false;
+			}
 		}
 	}, {
 		key: 'onRemoveNoRating',
 		value: function onRemoveNoRating() {
-
-			this.titles = (0, _underscore.filter)(this.titles, function (title) {
-				return title.rating > 0;
-			});
+			if (!this.rated) {
+				this.rated = true;
+				this.titles = (0, _underscore.filter)(this.titles, function (title) {
+					return title.rating > 0;
+				});
+				this.prevTitles = this.titles;
+			} else {
+				this.rated = false;
+				this.titles = this.originalTitles;
+			}
 		}
 	}, {
 		key: 'onGetTitlesSuccess',
 		value: function onGetTitlesSuccess(data) {
 			this.titles = data;
+			this.originalTitles = data;
 		}
 	}, {
 		key: 'onGetTitlesFail',
