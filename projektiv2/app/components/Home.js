@@ -26,6 +26,10 @@ class Home extends React.Component {
 		HomeActions.handleSort();
 	}
 
+	handleSortByReview() {
+		HomeActions.handleSortByReview();
+	}
+
 	removeNoRating() {
 
 		HomeActions.removeNoRating();
@@ -55,7 +59,7 @@ class Home extends React.Component {
 				if(ogNimet[title.originalnimi] >1 || suomiNimet[title.suominimi] > 1) {
           if(ogNimet[title.originalnimi] === -1){
 					      suomiNimet[title.suominimi] = -1;
-								return;	
+								return;
 					}
 					ogNimet[title.originalnimi] = -1;
 					suomiNimet[title.suominimi] = -1;
@@ -96,6 +100,7 @@ class Home extends React.Component {
 					<div id="controls">
 						<button onClick={this.handleSort}>Järjestä</button>
 						<button onClick={this.removeNoRating}>Näytä vain arvostellut</button>
+						<button onClick={this.handleSortByReview}>Järjestä arvosanan mukaan</button>
 					</div>
 					{titles}
 

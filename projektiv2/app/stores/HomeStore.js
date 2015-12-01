@@ -6,22 +6,59 @@ class HomeStore {
 	constructor() {
 		this.bindActions(HomeActions);
 		this.titles = [];
+		this.originalTitles = [];
+		this.prevTitles = [];
+		this.sorted = false;
+		this.rated = false;
+		this.sortedByRated = false;
 
 	}
 
 	onHandleSort() {
-		this.titles = sortBy(this.titles, 'endtime');
+		if(!this.sorted) {
+			this.prevTitles = this.titles;
+			this.titles = sortBy(this.titles, 'endtime');
+			this.sorted = true;
+		}
+		else {
+			this.titles = this.prevTitles;
+			this.sorted = false;
+		}
 	}
 
+	onHandleSortByReview() {
+
+		if(!this.sortedByRated) {
+			this.prevTitles = this.titles;
+			this.titles = sortBy(this.titles, function(title) {
+				return -1* title.rating;
+			});
+			this.sortedByRated = true;
+		}
+		else {
+			this.titles = this.prevTitles;
+			this.sortedByRated = false;
+		}
+}
+
 	onRemoveNoRating() {
-		
-		this.titles = filter(this.titles,function(title) {
-			return title.rating > 0;
-		});
+		if(!this.rated) {
+			this.rated = true;
+			this.titles = filter(this.titles,function(title) {
+				return title.rating > 0;
+			});
+			this.prevTitles = this.titles;
+
+		}
+		else {
+			this.rated = false;
+			this.titles = this.originalTitles;
+		}
 	}
 
 	onGetTitlesSuccess(data) {
 		this.titles = data;
+		this.originalTitles = data;
 	}
 
 	onGetTitlesFail(jqXhr) {
