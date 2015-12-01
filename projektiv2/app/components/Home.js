@@ -91,7 +91,7 @@ class Home extends React.Component {
 			});
 
 			return (
-					<div className='content'>
+					<div id='container'>
 
 					<div id="controls">
 						<button onClick={this.handleSort}>Järjestä</button>

@@ -27,7 +27,8 @@ class Header extends React.Component {
 	render() {
 		return (
 			<header id="header">
-			<p>Hello from header!</p>
+                        <img src={'https://lh4.googleusercontent.com/b4FE8gcoe1Q7NQJS5fIgSEJFw1Utry_uszUlgoXkgwl1CuhWSIxASMc3IL6b6sgKOI-RGA=w1894-h823'}/>
+			<p>Kolosseum</p>
 			<p/>
 			</header>
 			);
