@@ -12,7 +12,7 @@ var RoutingContext = Router.RoutingContext;
 var routes = require('./app/routes');
 
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('../database/database');
+var db = new sqlite3.Database('./database/database');
 
 var app = express();
 
@@ -39,7 +39,7 @@ app.get('/api/titles/all', function(req, res, next) {
 
 					lista.push(title);
 */
-				
+
 				res.send(row);
 			});
 
