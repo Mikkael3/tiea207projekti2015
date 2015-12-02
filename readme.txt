@@ -1,4 +1,6 @@
+
 http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongodb-and-socketio/
+Thanks for the tutorial and code.
 
 How to run:
 
@@ -8,8 +10,8 @@ How to run:
 2. Asenna bower, npm install -g bower
 3. Asenna gulp,  npm install -g gulp
 
-4. Tässä kansiossa aja komennot npm install ja bower install
+4. Tï¿½ssï¿½ kansiossa aja komennot npm install ja bower install
 
-5. Avaa 2 terminaalia tässä kansiossa
-6. Käynnistä ensimmäisessä gulp
+5. Avaa 2 terminaalia tï¿½ssï¿½ kansiossa
+6. Kï¿½ynnistï¿½ ensimmï¿½isessï¿½ gulp
 7. Ja toisessa npm start watch
