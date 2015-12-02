@@ -1,0 +1,64 @@
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+#app {
+   margin : 0;
+   padding:0;
+   min-height:100%;
+   position:relative;
+}
+
+#hcontainer{
+     margin-top:-1em;
+     border: 0;
+     padding:0;
+     margin:0;
+}
+
+
+#header {
+   top:0;
+   margin:0;
+   position:fixed;
+   background:#ff0;
+   width:100%;
+   padding:1em;
+ 
+}
+
+#header img {
+float:left;
+width:5em;
+margin-top: -1em;
+
+}
+
+#footer {
+    
+   position:fixed;
+   bottom:0;
+   width:100%;
+   height: 3em;   /* Height of the footer */
+   background:#6cf;
+}
+
+#container{
+
+margin: 1%;
+margin-top:7em;
+}
+
+.title {
+   height:250px;
+   width:25%;
+   list-style: none;
+   /*background-color: #000000;*/
+   float: left;
+}
+
+#controls {
+   clear: both;
+}

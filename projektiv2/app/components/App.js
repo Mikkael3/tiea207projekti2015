@@ -9,7 +9,7 @@ class App extends React.Component {
 	render() {
 		return(
 
-			<div id="hcontainer">
+			<div>
 			<Header/>
 			{this.props.children}
 			<Footer />
