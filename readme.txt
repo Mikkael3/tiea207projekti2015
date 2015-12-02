@@ -10,8 +10,8 @@ How to run:
 2. Asenna bower, npm install -g bower
 3. Asenna gulp,  npm install -g gulp
 
-4. T�ss� kansiossa aja komennot npm install ja bower install
+4. Tässä kansiossa aja komennot npm install ja bower install
 
-5. Avaa 2 terminaalia t�ss� kansiossa
-6. K�ynnist� ensimm�isess� gulp
+5. Avaa 2 terminaalia tässä kansiossa
+6. Käynnistä ensimmäisessä gulp
 7. Ja toisessa npm start watch
