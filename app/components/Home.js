@@ -65,7 +65,7 @@ class Home extends React.Component {
 					suomiNimet[title.suominimi] = -1;
 
 					return(
-						<li className="title" key={title.id}>
+						<div className="title col-md-4" key={title.id}>
 						<Link to={'/titles/' + title.id}>
 							<img src={'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png"} />
 							<p>SARJA</p>
@@ -75,12 +75,12 @@ class Home extends React.Component {
 							<p>{title.endtime}</p>
 							<p>{title.starttime}</p>
 						</Link>
-					</li>
+					</div>
 						)
 				}
 				if(ogNimet[title.originalnimi] > 0 || suomiNimet[title.suominimi] > 0){
 					return (
-						<li className="title" key={title.id}>
+						<div className="title col-md-4" key={title.id}>
 							<Link to={'/titles/' + title.id}>
 								<img src={'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png"} />
 								<p>{title.originalnimi}</p>
@@ -89,7 +89,7 @@ class Home extends React.Component {
 								<p>{title.endtime}</p>
 								<p>{title.starttime}</p>
 							</Link>
-						</li>
+						</div>
 
 					)
 				}
@@ -100,10 +100,11 @@ class Home extends React.Component {
 					<div id='container'>
 
 					<div id="controls">
-						<button onClick={this.handleSort}>{this.state.sorted ? 'Palauta' : 'Järjestä'}</button>
+						<button className="btn btn-default" onClick={this.handleSort}>{this.state.sorted ? 'Palauta' : 'Järjestä'}</button>
 						<button onClick={this.removeNoRating}>{this.state.rated ? 'Näytä kaikki' : 'Näytä vain arvostellut'}</button>
 						<button onClick={this.handleSortByReview}>{this.state.sortedByRated ? 'Laskeva' : 'Nouseva'}</button>
 					</div>
+
 					{titles}
 
 					</div>

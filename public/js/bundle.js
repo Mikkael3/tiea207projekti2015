@@ -528,14 +528,13 @@ var Header = (function (_React$Component) {
 		value: function render() {
 			return _react2['default'].createElement(
 				'header',
-				{ id: 'header' },
-				_react2['default'].createElement('img', { src: 'https://lh4.googleusercontent.com/b4FE8gcoe1Q7NQJS5fIgSEJFw1Utry_uszUlgoXkgwl1CuhWSIxASMc3IL6b6sgKOI-RGA=w1894-h823' }),
+				{ className: 'header' },
+				_react2['default'].createElement('img', { src: '/img/yle.png' }),
 				_react2['default'].createElement(
-					'p',
+					'h1',
 					null,
 					'Kolosseum'
-				),
-				_react2['default'].createElement('p', null)
+				)
 			);
 		}
 	}]);
@@ -645,8 +644,8 @@ var Home = (function (_React$Component) {
 					suomiNimet[title.suominimi] = -1;
 
 					return _react2['default'].createElement(
-						'li',
-						{ className: 'title', key: title.id },
+						'div',
+						{ className: 'title col-md-4', key: title.id },
 						_react2['default'].createElement(
 							_reactRouter.Link,
 							{ to: '/titles/' + title.id },
@@ -686,8 +685,8 @@ var Home = (function (_React$Component) {
 				}
 				if (ogNimet[title.originalnimi] > 0 || suomiNimet[title.suominimi] > 0) {
 					return _react2['default'].createElement(
-						'li',
-						{ className: 'title', key: title.id },
+						'div',
+						{ className: 'title col-md-4', key: title.id },
 						_react2['default'].createElement(
 							_reactRouter.Link,
 							{ to: '/titles/' + title.id },
@@ -730,7 +729,7 @@ var Home = (function (_React$Component) {
 					{ id: 'controls' },
 					_react2['default'].createElement(
 						'button',
-						{ onClick: this.handleSort },
+						{ className: 'btn btn-default', onClick: this.handleSort },
 						this.state.sorted ? 'Palauta' : 'Järjestä'
 					),
 					_react2['default'].createElement(
