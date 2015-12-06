@@ -5820,7 +5820,6 @@ button.close {
 }
 .modal.fade .modal-dialog {
   -webkit-transform: translate(0, -25%);
-  -ms-transform: translate(0, -25%);
   transform: translate(0, -25%);
   -webkit-transition: -webkit-transform 0.3s ease-out;
   transition: -webkit-transform 0.3s ease-out;
@@ -5829,7 +5828,6 @@ button.close {
 }
 .modal.in .modal-dialog {
   -webkit-transform: translate(0, 0);
-  -ms-transform: translate(0, 0);
   transform: translate(0, 0);
 }
 .modal-open .modal {
@@ -7259,18 +7257,15 @@ img.mfp-img {
 @media all and (max-width: 900px) {
   .mfp-arrow {
     -webkit-transform: scale(0.75);
-    -ms-transform: scale(0.75);
-        transform: scale(0.75);
+    transform: scale(0.75);
   }
   .mfp-arrow-left {
     -webkit-transform-origin: 0;
-    -ms-transform-origin: 0;
-        transform-origin: 0;
+    transform-origin: 0;
   }
   .mfp-arrow-right {
     -webkit-transform-origin: 100%;
-    -ms-transform-origin: 100%;
-        transform-origin: 100%;
+    transform-origin: 100%;
   }
   .mfp-container {
     padding-left: 6px;

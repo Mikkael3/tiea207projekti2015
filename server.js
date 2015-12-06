@@ -62,8 +62,8 @@ app.get('/api/titles/:id', function(req, res, next) {
 
 
 
-		db.get('SELECT * FROM elokuvat where id = ?', id, function(err, row) {
-			console.log("mitä asdfasdf "+ row.id);
+		db.get('SELECT * FROM elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi where id = ?', id, function(err, row) {
+
 
 			res.json({ "originalnimi": row.originalnimi,
 									"id": row.id,
@@ -72,7 +72,8 @@ app.get('/api/titles/:id', function(req, res, next) {
 									"kuvaus" : row.kuvaus,
 									"endtime" : row.endtime,
 									"starttime" : row.starttime,
-									"promotiontitle" : row.promotiontitle
+									"promotiontitle" : row.promotiontitle,
+									"rating" : row.rating
 			});
 		});
 

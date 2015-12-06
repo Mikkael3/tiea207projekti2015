@@ -49,6 +49,7 @@ class Title extends React.Component {
 			<p>Kuvaus: {this.state.kuvaus}</p>
 
 			<p>Promotion title: {this.state.promotiontitle}</p>
+			<p>Rating: {this.state.rating}</p>
 			<p>Aloitusaika: {this.state.starttime}</p>
 			<p>Lopetusaika: {this.state.endtime}</p>
 			<a href={'http://areena.yle.fi/' + this.state.id}>
