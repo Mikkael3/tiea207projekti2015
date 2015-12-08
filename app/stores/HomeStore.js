@@ -12,6 +12,7 @@ class HomeStore {
 		this.rated = false;
 		this.sortedByRated = false;
 
+
 	}
 
 	onHandleSort() {
@@ -63,6 +64,7 @@ class HomeStore {
 		this.titles = sortBy(data, function(title) {
 			return title.starttime;
 		});
+		
 		this.originalTitles = data;
 	}
 

@@ -2,6 +2,43 @@
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var AikaActions = (function () {
+    function AikaActions() {
+        _classCallCheck(this, AikaActions);
+
+        this.generateActions('formatDate');
+    }
+
+    _createClass(AikaActions, [{
+        key: 'formatDate',
+        value: function formatDate() {
+            this.actions.formatDate();
+        }
+    }]);
+
+    return AikaActions;
+})();
+
+exports['default'] = _alt2['default'].createActions(AikaActions);
+module.exports = exports['default'];
+
+},{"../alt":5}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
 	value: true
 });
 
@@ -35,7 +72,7 @@ var ArvosteluActions = (function () {
 exports['default'] = _alt2['default'].createActions(ArvosteluActions);
 module.exports = exports['default'];
 
-},{"../alt":4}],2:[function(require,module,exports){
+},{"../alt":5}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -79,7 +116,6 @@ var HomeActions = (function () {
 		value: function getTitles() {
 			var _this = this;
 
-			//Tehty json generaattorilla
 			$.ajax({ url: '/api/titles/all' }).done(function (data) {
 				_this.actions.getTitlesSuccess(data);
 			}).fail(function (jqXhr) {
@@ -94,7 +130,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":4}],3:[function(require,module,exports){
+},{"../alt":5}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -137,7 +173,7 @@ var TitleActions = (function () {
 exports['default'] = _alt2['default'].createActions(TitleActions);
 module.exports = exports['default'];
 
-},{"../alt":4}],4:[function(require,module,exports){
+},{"../alt":5}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -153,7 +189,85 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],5:[function(require,module,exports){
+},{"alt":"alt"}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
+
+var _storesAikaStore = require('../stores/AikaStore');
+
+var _storesAikaStore2 = _interopRequireDefault(_storesAikaStore);
+
+var _actionsAikaActions = require('../actions/AikaActions');
+
+var _actionsAikaActions2 = _interopRequireDefault(_actionsAikaActions);
+
+var Aika = (function (_React$Component) {
+    _inherits(Aika, _React$Component);
+
+    function Aika(props) {
+        _classCallCheck(this, Aika);
+
+        _get(Object.getPrototypeOf(Aika.prototype), 'constructor', this).call(this, props);
+        this.state = _storesAikaStore2['default'].getState();
+        this.onChange = this.onChange.bind(this);
+    }
+
+    _createClass(Aika, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            _storesAikaStore2['default'].listen(this.onChange);
+            //AikaActions.formatDate();
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            _storesAikaStore2['default'].unlisten(this.onChange);
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps) {}
+    }, {
+        key: 'onChange',
+        value: function onChange(state) {
+            this.setState(state);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'p',
+                null,
+                this.state.formatedDate
+            );
+        }
+    }]);
+
+    return Aika;
+})(_react2['default'].Component);
+
+exports['default'] = Aika;
+module.exports = exports['default'];
+
+},{"../actions/AikaActions":1,"../stores/AikaStore":16,"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -218,7 +332,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Arvostelu":6,"./Footer":7,"./Haku":8,"./Header":9,"react":"react"}],6:[function(require,module,exports){
+},{"./Arvostelu":8,"./Footer":9,"./Haku":10,"./Header":11,"react":"react"}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -310,7 +424,7 @@ var Arvostelu = (function (_React$Component) {
 exports['default'] = Arvostelu;
 module.exports = exports['default'];
 
-},{"../actions/ArvosteluActions":1,"../stores/ArvosteluStore":14,"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
+},{"../actions/ArvosteluActions":2,"../stores/ArvosteluStore":17,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -389,7 +503,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"react":"react","react-router":"react-router"}],8:[function(require,module,exports){
+},{"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -472,7 +586,7 @@ var Haku = (function (_React$Component) {
 exports['default'] = Haku;
 module.exports = exports['default'];
 
-},{"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
+},{"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -551,7 +665,7 @@ var Header = (function (_React$Component) {
 exports['default'] = Header;
 module.exports = exports['default'];
 
-},{"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
+},{"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -581,6 +695,10 @@ var _storesHomeStore2 = _interopRequireDefault(_storesHomeStore);
 var _actionsHomeActions = require('../actions/HomeActions');
 
 var _actionsHomeActions2 = _interopRequireDefault(_actionsHomeActions);
+
+var _Aika = require('./Aika');
+
+var _Aika2 = _interopRequireDefault(_Aika);
 
 var Home = (function (_React$Component) {
 	_inherits(Home, _React$Component);
@@ -641,6 +759,7 @@ var Home = (function (_React$Component) {
 			}
 
 			var titles = this.state.titles.map(function (title) {
+
 				if (ogNimet[title.originalnimi] > 1 || suomiNimet[title.suominimi] > 1) {
 					if (ogNimet[title.originalnimi] === -1) {
 						suomiNimet[title.suominimi] = -1;
@@ -676,11 +795,7 @@ var Home = (function (_React$Component) {
 								null,
 								title.rating
 							),
-							_react2['default'].createElement(
-								'p',
-								null,
-								title.endtime
-							),
+							_react2['default'].createElement(_Aika2['default'], { aika: title.endtime }),
 							_react2['default'].createElement(
 								'p',
 								null,
@@ -690,6 +805,7 @@ var Home = (function (_React$Component) {
 					);
 				}
 				if (ogNimet[title.originalnimi] > 0 || suomiNimet[title.suominimi] > 0) {
+
 					return _react2['default'].createElement(
 						'div',
 						{ className: 'title col-md-4', key: title.id },
@@ -712,11 +828,7 @@ var Home = (function (_React$Component) {
 								null,
 								title.rating
 							),
-							_react2['default'].createElement(
-								'p',
-								null,
-								title.endtime
-							),
+							_react2['default'].createElement(_Aika2['default'], { aika: title.endtime }),
 							_react2['default'].createElement(
 								'p',
 								null,
@@ -760,7 +872,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":2,"../stores/HomeStore":15,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
+},{"../actions/HomeActions":3,"../stores/HomeStore":18,"./Aika":6,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -902,7 +1014,7 @@ var Title = (function (_React$Component) {
 exports['default'] = Title;
 module.exports = exports['default'];
 
-},{"../actions/TitleActions":3,"../stores/TitleStore":16,"./Arvostelu":6,"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
+},{"../actions/TitleActions":4,"../stores/TitleStore":19,"./Arvostelu":8,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -935,7 +1047,7 @@ _reactDom2['default'].render(_react2['default'].createElement(
   _routes2['default']
 ), document.getElementById('app'));
 
-},{"./routes":13,"history/lib/createBrowserHistory":23,"react":"react","react-dom":"react-dom","react-router":"react-router"}],13:[function(require,module,exports){
+},{"./routes":15,"history/lib/createBrowserHistory":26,"react":"react","react-dom":"react-dom","react-router":"react-router"}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -970,7 +1082,50 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/App":5,"./components/Home":10,"./components/Title":11,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
+},{"./components/App":7,"./components/Home":12,"./components/Title":13,"react":"react","react-router":"react-router"}],16:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsAikaActions = require('../actions/AikaActions');
+
+var _actionsAikaActions2 = _interopRequireDefault(_actionsAikaActions);
+
+var AikaStore = (function () {
+    function AikaStore() {
+        _classCallCheck(this, AikaStore);
+
+        this.bindActions(_actionsAikaActions2['default']);
+        //this.actions.formatDate(this.props.endtime);
+        //this.formatedDate = "w";
+    }
+
+    _createClass(AikaStore, [{
+        key: 'onFormatDate',
+        value: function onFormatDate(date) {
+            this.formatedDate = date;
+        }
+    }]);
+
+    return AikaStore;
+})();
+
+exports['default'] = _alt2['default'].createStore(AikaStore);
+module.exports = exports['default'];
+
+},{"../actions/AikaActions":1,"../alt":5}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1021,7 +1176,7 @@ var ArvosteluStore = (function () {
 exports['default'] = _alt2['default'].createStore(ArvosteluStore);
 module.exports = exports['default'];
 
-},{"../actions/ArvosteluActions":1,"../alt":4}],15:[function(require,module,exports){
+},{"../actions/ArvosteluActions":2,"../alt":5}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1107,6 +1262,7 @@ var HomeStore = (function () {
 			this.titles = (0, _underscore.sortBy)(data, function (title) {
 				return title.starttime;
 			});
+
 			this.originalTitles = data;
 		}
 	}, {
@@ -1122,7 +1278,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":2,"../alt":4,"underscore":"underscore"}],16:[function(require,module,exports){
+},{"../actions/HomeActions":3,"../alt":5,"underscore":"underscore"}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1182,7 +1338,7 @@ var TitleStore = (function () {
 exports['default'] = _alt2['default'].createStore(TitleStore);
 module.exports = exports['default'];
 
-},{"../actions/TitleActions":3,"../alt":4,"underscore":"underscore"}],17:[function(require,module,exports){
+},{"../actions/TitleActions":4,"../alt":5,"underscore":"underscore"}],20:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1275,7 +1431,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],18:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /**
  * Indicates that navigation was caused by a call to history.push.
  */
@@ -1307,7 +1463,7 @@ exports['default'] = {
   REPLACE: REPLACE,
   POP: POP
 };
-},{}],19:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1334,7 +1490,7 @@ function loopAsync(turns, work, callback) {
 
   next();
 }
-},{}],20:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 (function (process){
 /*eslint-disable no-empty */
 'use strict';
@@ -1405,7 +1561,7 @@ function readState(key) {
   return null;
 }
 }).call(this,require('_process'))
-},{"_process":17,"warning":35}],21:[function(require,module,exports){
+},{"_process":20,"warning":38}],24:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1486,13 +1642,13 @@ function supportsGoWithoutReloadUsingHash() {
   var ua = navigator.userAgent;
   return ua.indexOf('Firefox') === -1;
 }
-},{}],22:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 exports.canUseDOM = canUseDOM;
-},{}],23:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1667,7 +1823,7 @@ function createBrowserHistory() {
 exports['default'] = createBrowserHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":18,"./DOMStateStorage":20,"./DOMUtils":21,"./ExecutionEnvironment":22,"./createDOMHistory":24,"_process":17,"invariant":34}],24:[function(require,module,exports){
+},{"./Actions":21,"./DOMStateStorage":23,"./DOMUtils":24,"./ExecutionEnvironment":25,"./createDOMHistory":27,"_process":20,"invariant":37}],27:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1710,7 +1866,7 @@ function createDOMHistory(options) {
 exports['default'] = createDOMHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./DOMUtils":21,"./ExecutionEnvironment":22,"./createHistory":25,"_process":17,"invariant":34}],25:[function(require,module,exports){
+},{"./DOMUtils":24,"./ExecutionEnvironment":25,"./createHistory":28,"_process":20,"invariant":37}],28:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1986,7 +2142,7 @@ function createHistory() {
 
 exports['default'] = createHistory;
 module.exports = exports['default'];
-},{"./Actions":18,"./AsyncUtils":19,"./createLocation":26,"./deprecate":27,"./parsePath":29,"./runTransitionHook":30,"deep-equal":31}],26:[function(require,module,exports){
+},{"./Actions":21,"./AsyncUtils":22,"./createLocation":29,"./deprecate":30,"./parsePath":32,"./runTransitionHook":33,"deep-equal":34}],29:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2026,7 +2182,7 @@ function createLocation() {
 
 exports['default'] = createLocation;
 module.exports = exports['default'];
-},{"./Actions":18,"./parsePath":29}],27:[function(require,module,exports){
+},{"./Actions":21,"./parsePath":32}],30:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2048,7 +2204,7 @@ function deprecate(fn, message) {
 exports['default'] = deprecate;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":17,"warning":35}],28:[function(require,module,exports){
+},{"_process":20,"warning":38}],31:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -2062,7 +2218,7 @@ function extractPath(string) {
 
 exports["default"] = extractPath;
 module.exports = exports["default"];
-},{}],29:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2109,7 +2265,7 @@ function parsePath(path) {
 exports['default'] = parsePath;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./extractPath":28,"_process":17,"warning":35}],30:[function(require,module,exports){
+},{"./extractPath":31,"_process":20,"warning":38}],33:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2136,7 +2292,7 @@ function runTransitionHook(hook, location, callback) {
 exports['default'] = runTransitionHook;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":17,"warning":35}],31:[function(require,module,exports){
+},{"_process":20,"warning":38}],34:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -2232,7 +2388,7 @@ function objEquiv(a, b, opts) {
   return typeof a === typeof b;
 }
 
-},{"./lib/is_arguments.js":32,"./lib/keys.js":33}],32:[function(require,module,exports){
+},{"./lib/is_arguments.js":35,"./lib/keys.js":36}],35:[function(require,module,exports){
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
@@ -2254,7 +2410,7 @@ function unsupported(object){
     false;
 };
 
-},{}],33:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
 
@@ -2265,7 +2421,7 @@ function shim (obj) {
   return keys;
 }
 
-},{}],34:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -2320,7 +2476,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this,require('_process'))
-},{"_process":17}],35:[function(require,module,exports){
+},{"_process":20}],38:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -2384,4 +2540,4 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = warning;
 
 }).call(this,require('_process'))
-},{"_process":17}]},{},[12]);
+},{"_process":20}]},{},[14]);

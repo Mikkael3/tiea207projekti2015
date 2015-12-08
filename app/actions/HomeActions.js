@@ -24,7 +24,7 @@ class HomeActions {
 	}
 
 	getTitles() {
-		//Tehty json generaattorilla
+		
 		$.ajax({ url: '/api/titles/all'})
 		 .done((data) => {
 		 	this.actions.getTitlesSuccess(data)

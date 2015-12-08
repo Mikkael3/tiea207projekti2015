@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import HomeStore from '../stores/HomeStore';
 import HomeActions from '../actions/HomeActions';
+import Aika from './Aika'
 
 
 class Home extends React.Component {
@@ -55,7 +56,10 @@ class Home extends React.Component {
 			}
 
 
+
 			let titles = this.state.titles.map((title) => {
+
+
 				if(ogNimet[title.originalnimi] >1 || suomiNimet[title.suominimi] > 1) {
           if(ogNimet[title.originalnimi] === -1){
 					      suomiNimet[title.suominimi] = -1;
@@ -63,6 +67,8 @@ class Home extends React.Component {
 					}
 					ogNimet[title.originalnimi] = -1;
 					suomiNimet[title.suominimi] = -1;
+
+
 
 					return(
 						<div className="title col-md-4" key={title.id}>
@@ -72,13 +78,16 @@ class Home extends React.Component {
 							<p>{title.originalnimi}</p>
 							<p>{title.suominimi}</p>
 							<p>{title.rating}</p>
-							<p>{title.endtime}</p>
+							<Aika aika={title.endtime}/>
 							<p>{title.starttime}</p>
 						</Link>
 					</div>
 						)
 				}
 				if(ogNimet[title.originalnimi] > 0 || suomiNimet[title.suominimi] > 0){
+
+
+
 					return (
 						<div className="title col-md-4" key={title.id}>
 							<Link to={'/titles/' + title.id}>
@@ -86,7 +95,8 @@ class Home extends React.Component {
 								<p>{title.originalnimi}</p>
 								<p>{title.suominimi}</p>
 								<p>{title.rating}</p>
-								<p>{title.endtime}</p>
+								<Aika aika={title.endtime}/>
+
 								<p>{title.starttime}</p>
 							</Link>
 						</div>
