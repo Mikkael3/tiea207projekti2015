@@ -55,7 +55,7 @@ class Home extends React.Component {
 				suomiNimet[num2] = suomiNimet[num2] ? suomiNimet[num2] + 1 : 1;
 			}
 
-
+			var moment = require('moment');
 
 			let titles = this.state.titles.map((title) => {
 
@@ -68,7 +68,9 @@ class Home extends React.Component {
 					ogNimet[title.originalnimi] = -1;
 					suomiNimet[title.suominimi] = -1;
 
-
+					var date = moment(title.endtime, moment.ISO_8601);
+					var endTimeFmt = moment(date).format('LL');
+					if(endTimeFmt === "Invalid date") endTimeFmt = "katsottavissa toistaiseksi";
 
 					return(
 						<div className="title col-md-4" key={title.id}>
@@ -78,15 +80,16 @@ class Home extends React.Component {
 							<p>{title.originalnimi}</p>
 							<p>{title.suominimi}</p>
 							<p>{title.rating}</p>
-							<Aika aika={title.endtime}/>
-							<p>{title.starttime}</p>
+							<p>{endTimeFmt}</p>
 						</Link>
 					</div>
 						)
 				}
 				if(ogNimet[title.originalnimi] > 0 || suomiNimet[title.suominimi] > 0){
 
-
+					var date = moment(title.endtime,'YYYY-MM-DD HH:mm Z');
+					var endTimeFmt = moment(date).format('LL');
+					if(endTimeFmt === "Invalid date") endTimeFmt = "katsottavissa toistaiseksi";
 
 					return (
 						<div className="title col-md-4" key={title.id}>
@@ -95,9 +98,8 @@ class Home extends React.Component {
 								<p>{title.originalnimi}</p>
 								<p>{title.suominimi}</p>
 								<p>{title.rating}</p>
-								<Aika aika={title.endtime}/>
+								<p>{endTimeFmt}</p>
 
-								<p>{title.starttime}</p>
 							</Link>
 						</div>
 
