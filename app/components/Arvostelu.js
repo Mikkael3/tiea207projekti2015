@@ -43,14 +43,22 @@ onChange(state) {
 
 	render() {
 		return (
-            <form id="Arvosteluform">
+			<form id="Arvosteluform">
+			<fieldset class="rating">
+			<legend>Please rate:</legend>
+			<input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Kaunis">5 stars</label>
+			<input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Juuh">4 stars</label>
+			<input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Ok">3 stars</label>
+			<input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Melko paska">2 stars</label>
+			<input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Paska">1 star</label>
+			</fieldset>
 
 			<input type="number" id="arvosana" min="0" max="10" ></input>
-            <input type="text" id="arvosteluteksti"></input>
-            <input type="submit" id="arvostelunappula" value="Arvostele"></input>
-            <button onClick={this.handleArvostelu.bind(this)}>Arvostelupainike</button>
-            </form>
-			);
+			<input type="text" id="arvosteluteksti"></input>
+			<input type="submit" id="arvostelunappula" value="Arvostele"></input>
+			<button onClick={this.handleArvostelu.bind(this)}>Arvostelupainike</button>
+			</form>
+		);
 	}
 
 

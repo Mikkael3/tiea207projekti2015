@@ -492,59 +492,59 @@ label {
   background: #fff
 }
 
-.radio {
-  margin-bottom: 10px;
-  margin-top: 10px;
-  padding-left: 20px;
+
+.rating {
+    float:left;
 }
 
-.radio-inline + .radio-inline {
-  margin-top: 10px;
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
 }
 
-.radio-inline,
-.checkbox-inline {
-  cursor: default;
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
 }
 
-.radio label {
-  display: inline-block;
-  cursor: pointer;
-  position: relative;
-  padding-left: 5px;
-  margin-right: 10px;
+.rating:not(:checked) > label:before {
+    content: '★ ';
 }
 
-.radio label:before {
-  content: '';
-  display: inline-block;
-  width: 17px;
-  height: 17px;
-  margin-left: -20px;
-  position: absolute;
-  left: 0;
-  background-color: #fff;
-  border: 1px solid #d0d0d0;
+.rating > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
 }
 
-.radio label:before {
-  bottom: 2.5px;
-  border-radius: 100px;
-  transition: border .2s 0s cubic-bezier(.45,.04,.22,1.30);
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
 }
 
-.radio input[type=radio]:checked + label:before {
-  border-width: 5px;
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
 }
 
-.radio input[type=radio] {
-  display: none;
-}
-
-.radio input[type=radio][disabled] + label {
-  opacity: .65;
-}
-
-.radio input[type=radio]:checked + label:before {
-  border-color: #10cebd;
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
 }
