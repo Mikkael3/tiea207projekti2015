@@ -9,7 +9,12 @@ class Arvostelu extends React.Component {
 
   handleArvostelu(event) {
     event.preventDefault();
-      ArvosteluActions.handleArvostelu(this.props.yleid);
+    
+    var tiedot = {
+      'yleid' : this.props.yleid,
+      'value' : event.target.rating.value
+    };
+    ArvosteluActions.handleArvostelu(tiedot);
   }
 
 constructor(props) {
@@ -43,7 +48,7 @@ onChange(state) {
 
 	render() {
 		return (
-			<form id="Arvosteluform">
+			<form id="Arvosteluform" onSubmit={this.handleArvostelu.bind(this)}>
 			<fieldset class="rating">
 			<legend>Please rate:</legend>
 			<input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Kaunis">5 stars</label>
@@ -52,11 +57,7 @@ onChange(state) {
 			<input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Melko paska">2 stars</label>
 			<input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Paska">1 star</label>
 			</fieldset>
-
-			<input type="number" id="arvosana" min="0" max="10" ></input>
-			<input type="text" id="arvosteluteksti"></input>
-			<input type="submit" id="arvostelunappula" value="Arvostele"></input>
-			<button onClick={this.handleArvostelu.bind(this)}>Arvostelupainike</button>
+      <input type="submit" id="arvostelunappula" value="Arvostele"></input>
 			</form>
 		);
 	}

@@ -24,22 +24,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
+app.post('/api/arvostelu', function(req,res, next) {
+
+		var id = req.body.yleid;
+		var arvosana = req.body.value;
+});
+
+
 app.get('/api/titles/all', function(req, res, next) {
 		var lista = [];
-		var finish = function() {
-			res.send(lista);
-		}
-
 			db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi', function(err,row) {
-					/*var title = {
-						"name": row.orginalnimi,
-						"titleId" : row.id,
-						"bio": row.suominimi
-					};
-
-					lista.push(title);
-*/
-
 				res.send(row);
 			});
 
