@@ -10,9 +10,16 @@ var ReactDOM = require('react-dom/server');
 var Router = require('react-router');
 var RoutingContext = Router.RoutingContext;
 var routes = require('./app/routes');
-
+var pq = require("pq");
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/database');
+var arvdb;
+
+if(process.env.DB_URL !== undefined)
+    arvdb =process.env.DB_URL;
+else{
+    arvdb = new sqlite3.Database('./database/arvosteludb');
+}
 
 var app = express();
 
@@ -26,8 +33,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/api/arvostelu', function(req,res, next) {
 
-		var id = req.body.yleid;
-		var arvosana = req.body.value;
+    var id = req.body.yleid;
+    var arvosana = req.body.value;
+
+    if(process.env.DB_URL !== undefined){
+	pg.connect(arvdb, function(err, client) {
+	    if (err) throw err;
+	    console.log('Connected to postgres! Getting schemas...');
+
+	    client
+		.query('INSERT  arvostelu (yleid,arvosana) VALUES(?,?)',id,arvosana)
+	});
+
+    }
+    
+    else{
+	db.run('INSERT  arvostelu (yleid,arvosana) VALUES(?,?)',id,arvosana);
+    }
 });
 
 
