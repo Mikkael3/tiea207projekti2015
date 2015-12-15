@@ -1,41 +1,42 @@
 import React from 'react';
 import {Link} from 'react-router';
-import TitleStore from '../stores/TitleStore';
-import TitleActions from '../actions/TitleActions';
+import SarjaStore from '../stores/SarjaStore';
+import SarjaActions from '../actions/SarjaActions';
 import Arvostelu from './Arvostelu';
 
 
-class Title extends React.Component {
+class Sarja extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = TitleStore.getState();
+		this.state = SarjaStore.getState();
 		this.onChange = this.onChange.bind(this);
 
 	}
 
 	componentDidMount() {
-		TitleStore.listen(this.onChange);
-		TitleActions.getTitle(this.props.params.id);
+		SarjaStore.listen(this.onChange);
+		SarjaActions.getTitle(this.props.params.id);
+
+
 
 	}
 
 	componentWillUnmount() {
-		TitleStore.unlisten(this.onChange);
+		SarjaStore.unlisten(this.onChange);
 
 
 	}
 
 	componentDidUpdate(prevProps) {
 
-		if (prevProps.params.titleId !== this.props.params.titleId) {
-
-			TitleActions.getTitle(this.props.params.titleId);
-		}
 
 	}
 
 	onChange(state) {
 		this.setState(state);
+    SarjaActions.getSarja(this.state.originalnimi);
+
+
 	}
 
 
@@ -49,7 +50,7 @@ class Title extends React.Component {
 			<h2>ID: {this.state.id}</h2>
 			<p>Kuvaus: {this.state.kuvaus}</p>
 
-			<p>Promotion title: {this.state.promotiontitle}</p>
+			<p>Promotion Sarja: {this.state.promotionSarja}</p>
 			<p>Rating: {this.state.rating}</p>
 			<p>Aloitusaika: {this.state.starttime}</p>
 			<p>Lopetusaika: {this.state.endtime}</p>
@@ -63,4 +64,4 @@ class Title extends React.Component {
 	}
 }
 
-export default Title;
+export default Sarja;

@@ -74,7 +74,7 @@ class Home extends React.Component {
 
 					return(
 						<div className="title col-md-4" key={title.id}>
-						<Link to={'/titles/' + title.id}>
+						<Link to={'/series/' + title.id}>
 							<img src={'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png"} />
 							<p>SARJA</p>
 							<p>{title.originalnimi}</p>

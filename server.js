@@ -31,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
+
 app.post('/api/arvostelu', function(req,res, next) {
 
     var id = req.body.yleid;
@@ -46,7 +47,7 @@ app.post('/api/arvostelu', function(req,res, next) {
 	});
 
     }
-    
+
     else{
 	db.run('INSERT  arvostelu (yleid,arvosana) VALUES(?,?)',id,arvosana);
     }
@@ -54,29 +55,16 @@ app.post('/api/arvostelu', function(req,res, next) {
 
 
 app.get('/api/titles/all', function(req, res, next) {
-		var lista = [];
 			db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi', function(err,row) {
 				res.send(row);
 			});
 
-
-
-
-
 });
+
+
 
 app.get('/api/titles/:id', function(req, res, next) {
 		var id = req.params.id;
-
-		//var id = req.params.id;
-		var testititle = {
-		"originalnimi": "",
-		"imgid": "",
-		"id": "",
-		"suominimi": ""
-		};
-
-
 
 		db.get('SELECT * FROM elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi where id = ?', id, function(err, row) {
 
@@ -93,12 +81,17 @@ app.get('/api/titles/:id', function(req, res, next) {
 			});
 		});
 
+});
 
-
-
-
+app.get('/api/series/:id', function(req, res, next) {
+					var id = req.params.id;
+					db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi where originalnimi = ?', id, function(err,row) {
+						res.send(row);
+					});
 
 });
+
+
 
 app.use(function(req, res) {
 	Router.match({ routes: routes, location: req.url }, function(err, redirectLocation, renderProps) {
