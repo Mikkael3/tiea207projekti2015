@@ -34,9 +34,17 @@ class Sarja extends React.Component {
 
 	onChange(state) {
 		this.setState(state);
-    SarjaActions.getSarja(this.state.originalnimi);
 
 
+
+	}
+
+	getNewSarja(nimi) {
+		SarjaActions.getNewSarja(nimi);
+	}
+
+	getSarja(nimi) {
+		//SarjaActions.getSarja(nimi);
 	}
 
 
@@ -58,6 +66,7 @@ class Sarja extends React.Component {
 			<img src={'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png"} />
 
 			</a>
+			<button onClick={this.getNewSarja(this.state.originalnimi)}>Näytä jaksot</button>
 			<Arvostelu yleid={this.state.id} />
 			</div>
 		);

@@ -1,12 +1,15 @@
 import alt from '../alt';
+import {assign} from 'underscore';
 
 class SarjaActions {
 	constructor() {
 		this.generateActions(
 			'getTitleSuccess',
 			'getTitleFail',
-      'getSarjaSuccess',
-      'getSarjaFail'
+      		'getSarjaSuccess',
+      		'getSarjaFail',
+			'getNewSarjaSuccess',
+			'getNewSarjaFail'
 		);
 	}
 
@@ -22,18 +25,33 @@ class SarjaActions {
 		 });
 	}
 
+	getNewSarja(titleName) {
+		$.ajax({
+			url: '/api/series/search',
+			data: {name : titleName }
+		})
+		.done((data) => {
+			this.actions.getNewSarjaSuccess(data);
+		})
+		.fail(() => {
+			this.actions.getNewSarjaFail(titleName);
+		});
+	}
 
+/*
   getSarja(titleName) {
 
-
-    $.ajax({ url: '/api/series/' + titleName})
+    $.ajax({
+		url: '/api/series/search',
+		data: {name: titleName}
+	})
      .done((data) => {
       this.actions.getSarjaSuccess(data)
      })
      .fail((jqXhr) => {
       this.actions.getSarjaFail(jqXhr)
      });
-  }
+ } */
 }
 
 export default alt.createActions(SarjaActions);

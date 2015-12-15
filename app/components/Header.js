@@ -27,7 +27,9 @@ class Header extends React.Component {
 	render() {
 		return (
 			<header className="header">
-			<img src={'/img/yle.png'}/>
+			<Link to='/'>
+				<img className="logo" src={'/img/yle.png'}/>
+			</Link>
 			<h1>Kolosseum</h1>
 			</header>
 			);

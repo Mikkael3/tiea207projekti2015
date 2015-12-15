@@ -83,9 +83,10 @@ app.get('/api/titles/:id', function(req, res, next) {
 
 });
 
-app.get('/api/series/:id', function(req, res, next) {
-					var id = req.params.id;
-					db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi where originalnimi = ?', id, function(err,row) {
+app.get('/api/series/search', function(req, res, next) {
+					var id = req.query.name;
+                    console.log(id);
+					db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi where elokuvat.originalnimi = ?', id, function(err,row) {
 						res.send(row);
 					});
 

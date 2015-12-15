@@ -10,11 +10,11 @@ class SarjaStore {
     	this.suominimi = '';
         this.imgid = '';
 		this.rating = 0;
-    this.jaksot = [];
+    	this.jaksot = [];
 	}
 
 	onGetTitleSuccess(data) {
-		assign(this,data);
+		//assign(this,data);
 		this.id = data.id;
 		this.originalnimi = data.originalnimi;
 		this.suominimi = data.suominimi;
@@ -24,13 +24,21 @@ class SarjaStore {
 		//this.bio = data.bio;
 	}
 
-  onGetSarjaSuccess(data) {
-    this.jaksot = data;
-  }
+	onGetNewSarjaSuccess(data) {
+		this.jaksot = data;
+	}
 
-  onGetTitleFail(jqXhr) {
-    toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
-  }
+	onGetNewSarjaFail(jqXhr) {
+		toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
+	}
+
+  	onGetSarjaSuccess(data) {
+    	this.jaksot = data;
+  	}
+
+  	onGetTitleFail(jqXhr) {
+    	toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
+  	}
 
 	onGetSarjaFail(jqXhr) {
 		toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);

@@ -120,11 +120,13 @@ var _alt = require('../alt');
 
 var _alt2 = _interopRequireDefault(_alt);
 
+var _underscore = require('underscore');
+
 var SarjaActions = (function () {
 	function SarjaActions() {
 		_classCallCheck(this, SarjaActions);
 
-		this.generateActions('getTitleSuccess', 'getTitleFail', 'getSarjaSuccess', 'getSarjaFail');
+		this.generateActions('getTitleSuccess', 'getTitleFail', 'getSarjaSuccess', 'getSarjaFail', 'getNewSarjaSuccess', 'getNewSarjaFail');
 	}
 
 	_createClass(SarjaActions, [{
@@ -139,16 +141,34 @@ var SarjaActions = (function () {
 			});
 		}
 	}, {
-		key: 'getSarja',
-		value: function getSarja(titleName) {
+		key: 'getNewSarja',
+		value: function getNewSarja(titleName) {
 			var _this2 = this;
 
-			$.ajax({ url: '/api/series/' + titleName }).done(function (data) {
-				_this2.actions.getSarjaSuccess(data);
-			}).fail(function (jqXhr) {
-				_this2.actions.getSarjaFail(jqXhr);
+			$.ajax({
+				url: '/api/series/search',
+				data: { name: titleName }
+			}).done(function (data) {
+				_this2.actions.getNewSarjaSuccess(data);
+			}).fail(function () {
+				_this2.actions.getNewSarjaFail(titleName);
 			});
 		}
+
+		/*
+    getSarja(titleName) {
+  
+      $.ajax({
+  		url: '/api/series/search',
+  		data: {name: titleName}
+  	})
+       .done((data) => {
+        this.actions.getSarjaSuccess(data)
+       })
+       .fail((jqXhr) => {
+        this.actions.getSarjaFail(jqXhr)
+       });
+   } */
 	}]);
 
 	return SarjaActions;
@@ -157,7 +177,7 @@ var SarjaActions = (function () {
 exports['default'] = _alt2['default'].createActions(SarjaActions);
 module.exports = exports['default'];
 
-},{"../alt":5}],4:[function(require,module,exports){
+},{"../alt":5,"underscore":"underscore"}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -455,14 +475,17 @@ var Footer = (function (_React$Component) {
   	this.state = FooterStore.getState();
   	this.onChange = this.onChange.bind(this);
   }
-  	componentDidMount() {
+  
+  componentDidMount() {
   	FooterStore.listen(this.onChange);
   	FooterActions.
   }
-  	componentWillUnmount() {
+  
+  componentWillUnmount() {
   	FooterStore.unlisten(this.onChange);
   }
-  	onChange(state) {
+  
+  onChange(state) {
   	this.setState(state);
   }
   */
@@ -614,14 +637,17 @@ var Header = (function (_React$Component) {
   	this.state = FooterStore.getState();
   	this.onChange = this.onChange.bind(this);
   }
-  	componentDidMount() {
+  
+  componentDidMount() {
   	FooterStore.listen(this.onChange);
   	FooterActions.
   }
-  	componentWillUnmount() {
+  
+  componentWillUnmount() {
   	FooterStore.unlisten(this.onChange);
   }
-  	onChange(state) {
+  
+  onChange(state) {
   	this.setState(state);
   }
   */
@@ -629,7 +655,11 @@ var Header = (function (_React$Component) {
 			return _react2['default'].createElement(
 				'header',
 				{ className: 'header' },
-				_react2['default'].createElement('img', { src: '/img/yle.png' }),
+				_react2['default'].createElement(
+					_reactRouter.Link,
+					{ to: '/' },
+					_react2['default'].createElement('img', { className: 'logo', src: '/img/yle.png' })
+				),
 				_react2['default'].createElement(
 					'h1',
 					null,
@@ -920,7 +950,16 @@ var Sarja = (function (_React$Component) {
 		key: 'onChange',
 		value: function onChange(state) {
 			this.setState(state);
-			_actionsSarjaActions2['default'].getSarja(this.state.originalnimi);
+		}
+	}, {
+		key: 'getNewSarja',
+		value: function getNewSarja(nimi) {
+			_actionsSarjaActions2['default'].getNewSarja(nimi);
+		}
+	}, {
+		key: 'getSarja',
+		value: function getSarja(nimi) {
+			//SarjaActions.getSarja(nimi);
 		}
 	}, {
 		key: 'render',
@@ -981,6 +1020,11 @@ var Sarja = (function (_React$Component) {
 					'a',
 					{ href: 'http://areena.yle.fi/' + this.state.id },
 					_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" })
+				),
+				_react2['default'].createElement(
+					'button',
+					{ onClick: this.getNewSarja(this.state.originalnimi) },
+					'Näytä jaksot'
 				),
 				_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id })
 			);
@@ -1399,7 +1443,7 @@ var SarjaStore = (function () {
 	_createClass(SarjaStore, [{
 		key: 'onGetTitleSuccess',
 		value: function onGetTitleSuccess(data) {
-			(0, _underscore.assign)(this, data);
+			//assign(this,data);
 			this.id = data.id;
 			this.originalnimi = data.originalnimi;
 			this.suominimi = data.suominimi;
@@ -1407,6 +1451,16 @@ var SarjaStore = (function () {
 			this.rating = data.rating;
 
 			//this.bio = data.bio;
+		}
+	}, {
+		key: 'onGetNewSarjaSuccess',
+		value: function onGetNewSarjaSuccess(data) {
+			this.jaksot = data;
+		}
+	}, {
+		key: 'onGetNewSarjaFail',
+		value: function onGetNewSarjaFail(jqXhr) {
+			toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
 		}
 	}, {
 		key: 'onGetSarjaSuccess',
@@ -1767,7 +1821,7 @@ function getUserConfirmation(message, callback) {
 }
 
 /**
- * Returns true if the HTML5 history API is supported. Taken from modernizr.
+ * Returns true if the HTML5 history API is supported. Taken from Modernizr.
  *
  * https://github.com/Modernizr/Modernizr/blob/master/LICENSE
  * https://github.com/Modernizr/Modernizr/blob/master/feature-detects/history.js
@@ -1777,6 +1831,11 @@ function getUserConfirmation(message, callback) {
 function supportsHistory() {
   var ua = navigator.userAgent;
   if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) {
+    return false;
+  }
+  // FIXME: Work around our browser history not working correctly on Chrome
+  // iOS: https://github.com/rackt/react-router/issues/2565
+  if (ua.indexOf('CriOS') !== -1) {
     return false;
   }
   return window.history && 'pushState' in window.history;
@@ -2035,6 +2094,10 @@ var _createLocation2 = require('./createLocation');
 
 var _createLocation3 = _interopRequireDefault(_createLocation2);
 
+var _parsePath = require('./parsePath');
+
+var _parsePath2 = _interopRequireDefault(_parsePath);
+
 var _runTransitionHook = require('./runTransitionHook');
 
 var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
@@ -2159,15 +2222,10 @@ function createHistory() {
       if (ok) {
         // treat PUSH to current path like REPLACE to be consistent with browsers
         if (nextLocation.action === _Actions.PUSH) {
-          var _getCurrentLocation = getCurrentLocation();
+          var prevPath = createPath(location);
+          var nextPath = createPath(nextLocation);
 
-          var pathname = _getCurrentLocation.pathname;
-          var search = _getCurrentLocation.search;
-
-          var currentPath = pathname + search;
-          var path = nextLocation.pathname + nextLocation.search;
-
-          if (currentPath === path) nextLocation.action = _Actions.REPLACE;
+          if (nextPath === prevPath) nextLocation.action = _Actions.REPLACE;
         }
 
         if (finishTransition(nextLocation) !== false) updateLocation(nextLocation);
@@ -2180,20 +2238,12 @@ function createHistory() {
     });
   }
 
-  function pushState(state, path) {
-    transitionTo(createLocation(path, state, _Actions.PUSH, createKey()));
+  function push(location) {
+    transitionTo(createLocation(location, null, _Actions.PUSH, createKey()));
   }
 
-  function push(path) {
-    pushState(null, path);
-  }
-
-  function replaceState(state, path) {
-    transitionTo(createLocation(path, state, _Actions.REPLACE, createKey()));
-  }
-
-  function replace(path) {
-    replaceState(null, path);
+  function replace(location) {
+    transitionTo(createLocation(location, null, _Actions.REPLACE, createKey()));
   }
 
   function goBack() {
@@ -2261,12 +2311,24 @@ function createHistory() {
     });
   }
 
+  // deprecated
+  function pushState(state, path) {
+    if (typeof path === 'string') path = _parsePath2['default'](path);
+
+    push(_extends({ state: state }, path));
+  }
+
+  // deprecated
+  function replaceState(state, path) {
+    if (typeof path === 'string') path = _parsePath2['default'](path);
+
+    replace(_extends({ state: state }, path));
+  }
+
   return {
     listenBefore: listenBefore,
     listen: listen,
     transitionTo: transitionTo,
-    pushState: pushState,
-    replaceState: replaceState,
     push: push,
     replace: replace,
     go: go,
@@ -2279,13 +2341,15 @@ function createHistory() {
 
     setState: _deprecate2['default'](setState, 'setState is deprecated; use location.key to save state instead'),
     registerTransitionHook: _deprecate2['default'](registerTransitionHook, 'registerTransitionHook is deprecated; use listenBefore instead'),
-    unregisterTransitionHook: _deprecate2['default'](unregisterTransitionHook, 'unregisterTransitionHook is deprecated; use the callback returned from listenBefore instead')
+    unregisterTransitionHook: _deprecate2['default'](unregisterTransitionHook, 'unregisterTransitionHook is deprecated; use the callback returned from listenBefore instead'),
+    pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
+    replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
   };
 }
 
 exports['default'] = createHistory;
 module.exports = exports['default'];
-},{"./Actions":21,"./AsyncUtils":22,"./createLocation":29,"./deprecate":30,"./runTransitionHook":33,"deep-equal":34}],29:[function(require,module,exports){
+},{"./Actions":21,"./AsyncUtils":22,"./createLocation":29,"./deprecate":30,"./parsePath":32,"./runTransitionHook":33,"deep-equal":34}],29:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2299,16 +2363,19 @@ var _parsePath = require('./parsePath');
 var _parsePath2 = _interopRequireDefault(_parsePath);
 
 function createLocation() {
-  var path = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
+  var location = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
   var state = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
   var action = arguments.length <= 2 || arguments[2] === undefined ? _Actions.POP : arguments[2];
   var key = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 
-  if (typeof path === 'string') path = _parsePath2['default'](path);
+  if (typeof location === 'string') location = _parsePath2['default'](location);
 
-  var pathname = path.pathname || '/';
-  var search = path.search || '';
-  var hash = path.hash || '';
+  var pathname = location.pathname || '/';
+  var search = location.search || '';
+  var hash = location.hash || '';
+
+  // TODO: Deprecate passing state directly into createLocation.
+  state = location.state || state;
 
   return {
     pathname: pathname,
