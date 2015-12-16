@@ -73,9 +73,9 @@ app.get('/api/arvostelut/:id', function(req, res, next) {
         pg.connect(arvdb, function(err, client) {
             if (err) throw err;
             console.log('Connected to postgres! Getting schemas...');
-            client.query('Select avg(arvosana) as ka from arvostelu where yleid = $1', [id] ,function(err, result) {
+            client.query('Select avg(arvosana) as ka from arvostelu where yleid like $1', [id] ,function(err, result) {
                 //done();
-                res.send(result.ka);
+                res.send(result);
             });
         });
     }
