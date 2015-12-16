@@ -45,7 +45,7 @@ app.post('/api/arvostelu', function(req, res, next) {
         pg.connect(arvdb, function(err, client) {
             if (err) throw err;
             console.log('Connected to postgres! Getting schemas...');
-            client.query('INSERT  arvostelu (yleid,arvosana) VALUES($1,$2)', [id, arvosana],function(err,result) {
+            client.query('INSERT INTO arvostelu (yleid,arvosana) VALUES ($1,$2)', [id, arvosana],function(err,result) {
                 //done();
                 res.send({
                     message: "Arvostelu onnistui!"
