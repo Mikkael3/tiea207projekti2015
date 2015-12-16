@@ -4,7 +4,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var async = require('async');
 
-var swig  = require('swig');
+var swig = require('swig');
 var React = require('react');
 var ReactDOM = require('react-dom/server');
 var Router = require('react-router');
@@ -15,9 +15,10 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/database');
 var arvdb;
 
-if(process.env.DB_URL !== undefined)
-    arvdb =process.env.DB_URL;
-else{
+console.log(process.env.DB_URL);
+if (process.env.DB_URL !== undefined)
+    arvdb = process.env.DB_URL;
+else {
     arvdb = new sqlite3.Database('./database/arvosteludb');
 }
 
@@ -26,7 +27,9 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -34,115 +37,110 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.post('/api/arvostelu', function(req,res, next) {
+app.post('/api/arvostelu', function(req, res, next) {
     var id = req.body.id;
     var arvosana = req.body.arvosana;
 
-    if(process.env.DB_URL !== undefined){
-      pg.connect(arvdb, function(err, client) {
-      if (err) throw err;
+    if (process.env.DB_URL !== undefined) {
+        pg.connect(arvdb, function(err, client) {
+            if (err) throw err;
+            console.log('Connected to postgres! Getting schemas...');
+            client.query('INSERT  arvostelu (yleid,arvosana) VALUES(?,?)', id, arvosana,function(err,result) {
+                done();
+                res.send({
+                    message: "Arvostelu onnistui!"
+                });
+            });
+        });
 
-      console.log('Connected to postgres! Getting schemas...');
-
-	    client
-		.query('INSERT  arvostelu (yleid,arvosana) VALUES(?,?)',id,arvosana)
-	});
-
-    }
-
-    else{
-      var stmt = arvdb.prepare("INSERT INTO arvostelu (yleid, arvosana) VALUES(?,?)");
-	     stmt.run(id,arvosana);
-       stmt.finalize();
-       res.send({message: "Arvostelu onnistui!"});
+    } else {
+        var stmt = arvdb.prepare("INSERT INTO arvostelu (yleid, arvosana) VALUES(?,?)");
+        stmt.run(id, arvosana);
+        stmt.finalize();
+        res.send({
+            message: "Arvostelu onnistui!"
+        });
     }
 });
-
-
-
-app.get('/api/arvostelut/:id' ,function (req, res, next) {
+app.get('/api/arvostelut/:id', function(req, res, next) {
     var id = req.params.id;
-
-    arvdb.get("Select avg(arvosana) as ka from arvostelu where yleid = ?", id, function(err, row) {
-
-      res.send(row);
-    });
+    if (process.env.DB_URL === undefined) {
+        arvdb.get("Select avg(arvosana) as ka from arvostelu where yleid = ?", id, function(err, row) {
+            res.send(row);
+        });
+    }
+    else {
+        pg.connect(arvdb, function(err, client) {
+            if (err) throw err;
+            console.log('Connected to postgres! Getting schemas...');
+            client.query('Select avg(arvosana) as ka from arvostelu where yleid = ?',id,function(err, result) {
+                done();
+                res.send(result);
+            });
+        });
+    }
 });
-
 app.get('/api/titles/all', function(req, res, next) {
-			db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi', function(err,row) {
-				res.send(row);
-			});
+    db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi', function(err, row) {
+        res.send(row);
+    });
 
 });
-
-
 
 app.get('/api/titles/:id', function(req, res, next) {
-		var id = req.params.id;
+    var id = req.params.id;
 
-		db.get('SELECT * FROM elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi where id = ?', id, function(err, row) {
+    db.get('SELECT * FROM elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi where id = ?', id, function(err, row) {
 
 
-			res.json({ "originalnimi": row.originalnimi,
-									"id": row.id,
-									"suominimi": row.suominimi,
-									"imgid" : row.imgid,
-									"kuvaus" : row.kuvaus,
-									"endtime" : row.endtime,
-									"starttime" : row.starttime,
-									"promotiontitle" : row.promotiontitle,
-									"rating" : row.rating
-			});
-		});
+        res.json({
+            "originalnimi": row.originalnimi,
+            "id": row.id,
+            "suominimi": row.suominimi,
+            "imgid": row.imgid,
+            "kuvaus": row.kuvaus,
+            "endtime": row.endtime,
+            "starttime": row.starttime,
+            "promotiontitle": row.promotiontitle,
+            "rating": row.rating
+        });
+    });
 
 });
 
 app.get('/api/series/search', function(req, res, next) {
-					var id = req.query.name;
-                    console.log(id);
-					db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi where elokuvat.originalnimi = ?', id, function(err,row) {
-						res.send(row);
-					});
+    var id = req.query.name;
+    console.log(id);
+    db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi where elokuvat.originalnimi = ?', id, function(err, row) {
+        res.send(row);
+    });
 
 });
 
 
 
 app.use(function(req, res) {
-	Router.match({ routes: routes, location: req.url }, function(err, redirectLocation, renderProps) {
-		if (err) {
-			res.status(500).send(err.message)
-		} else if (redirectLocation) {
-			res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
-		} else if (renderProps) {
-			var html = ReactDOM.renderToString(<RoutingContext {...renderProps} />);
-			var page = swig.renderFile('views/index.html', { html: html });
-			res.status(200).send(page);
-		} else {
-			res.status(404).send('Page Not Found')
-		}
-	});
-});
-/*
-app.get('/api/getTitles') {
-	//tarkistaa onko haettu viim 24h
-	//jos on jatketaan
-	//jos ei ni haetaan uudestaan
-	//hakee dbsta
-	//muuttaa json
-	//palauttaa tiedoston
-}
+            Router.match({
+                    routes: routes,
+                    location: req.url
+                }, function(err, redirectLocation, renderProps) {
+                    if (err) {
+                        res.status(500).send(err.message)
+                    } else if (redirectLocation) {
+                        res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
+                    } else if (renderProps) {
+                        var html = ReactDOM.renderToString( < RoutingContext {...renderProps
+                            }
+                            />);
+                            var page = swig.renderFile('views/index.html', {
+                                html: html
+                            }); res.status(200).send(page);
+                        } else {
+                            res.status(404).send('Page Not Found')
+                        }
+                    });
+            });
 
-haeylejaombd() {
-	//haetiedot
-	//$.ajax(yleltä)
-	//syötetään db
-	//sama omdb
-}
-
-*/
-
-app.listen(app.get('port'), function() {
-	console.log('Express server listening on port ' + app.get('port'));
-});
+        app.listen(app.get('port'), function() {
+            console.log('Express server listening on port ' + app.get('port'));
+        });
