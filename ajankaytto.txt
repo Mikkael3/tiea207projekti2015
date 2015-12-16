@@ -1,0 +1,34 @@
+1. 6/10/2015  2h Aiheen valintaaa, sopimusten tekeminen
+2. 8/10/2015  4h Aiheen tarkennusta ja apiavaimien tilaaminen, synopsisten kirjoittamista, projektinhallinnan suunnittelua
+3. 13/10/2015 3h Yksinkertaisen käyttöliittymän suunnittelua, synopsisten kirjoittamista
+4. 20/10/2015 4h NodeJS tutustumista koululla
+5. 20/10/2015 3h Raaka nodejs serveripohja (kotona)
+6. 22/10/2015 3h Nodejs serveripohjan parantelu. Toinen näkymä (kotona)
+7. 3/11/2015 3h Koodailua tietokannan suunnittelua
+8. 4/11/2015 3h Tietokanann toteutusta
+9.11/11/2015 6h Tietokantaaa
+10. 12/11/2015 6h apikutsut + tietokantaa
+11. 13/11/2015 1h tietokannan parantelua
+12. 18/11/2015 2h tietokannan muokkailua
+13. 22/11/2015 2h tietokannan parantelua. Korjailin koodia ja lisäilin attrbuutteja
+14. 24/11/2015 2h tietokantaan korjailua ja muutoksia
+15. 25/11/2015 4h tietokantaaa
+16. 26/11/2015 5h arvostelumahdollisuuden tekemistä
+17. 2.12 4h koodailua
+18. 3.12 3h koodailua
+19. 10.12 4h
+20. 15.12 5h
+21. 16.12 7h
+
+12.10. 1h    tapaaminen
+19.10. 1h    tapaaminen
+3.11.  1h    tapaaminen
+10.11. 1h    tapaaminen
+17.11. 30min tapaaminen
+24.11. 30min tapaaminen
+1.12   30min tapaaminen
+14.12 30min tapaaminen
+
+luennot 8h
+
+total:          90h
