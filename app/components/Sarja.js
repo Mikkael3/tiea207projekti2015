@@ -49,6 +49,24 @@ class Sarja extends React.Component {
 
 	render() {
 
+		let titles = this.state.jaksot.map((title) => {
+			return(
+			<div className="title col-md-6" key={title.id}>
+				<Link to={'/titles/' + title.id}>
+					<img src={'http://images.cdn.yle.fi/image/upload/w_100,h_100,c_fit/' + title.imgid + ".png"} />
+					<p>{title.originalnimi}</p>
+					<p>{title.kuvaus}</p>
+					<p>{title.rating}</p>
+
+
+				</Link>
+			</div>
+		);
+
+		});
+
+
+
 		return (
 			<div className='content'>
 			<button onClick={this.getNewSarja.bind(this)}>Näytä jaksot</button>
@@ -57,7 +75,7 @@ class Sarja extends React.Component {
 			<h2>ID: {this.state.id}</h2>
 			<p>Kuvaus: {this.state.kuvaus}</p>
 
-			<p>Promotion Sarja: {this.state.promotionSarja}</p>
+			<p>Promotion Title: {this.state.promotiontitle}</p>
 			<p>Rating: {this.state.rating}</p>
 			<p>Aloitusaika: {this.state.starttime}</p>
 			<p>Lopetusaika: {this.state.endtime}</p>
@@ -67,6 +85,7 @@ class Sarja extends React.Component {
 			</a>
 
 			<Arvostelu yleid={this.state.id} />
+			{titles}
 			</div>
 		);
 	}
