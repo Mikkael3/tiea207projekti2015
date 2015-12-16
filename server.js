@@ -10,7 +10,7 @@ var ReactDOM = require('react-dom/server');
 var Router = require('react-router');
 var RoutingContext = Router.RoutingContext;
 var routes = require('./app/routes');
-var pq = require("pq");
+var pg = require("pg");
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./database/database');
 var arvdb;
