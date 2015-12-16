@@ -13,11 +13,7 @@ class ArvosteluStore {
 	}
 
 	onGetArvosanaSuccess(data) {
-		alert(data);
-		alert(data.rows.ka);
-		alert(data.rows[0]);
-		alert(data.ka);
-		this.kolosseumKA = data.ka;
+		this.kolosseumKA = data.rows[0].ka;
 	}
 
 	onGetArvosanaFail(jqXhr) {
