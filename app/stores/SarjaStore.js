@@ -32,17 +32,11 @@ class SarjaStore {
 		toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
 	}
 
-  	onGetSarjaSuccess(data) {
-    	this.jaksot = data;
-  	}
 
   	onGetTitleFail(jqXhr) {
     	toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
   	}
 
-	onGetSarjaFail(jqXhr) {
-		toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
-	}
 }
 
 export default alt.createStore(SarjaStore);

@@ -39,20 +39,19 @@ class Sarja extends React.Component {
 
 	}
 
-	getNewSarja(nimi) {
-		SarjaActions.getNewSarja(nimi);
+	getNewSarja(event) {
+		//event.preventDefault();
+		//alert("asdfasdf");
+		SarjaActions.getNewSarja(this.state.originalnimi);
 	}
 
-	getSarja(nimi) {
-		//SarjaActions.getSarja(nimi);
-	}
 
 
 	render() {
 
 		return (
 			<div className='content'>
-
+			<button onClick={this.getNewSarja.bind(this)}>Näytä jaksot</button>
 			<h2>Originalnimi: {this.state.originalnimi}</h2>
 			<h2>Suominimi: {this.state.suominimi}</h2>
 			<h2>ID: {this.state.id}</h2>
@@ -66,7 +65,7 @@ class Sarja extends React.Component {
 			<img src={'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png"} />
 
 			</a>
-			<button onClick={this.getNewSarja(this.state.originalnimi)}>Näytä jaksot</button>
+
 			<Arvostelu yleid={this.state.id} />
 			</div>
 		);
