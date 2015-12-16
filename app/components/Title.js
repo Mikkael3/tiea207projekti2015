@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import TitleStore from '../stores/TitleStore';
 import TitleActions from '../actions/TitleActions';
 import Arvostelu from './Arvostelu';
-
+import Trailer from './Trailer';
 
 class Title extends React.Component {
 	constructor(props) {
@@ -58,6 +58,7 @@ class Title extends React.Component {
 
 			</a>
 			<Arvostelu yleid={this.state.id} />
+			<Trailer/>
 			</div>
 		);
 	}

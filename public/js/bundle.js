@@ -45,7 +45,7 @@ var ArvosteluActions = (function () {
 exports['default'] = _alt2['default'].createActions(ArvosteluActions);
 module.exports = exports['default'];
 
-},{"../alt":5}],2:[function(require,module,exports){
+},{"../alt":6}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -103,7 +103,7 @@ var HomeActions = (function () {
 exports['default'] = _alt2['default'].createActions(HomeActions);
 module.exports = exports['default'];
 
-},{"../alt":5}],3:[function(require,module,exports){
+},{"../alt":6}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -177,7 +177,7 @@ var SarjaActions = (function () {
 exports['default'] = _alt2['default'].createActions(SarjaActions);
 module.exports = exports['default'];
 
-},{"../alt":5,"underscore":"underscore"}],4:[function(require,module,exports){
+},{"../alt":6,"underscore":"underscore"}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -220,7 +220,31 @@ var TitleActions = (function () {
 exports['default'] = _alt2['default'].createActions(TitleActions);
 module.exports = exports['default'];
 
-},{"../alt":5}],5:[function(require,module,exports){
+},{"../alt":6}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var TrailerActions = function TrailerActions() {
+	_classCallCheck(this, TrailerActions);
+
+	this.generateActions();
+};
+
+exports['default'] = _alt2['default'].createActions(TrailerActions);
+module.exports = exports['default'];
+
+},{"../alt":6}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -236,7 +260,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],6:[function(require,module,exports){
+},{"alt":"alt"}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -301,7 +325,7 @@ var App = (function (_React$Component) {
 exports['default'] = App;
 module.exports = exports['default'];
 
-},{"./Arvostelu":7,"./Footer":8,"./Haku":9,"./Header":10,"react":"react"}],7:[function(require,module,exports){
+},{"./Arvostelu":8,"./Footer":9,"./Haku":10,"./Header":11,"react":"react"}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -430,7 +454,7 @@ var Arvostelu = (function (_React$Component) {
 exports['default'] = Arvostelu;
 module.exports = exports['default'];
 
-},{"../actions/ArvosteluActions":1,"../stores/ArvosteluStore":16,"react":"react","react-router":"react-router"}],8:[function(require,module,exports){
+},{"../actions/ArvosteluActions":1,"../stores/ArvosteluStore":18,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -506,7 +530,7 @@ var Footer = (function (_React$Component) {
 exports['default'] = Footer;
 module.exports = exports['default'];
 
-},{"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
+},{"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -589,7 +613,7 @@ var Haku = (function (_React$Component) {
 exports['default'] = Haku;
 module.exports = exports['default'];
 
-},{"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
+},{"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -669,7 +693,7 @@ var Header = (function (_React$Component) {
 exports['default'] = Header;
 module.exports = exports['default'];
 
-},{"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
+},{"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -880,7 +904,7 @@ var Home = (function (_React$Component) {
 exports['default'] = Home;
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":2,"../stores/HomeStore":17,"moment":39,"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
+},{"../actions/HomeActions":2,"../stores/HomeStore":19,"moment":42,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1028,7 +1052,7 @@ var Sarja = (function (_React$Component) {
 exports['default'] = Sarja;
 module.exports = exports['default'];
 
-},{"../actions/SarjaActions":3,"../stores/SarjaStore":18,"./Arvostelu":7,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
+},{"../actions/SarjaActions":3,"../stores/SarjaStore":20,"./Arvostelu":8,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1062,6 +1086,10 @@ var _actionsTitleActions2 = _interopRequireDefault(_actionsTitleActions);
 var _Arvostelu = require('./Arvostelu');
 
 var _Arvostelu2 = _interopRequireDefault(_Arvostelu);
+
+var _Trailer = require('./Trailer');
+
+var _Trailer2 = _interopRequireDefault(_Trailer);
 
 var Title = (function (_React$Component) {
 	_inherits(Title, _React$Component);
@@ -1159,7 +1187,8 @@ var Title = (function (_React$Component) {
 					{ href: 'http://areena.yle.fi/' + this.state.id },
 					_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" })
 				),
-				_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id })
+				_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id }),
+				_react2['default'].createElement(_Trailer2['default'], null)
 			);
 		}
 	}]);
@@ -1170,7 +1199,103 @@ var Title = (function (_React$Component) {
 exports['default'] = Title;
 module.exports = exports['default'];
 
-},{"../actions/TitleActions":4,"../stores/TitleStore":19,"./Arvostelu":7,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
+},{"../actions/TitleActions":4,"../stores/TitleStore":21,"./Arvostelu":8,"./Trailer":15,"react":"react","react-router":"react-router"}],15:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+		value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
+
+var _storesTrailerStore = require('../stores/TrailerStore');
+
+var _storesTrailerStore2 = _interopRequireDefault(_storesTrailerStore);
+
+var _actionsTrailerActions = require('../actions/TrailerActions');
+
+var _actionsTrailerActions2 = _interopRequireDefault(_actionsTrailerActions);
+
+var Trailer = (function (_React$Component) {
+		_inherits(Trailer, _React$Component);
+
+		function Trailer(props) {
+				_classCallCheck(this, Trailer);
+
+				_get(Object.getPrototypeOf(Trailer.prototype), 'constructor', this).call(this, props);
+				this.state = _storesTrailerStore2['default'].getState();
+				this.onChange = this.onChange.bind(this);
+		}
+
+		_createClass(Trailer, [{
+				key: 'componentDidMount',
+				value: function componentDidMount() {
+						_storesTrailerStore2['default'].listen(this.onChange);
+				}
+		}, {
+				key: 'componentWillUnmount',
+				value: function componentWillUnmount() {
+						_storesTrailerStore2['default'].unlisten(this.onChange);
+				}
+		}, {
+				key: 'componentDidUpdate',
+				value: function componentDidUpdate(prevProps) {}
+		}, {
+				key: 'onChange',
+				value: function onChange(state) {
+						this.setState(state);
+				}
+		}, {
+				key: 'render',
+				value: function render() {
+						return _react2['default'].createElement(
+								'div',
+								null,
+								_react2['default'].createElement('link', { rel: 'stylesheet', type: 'text/css', href: '//cdn.traileraddict.com/css/rembed.css' }),
+								_react2['default'].createElement(
+										'div',
+										{ 'class': 'outer-embed-ta' },
+										_react2['default'].createElement('iframe', { size: '40%', src: '//v.traileraddict.com/8873', allowfullscreen: 'true', webkitallowfullscreen: 'true', mozallowfullscreen: 'true', scrolling: 'no', frameborder: '0', 'class': 'embed-ta' })
+								),
+								_react2['default'].createElement(
+										'p',
+										null,
+										_react2['default'].createElement(
+												'p',
+												null,
+												'Sarja'
+										),
+										_react2['default'].createElement(
+												'a',
+												{ href: 'http://www.traileraddict.com' },
+												'TrailerAddict'
+										)
+								)
+						);
+				}
+		}]);
+
+		return Trailer;
+})(_react2['default'].Component);
+
+exports['default'] = Trailer;
+module.exports = exports['default'];
+
+},{"../actions/TrailerActions":5,"../stores/TrailerStore":22,"react":"react","react-router":"react-router"}],16:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -1203,7 +1328,7 @@ _reactDom2['default'].render(_react2['default'].createElement(
   _routes2['default']
 ), document.getElementById('app'));
 
-},{"./routes":15,"history/lib/createBrowserHistory":26,"react":"react","react-dom":"react-dom","react-router":"react-router"}],15:[function(require,module,exports){
+},{"./routes":17,"history/lib/createBrowserHistory":29,"react":"react","react-dom":"react-dom","react-router":"react-router"}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1243,7 +1368,7 @@ exports['default'] = _react2['default'].createElement(
 );
 module.exports = exports['default'];
 
-},{"./components/App":6,"./components/Home":11,"./components/Sarja":12,"./components/Title":13,"react":"react","react-router":"react-router"}],16:[function(require,module,exports){
+},{"./components/App":7,"./components/Home":12,"./components/Sarja":13,"./components/Title":14,"react":"react","react-router":"react-router"}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1293,7 +1418,7 @@ var ArvosteluStore = (function () {
 exports['default'] = _alt2['default'].createStore(ArvosteluStore);
 module.exports = exports['default'];
 
-},{"../actions/ArvosteluActions":1,"../alt":5}],17:[function(require,module,exports){
+},{"../actions/ArvosteluActions":1,"../alt":6}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1395,7 +1520,7 @@ var HomeStore = (function () {
 exports['default'] = _alt2['default'].createStore(HomeStore);
 module.exports = exports['default'];
 
-},{"../actions/HomeActions":2,"../alt":5,"underscore":"underscore"}],18:[function(require,module,exports){
+},{"../actions/HomeActions":2,"../alt":6,"underscore":"underscore"}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1466,7 +1591,7 @@ var SarjaStore = (function () {
 exports['default'] = _alt2['default'].createStore(SarjaStore);
 module.exports = exports['default'];
 
-},{"../actions/SarjaActions":3,"../alt":5,"underscore":"underscore"}],19:[function(require,module,exports){
+},{"../actions/SarjaActions":3,"../alt":6,"underscore":"underscore"}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1526,7 +1651,35 @@ var TitleStore = (function () {
 exports['default'] = _alt2['default'].createStore(TitleStore);
 module.exports = exports['default'];
 
-},{"../actions/TitleActions":4,"../alt":5,"underscore":"underscore"}],20:[function(require,module,exports){
+},{"../actions/TitleActions":4,"../alt":6,"underscore":"underscore"}],22:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsTrailerActions = require('../actions/TrailerActions');
+
+var _actionsTrailerActions2 = _interopRequireDefault(_actionsTrailerActions);
+
+var TrailerStore = function TrailerStore() {
+	_classCallCheck(this, TrailerStore);
+
+	this.bindActions(_actionsTrailerActions2['default']);
+};
+
+exports['default'] = _alt2['default'].createStore(TrailerStore);
+module.exports = exports['default'];
+
+},{"../actions/TrailerActions":5,"../alt":6}],23:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -1619,7 +1772,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],21:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /**
  * Indicates that navigation was caused by a call to history.push.
  */
@@ -1651,7 +1804,7 @@ exports['default'] = {
   REPLACE: REPLACE,
   POP: POP
 };
-},{}],22:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1678,7 +1831,7 @@ function loopAsync(turns, work, callback) {
 
   next();
 }
-},{}],23:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 (function (process){
 /*eslint-disable no-empty */
 'use strict';
@@ -1749,7 +1902,7 @@ function readState(key) {
   return null;
 }
 }).call(this,require('_process'))
-},{"_process":20,"warning":38}],24:[function(require,module,exports){
+},{"_process":23,"warning":41}],27:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1825,13 +1978,13 @@ function supportsGoWithoutReloadUsingHash() {
   var ua = navigator.userAgent;
   return ua.indexOf('Firefox') === -1;
 }
-},{}],25:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 exports.canUseDOM = canUseDOM;
-},{}],26:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2006,7 +2159,7 @@ function createBrowserHistory() {
 exports['default'] = createBrowserHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":21,"./DOMStateStorage":23,"./DOMUtils":24,"./ExecutionEnvironment":25,"./createDOMHistory":27,"_process":20,"invariant":37}],27:[function(require,module,exports){
+},{"./Actions":24,"./DOMStateStorage":26,"./DOMUtils":27,"./ExecutionEnvironment":28,"./createDOMHistory":30,"_process":23,"invariant":40}],30:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2049,7 +2202,7 @@ function createDOMHistory(options) {
 exports['default'] = createDOMHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./DOMUtils":24,"./ExecutionEnvironment":25,"./createHistory":28,"_process":20,"invariant":37}],28:[function(require,module,exports){
+},{"./DOMUtils":27,"./ExecutionEnvironment":28,"./createHistory":31,"_process":23,"invariant":40}],31:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2320,7 +2473,7 @@ function createHistory() {
 
 exports['default'] = createHistory;
 module.exports = exports['default'];
-},{"./Actions":21,"./AsyncUtils":22,"./createLocation":29,"./deprecate":30,"./runTransitionHook":33,"deep-equal":34}],29:[function(require,module,exports){
+},{"./Actions":24,"./AsyncUtils":25,"./createLocation":32,"./deprecate":33,"./runTransitionHook":36,"deep-equal":37}],32:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -2357,7 +2510,7 @@ function createLocation() {
 
 exports['default'] = createLocation;
 module.exports = exports['default'];
-},{"./Actions":21,"./parsePath":32}],30:[function(require,module,exports){
+},{"./Actions":24,"./parsePath":35}],33:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2379,7 +2532,7 @@ function deprecate(fn, message) {
 exports['default'] = deprecate;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":20,"warning":38}],31:[function(require,module,exports){
+},{"_process":23,"warning":41}],34:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -2393,7 +2546,7 @@ function extractPath(string) {
 
 exports["default"] = extractPath;
 module.exports = exports["default"];
-},{}],32:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2440,7 +2593,7 @@ function parsePath(path) {
 exports['default'] = parsePath;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./extractPath":31,"_process":20,"warning":38}],33:[function(require,module,exports){
+},{"./extractPath":34,"_process":23,"warning":41}],36:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2467,7 +2620,7 @@ function runTransitionHook(hook, location, callback) {
 exports['default'] = runTransitionHook;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":20,"warning":38}],34:[function(require,module,exports){
+},{"_process":23,"warning":41}],37:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -2563,7 +2716,7 @@ function objEquiv(a, b, opts) {
   return typeof a === typeof b;
 }
 
-},{"./lib/is_arguments.js":35,"./lib/keys.js":36}],35:[function(require,module,exports){
+},{"./lib/is_arguments.js":38,"./lib/keys.js":39}],38:[function(require,module,exports){
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
@@ -2585,7 +2738,7 @@ function unsupported(object){
     false;
 };
 
-},{}],36:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
 
@@ -2596,7 +2749,7 @@ function shim (obj) {
   return keys;
 }
 
-},{}],37:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -2651,7 +2804,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this,require('_process'))
-},{"_process":20}],38:[function(require,module,exports){
+},{"_process":23}],41:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -2715,7 +2868,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = warning;
 
 }).call(this,require('_process'))
-},{"_process":20}],39:[function(require,module,exports){
+},{"_process":23}],42:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -5911,4 +6064,4 @@ module.exports = warning;
     return _moment;
 
 }));
-},{}]},{},[14]);
+},{}]},{},[16]);
