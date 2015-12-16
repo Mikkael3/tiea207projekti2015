@@ -19,22 +19,34 @@ var ArvosteluActions = (function () {
 	function ArvosteluActions() {
 		_classCallCheck(this, ArvosteluActions);
 
-		this.generateActions('handleArvostelu');
+		this.generateActions('handleArvosteluSuccess', 'handleArvosteluFail', 'getArvosanaSuccess', 'getArvosanaFail');
 	}
 
 	_createClass(ArvosteluActions, [{
+		key: 'getArvosana',
+		value: function getArvosana(id) {
+			var _this = this;
+
+			//alert(id);
+			$.ajax({ url: '/api/arvostelut/' + id }).done(function (data) {
+				_this.actions.getArvosanaSuccess(data);
+			}).fail(function (jqXhr) {
+				_this.actions.getArvosanaFail(jqXhr);
+			});
+		}
+	}, {
 		key: 'handleArvostelu',
 		value: function handleArvostelu(tiedot) {
-			var _this = this;
+			var _this2 = this;
 
 			$.ajax({
 				type: 'POST',
-				url: 'api/arvostelu',
+				url: '/api/arvostelu',
 				data: { id: tiedot.yleid, arvosana: tiedot.value }
 			}).done(function (data) {
-				_this.actions.handleArvostelu("ok");
+				_this2.actions.handleArvosteluSuccess(data.message);
 			}).fail(function (jqXhr) {
-				_this.actions.handleArvostelu(jqXhr);
+				_this2.actions.handleArvosteluFail(jqXhr);
 			});
 		}
 	}]);
@@ -368,7 +380,13 @@ var Arvostelu = (function (_React$Component) {
         'yleid': this.props.yleid,
         'value': event.target.rating.value
       };
+      if (event.target.rating.value === "") {
+        toastr.error("Valitse arvosana");
+        return;
+      }
+
       _actionsArvosteluActions2['default'].handleArvostelu(tiedot);
+      _actionsArvosteluActions2['default'].getArvosana(this.props.yleid);
     }
   }]);
 
@@ -376,6 +394,7 @@ var Arvostelu = (function (_React$Component) {
     _classCallCheck(this, Arvostelu);
 
     _get(Object.getPrototypeOf(Arvostelu.prototype), 'constructor', this).call(this, props);
+
     this.state = _storesArvosteluStore2['default'].getState();
     this.onChange = this.onChange.bind(this);
   }
@@ -391,9 +410,6 @@ var Arvostelu = (function (_React$Component) {
       _storesArvosteluStore2['default'].unlisten(this.onChange);
     }
   }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {}
-  }, {
     key: 'onChange',
     value: function onChange(state) {
       this.setState(state);
@@ -402,48 +418,63 @@ var Arvostelu = (function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2['default'].createElement(
-        'form',
-        { id: 'Arvosteluform', onSubmit: this.handleArvostelu.bind(this) },
+        'div',
+        null,
         _react2['default'].createElement(
-          'fieldset',
-          { 'class': 'rating' },
-          _react2['default'].createElement(
-            'legend',
-            null,
-            'Please rate:'
-          ),
-          _react2['default'].createElement('input', { type: 'radio', id: 'star5', name: 'rating', value: '5' }),
-          _react2['default'].createElement(
-            'label',
-            { 'for': 'star5', title: 'Kaunis' },
-            '5 stars'
-          ),
-          _react2['default'].createElement('input', { type: 'radio', id: 'star4', name: 'rating', value: '4' }),
-          _react2['default'].createElement(
-            'label',
-            { 'for': 'star4', title: 'Juuh' },
-            '4 stars'
-          ),
-          _react2['default'].createElement('input', { type: 'radio', id: 'star3', name: 'rating', value: '3' }),
-          _react2['default'].createElement(
-            'label',
-            { 'for': 'star3', title: 'Ok' },
-            '3 stars'
-          ),
-          _react2['default'].createElement('input', { type: 'radio', id: 'star2', name: 'rating', value: '2' }),
-          _react2['default'].createElement(
-            'label',
-            { 'for': 'star2', title: 'Melko paska' },
-            '2 stars'
-          ),
-          _react2['default'].createElement('input', { type: 'radio', id: 'star1', name: 'rating', value: '1' }),
-          _react2['default'].createElement(
-            'label',
-            { 'for': 'star1', title: 'Paska' },
-            '1 star'
-          )
+          'p',
+          null,
+          'Arvosana: ',
+          this.state.kolosseumKA
         ),
-        _react2['default'].createElement('input', { type: 'submit', id: 'arvostelunappula', value: 'Arvostele' })
+        _react2['default'].createElement(
+          'form',
+          { id: 'Arvosteluform', onSubmit: this.handleArvostelu.bind(this) },
+          _react2['default'].createElement(
+            'fieldset',
+            { 'class': 'rating' },
+            _react2['default'].createElement(
+              'legend',
+              null,
+              'Arvostele:'
+            ),
+            _react2['default'].createElement('input', { type: 'radio', id: 'star5', name: 'rating', value: '5' }),
+            _react2['default'].createElement(
+              'label',
+              { 'for': 'star5', title: 'Kaunis' },
+              '5 stars'
+            ),
+            _react2['default'].createElement('input', { type: 'radio', id: 'star4', name: 'rating', value: '4' }),
+            _react2['default'].createElement(
+              'label',
+              { 'for': 'star4', title: 'Juuh' },
+              '4 stars'
+            ),
+            _react2['default'].createElement('input', { type: 'radio', id: 'star3', name: 'rating', value: '3' }),
+            _react2['default'].createElement(
+              'label',
+              { 'for': 'star3', title: 'Ok' },
+              '3 stars'
+            ),
+            _react2['default'].createElement('input', { type: 'radio', id: 'star2', name: 'rating', value: '2' }),
+            _react2['default'].createElement(
+              'label',
+              { 'for': 'star2', title: 'Melko huono' },
+              '2 stars'
+            ),
+            _react2['default'].createElement('input', { type: 'radio', id: 'star1', name: 'rating', value: '1' }),
+            _react2['default'].createElement(
+              'label',
+              { 'for': 'star1', title: 'Huono' },
+              '1 star'
+            )
+          ),
+          _react2['default'].createElement('input', { disabled: this.state.onkoArvosteltu, type: 'submit', id: 'arvostelunappula', value: 'Arvostele' })
+        ),
+        _react2['default'].createElement(
+          'span',
+          { className: 'help-block' },
+          this.state.helpBlock
+        )
       );
     }
   }]);
@@ -980,6 +1011,33 @@ var Sarja = (function (_React$Component) {
 		key: 'render',
 		value: function render() {
 
+			var titles = this.state.jaksot.map(function (title) {
+				return _react2['default'].createElement(
+					'div',
+					{ className: 'title col-md-6', key: title.id },
+					_react2['default'].createElement(
+						_reactRouter.Link,
+						{ to: '/titles/' + title.id },
+						_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_100,h_100,c_fit/' + title.imgid + ".png" }),
+						_react2['default'].createElement(
+							'p',
+							null,
+							title.originalnimi
+						),
+						_react2['default'].createElement(
+							'p',
+							null,
+							title.kuvaus
+						),
+						_react2['default'].createElement(
+							'p',
+							null,
+							title.rating
+						)
+					)
+				);
+			});
+
 			return _react2['default'].createElement(
 				'div',
 				{ className: 'content' },
@@ -1015,8 +1073,8 @@ var Sarja = (function (_React$Component) {
 				_react2['default'].createElement(
 					'p',
 					null,
-					'Promotion Sarja: ',
-					this.state.promotionSarja
+					'Promotion Title: ',
+					this.state.promotiontitle
 				),
 				_react2['default'].createElement(
 					'p',
@@ -1041,7 +1099,8 @@ var Sarja = (function (_React$Component) {
 					{ href: 'http://areena.yle.fi/' + this.state.id },
 					_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" })
 				),
-				_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id })
+				_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id }),
+				titles
 			);
 		}
 	}]);
@@ -1394,21 +1453,34 @@ var ArvosteluStore = (function () {
 		_classCallCheck(this, ArvosteluStore);
 
 		this.bindActions(_actionsArvosteluActions2['default']);
+		this.helpBlock = "";
+		this.onkoArvosteltu = false;
+		this.kolosseumKA = 0;
 		//this.titles = [];
 	}
 
-	//onHandleSort() {
-	//	this.titles = sortBy(this.titles, 'endtime');
-	//}
-
 	_createClass(ArvosteluStore, [{
-		key: 'onHandleArvostelu',
-		value: function onHandleArvostelu(tiedot) {
-			alert(tiedot);
-
-			//var db = new sqlite3.Database('../../../database/arvosteludb');
-			//db.run('INSERT OR IGNORE INTO arvostelu (yleid,arvolause,arvosteluteksti) VALUES(?,?,?)',yleid,arvolause,arvosteluteksti);
-			//db.end();
+		key: 'onGetArvosanaSuccess',
+		value: function onGetArvosanaSuccess(data) {
+			alert(data);
+			this.kolosseumKA = data.ka;
+		}
+	}, {
+		key: 'onGetArvosanaFail',
+		value: function onGetArvosanaFail(jqXhr) {
+			alert("error");
+			toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
+		}
+	}, {
+		key: 'onHandleArvosteluSuccess',
+		value: function onHandleArvosteluSuccess(message) {
+			this.helpBlock = message;
+			this.onkoArvosteltu = true;
+		}
+	}, {
+		key: 'onHandleArvosteluFail',
+		value: function onHandleArvosteluFail(jqXhr) {
+			toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
 		}
 	}]);
 

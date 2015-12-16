@@ -5,24 +5,35 @@ import ArvosteluActions from '../actions/ArvosteluActions';
 class ArvosteluStore {
 	constructor() {
 		this.bindActions(ArvosteluActions);
+		this.helpBlock = "";
+		this.onkoArvosteltu= false;
+		this.kolosseumKA = 0;
 		//this.titles = [];
 
 	}
 
-//onHandleSort() {
-//	this.titles = sortBy(this.titles, 'endtime');
-//}
+	onGetArvosanaSuccess(data) {
+		alert(data);
+		this.kolosseumKA = data.ka;
+	}
+
+	onGetArvosanaFail(jqXhr) {
+		alert("error");
+		toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
+	}
 
 
-	onHandleArvostelu(tiedot) {
-		alert(tiedot);
+	onHandleArvosteluSuccess(message) {
+		this.helpBlock = message;
+		this.onkoArvosteltu = true;
+
+	}
+
+	onHandleArvosteluFail(jqXhr) {
+    	toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
+  	}
 
 
-    //var db = new sqlite3.Database('../../../database/arvosteludb');
-    //db.run('INSERT OR IGNORE INTO arvostelu (yleid,arvolause,arvosteluteksti) VALUES(?,?,?)',yleid,arvolause,arvosteluteksti);
-    //db.end();
-
-    }
 
 }
 

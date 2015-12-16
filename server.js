@@ -32,15 +32,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.post('/api/arvostelu', function(req,res, next) {
 
-    var id = req.body.yleid;
-    var arvosana = req.body.value;
+
+app.post('/api/arvostelu', function(req,res, next) {
+    var id = req.body.id;
+    var arvosana = req.body.arvosana;
 
     if(process.env.DB_URL !== undefined){
-	pg.connect(arvdb, function(err, client) {
-	    if (err) throw err;
-	    console.log('Connected to postgres! Getting schemas...');
+      pg.connect(arvdb, function(err, client) {
+      if (err) throw err;
+
+      console.log('Connected to postgres! Getting schemas...');
 
 	    client
 		.query('INSERT  arvostelu (yleid,arvosana) VALUES(?,?)',id,arvosana)
@@ -49,10 +51,23 @@ app.post('/api/arvostelu', function(req,res, next) {
     }
 
     else{
-	db.run('INSERT  arvostelu (yleid,arvosana) VALUES(?,?)',id,arvosana);
+      var stmt = arvdb.prepare("INSERT INTO arvostelu (yleid, arvosana) VALUES(?,?)");
+	     stmt.run(id,arvosana);
+       stmt.finalize();
+       res.send({message: "Arvostelu onnistui!"});
     }
 });
 
+
+
+app.get('/api/arvostelut/:id' ,function (req, res, next) {
+    var id = req.params.id;
+
+    arvdb.get("Select avg(arvosana) as ka from arvostelu where yleid = ?", id, function(err, row) {
+
+      res.send(row);
+    });
+});
 
 app.get('/api/titles/all', function(req, res, next) {
 			db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi', function(err,row) {

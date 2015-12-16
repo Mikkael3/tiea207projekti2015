@@ -5,21 +5,37 @@ import alt from '../alt';
 class ArvosteluActions {
 	constructor() {
 		this.generateActions(
-            'handleArvostelu'
+            'handleArvosteluSuccess',
+						'handleArvosteluFail',
+						'getArvosanaSuccess',
+						'getArvosanaFail'
 		);
 	}
+
+	getArvosana(id) {
+		//alert(id);
+		$.ajax({ url: '/api/arvostelut/' + id})
+		 .done((data) => {
+			this.actions.getArvosanaSuccess(data)
+		 })
+		 .fail((jqXhr) => {
+			this.actions.getArvosanaFail(jqXhr)
+		 });
+	}
+
 
     handleArvostelu(tiedot) {
 			$.ajax({
 				type: 'POST',
-				url: 'api/arvostelu',
+				url: '/api/arvostelu',
 				data: {id : tiedot.yleid, arvosana: tiedot.value}
 			})
 				.done((data) => {
-						this.actions.handleArvostelu("ok");
+						this.actions.handleArvosteluSuccess(data.message);
+
 				})
 				.fail((jqXhr) => {
-					this.actions.handleArvostelu(jqXhr);
+					this.actions.handleArvosteluFail(jqXhr);
 				});
 
 
