@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import SarjaStore from '../stores/SarjaStore';
 import SarjaActions from '../actions/SarjaActions';
 import Arvostelu from './Arvostelu';
-
+import Trailer from './Trailer';
 
 class Sarja extends React.Component {
 	constructor(props) {
@@ -85,6 +85,7 @@ class Sarja extends React.Component {
 			</a>
 
 			<Arvostelu yleid={this.state.id} />
+			<Trailer/>
 			{titles}
 			</div>
 		);

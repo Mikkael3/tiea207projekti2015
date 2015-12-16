@@ -970,6 +970,10 @@ var _Arvostelu = require('./Arvostelu');
 
 var _Arvostelu2 = _interopRequireDefault(_Arvostelu);
 
+var _Trailer = require('./Trailer');
+
+var _Trailer2 = _interopRequireDefault(_Trailer);
+
 var Sarja = (function (_React$Component) {
 	_inherits(Sarja, _React$Component);
 
@@ -1100,6 +1104,7 @@ var Sarja = (function (_React$Component) {
 					_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" })
 				),
 				_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id }),
+				_react2['default'].createElement(_Trailer2['default'], null),
 				titles
 			);
 		}
@@ -1111,7 +1116,7 @@ var Sarja = (function (_React$Component) {
 exports['default'] = Sarja;
 module.exports = exports['default'];
 
-},{"../actions/SarjaActions":3,"../stores/SarjaStore":20,"./Arvostelu":8,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
+},{"../actions/SarjaActions":3,"../stores/SarjaStore":20,"./Arvostelu":8,"./Trailer":15,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
