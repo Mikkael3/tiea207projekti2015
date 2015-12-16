@@ -45,7 +45,7 @@ app.post('/api/arvostelu', function(req, res, next) {
         pg.connect(arvdb, function(err, client) {
             if (err) throw err;
             console.log('Connected to postgres! Getting schemas...');
-            client.query('INSERT  arvostelu (yleid,arvosana) VALUES(?,?)', id, arvosana,function(err,result) {
+            client.query('INSERT  arvostelu (yleid,arvosana) VALUES($1,$2)', [id, arvosana],function(err,result) {
                 done();
                 res.send({
                     message: "Arvostelu onnistui!"
@@ -73,7 +73,7 @@ app.get('/api/arvostelut/:id', function(req, res, next) {
         pg.connect(arvdb, function(err, client) {
             if (err) throw err;
             console.log('Connected to postgres! Getting schemas...');
-            client.query('Select avg(arvosana) as ka from arvostelu where yleid = ?',id,function(err, result) {
+            client.query('Select avg(arvosana) as ka from arvostelu where yleid = $1', [id] ,function(err, result) {
                 done();
                 res.send(result);
             });
