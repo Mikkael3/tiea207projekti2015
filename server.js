@@ -75,7 +75,7 @@ app.get('/api/arvostelut/:id', function(req, res, next) {
             console.log('Connected to postgres! Getting schemas...');
             client.query('Select avg(arvosana) as ka from arvostelu where yleid=$1', [id] ,function(err, result) {
                 //done();
-                res.send(result.rows[ka]);
+                res.send(result);
             });
         });
     }
