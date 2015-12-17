@@ -42,26 +42,22 @@ app.post('/api/arvostelu', function(req, res, next) {
     var arvosana = req.body.arvosana;
 
     if (process.env.DATABASE_URL !== undefined) {
-        pg.connect(arvdb, function(err, client) {
-            if (err) throw err;
-            console.log('Connected to postgres! Getting schemas...');
-            client.query('INSERT INTO arvostelu (yleid,arvosana) VALUES ($1,$2)', [id, arvosana],function(err,result) {
-                //done();
-                res.send({
-                    message: "Arvostelu onnistui!"
-                });
-            });
+      var client = new pg.Client(process.env.DATABASE_URL);
+      client.connect(function(err) {
+        if(err){
+          return console.error("cant connect", err);
+        }
+        client.query('INSERT INTO arvostelu (yleid,arvosana) VALUES ($1,$2)', [id, arvosana], function(err,result) {
+          if(err) {
+            return console.error("error", err);
+          }
+          res.send({message: "Arvostelu onnistui!"});
+          client.end();
         });
+      });
 
-    } else {
-        var stmt = arvdb.prepare("INSERT INTO arvostelu (yleid, arvosana) VALUES(?,?)");
-        stmt.run(id, arvosana);
-        stmt.finalize();
-        res.send({
-            message: "Arvostelu onnistui!"
-        });
-    }
 });
+
 app.get('/api/arvostelut/:id', function(req, res, next) {
     var id = req.params.id;
     if (process.env.DATABASE_URL === undefined) {
@@ -70,15 +66,19 @@ app.get('/api/arvostelut/:id', function(req, res, next) {
         });
     }
     else {
-        pg.connect(arvdb, function(err, client) {
-            if (err) throw err;
-            console.log('Connected to postgres! Getting schemas...');
-            client.query('Select avg(arvosana) as ka from arvostelu where yleid=$1', [id] ,function(err, result) {
-                //done();
-                res.send(result.rows[0]);
-            });
+      var client = new pg.Client(process.env.DATABASE_URL);
+      client.connect(function(err) {
+        if(err){
+          return console.error("cant connect", err);
+        }
+        client.query('Select avg(arvosana) as ka from arvostelu where yleid=$1', [id], function(err,result) {
+          if(err) {
+            return console.error("error", err);
+          }
+          res.send(result.rows[0]);
+          client.end();
         });
-    }
+      });
 });
 app.get('/api/titles/all', function(req, res, next) {
     db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi', function(err, row) {
