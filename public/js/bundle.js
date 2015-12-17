@@ -846,7 +846,7 @@ var Home = (function (_React$Component) {
 
 					return _react2['default'].createElement(
 						'div',
-						{ className: 'title col-md-2', key: title.id },
+						{ className: 'title col-md-3', key: title.id },
 						_react2['default'].createElement(
 							_reactRouter.Link,
 							{ className: ' ', to: '/series/' + title.id },
@@ -887,7 +887,7 @@ var Home = (function (_React$Component) {
 
 					return _react2['default'].createElement(
 						'div',
-						{ className: 'title col-md-2', key: title.id },
+						{ className: 'title col-md-3', key: title.id },
 						_react2['default'].createElement(
 							_reactRouter.Link,
 							{ className: '', to: '/titles/' + title.id },
@@ -1530,7 +1530,7 @@ var HomeStore = (function () {
 		value: function onHandleSort() {
 			if (!this.sorted) {
 				this.prevTitles = this.titles;
-				this.titles = (0, _underscore.sortBy)(this.titles, 'endtime');
+				this.titles = (0, _underscore.sortBy)(this.titles, 'suominimi');
 				this.sorted = true;
 			} else {
 				this.titles = this.prevTitles;
@@ -1573,10 +1573,10 @@ var HomeStore = (function () {
 		value: function onGetTitlesSuccess(data) {
 
 			this.titles = (0, _underscore.sortBy)(data, function (title) {
-				return title.starttime;
+				return -1 * title.suominimi;
 			});
 
-			this.originalTitles = data;
+			this.originalTitles = this.titles;
 		}
 	}, {
 		key: 'onGetTitlesFail',

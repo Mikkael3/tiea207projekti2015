@@ -18,7 +18,7 @@ class HomeStore {
 	onHandleSort() {
 		if(!this.sorted) {
 			this.prevTitles = this.titles;
-			this.titles = sortBy(this.titles, 'endtime');
+			this.titles = sortBy(this.titles, 'suominimi');
 			this.sorted = true;
 		}
 		else {
@@ -62,10 +62,10 @@ class HomeStore {
 	onGetTitlesSuccess(data) {
 
 		this.titles = sortBy(data, function(title) {
-			return title.starttime;
+			return -1 * title.suominimi;
 		});
-		
-		this.originalTitles = data;
+
+		this.originalTitles = this.titles;
 	}
 
 	onGetTitlesFail(jqXhr) {

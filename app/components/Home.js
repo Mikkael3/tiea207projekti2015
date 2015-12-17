@@ -73,7 +73,7 @@ class Home extends React.Component {
 					if(endTimeFmt === "Invalid date") endTimeFmt = "katsottavissa toistaiseksi";
 
 					return(
-						<div className="title col-md-2" key={title.id}>
+						<div className="title col-md-3" key={title.id}>
 						<Link className=" " to={'/series/' + title.id}>
 						<div className="ribbon"><span>Sarja</span></div>
 							<img src={'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png"} />
@@ -89,10 +89,10 @@ class Home extends React.Component {
 					var date = moment(title.endtime,'YYYY-MM-DD HH:mm Z');
 					var endTimeFmt = moment(date).format('LL');
 					if(endTimeFmt === "Invalid date") endTimeFmt = "katsottavissa toistaiseksi";
-					
+
 
 					return (
-						<div className="title col-md-2" key={title.id}>
+						<div className="title col-md-3" key={title.id}>
 							<Link className="" to={'/titles/' + title.id}>
 								<img src={'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png"} />
 
