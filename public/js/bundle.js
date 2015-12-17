@@ -1462,12 +1462,12 @@ var ArvosteluStore = (function () {
 	_createClass(ArvosteluStore, [{
 		key: 'onGetArvosanaSuccess',
 		value: function onGetArvosanaSuccess(data) {
-			this.kolosseumKA = data.rows[0].ka;
+			if (data !== undefined) this.kolosseumKA = data.ka;
 		}
 	}, {
 		key: 'onGetArvosanaFail',
 		value: function onGetArvosanaFail(jqXhr) {
-			alert("error");
+
 			toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
 		}
 	}, {

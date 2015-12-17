@@ -75,7 +75,7 @@ app.get('/api/arvostelut/:id', function(req, res, next) {
             console.log('Connected to postgres! Getting schemas...');
             client.query('Select avg(arvosana) as ka from arvostelu where yleid=$1', [id] ,function(err, result) {
                 //done();
-                res.send(result);
+                res.send(result.rows[0]);
             });
         });
     }
@@ -92,8 +92,8 @@ app.get('/api/titles/:id', function(req, res, next) {
 
     db.get('SELECT *  FROM elokuvat LEFT JOIN omdb  ON elokuvat.originalnimi=omdb.originalnimi where id = ?', id, function(err, row) {
     //db.get('SELECT * from elokuvat left join omdb,trailers on  elokuvat.originalnimi like omdb.originalnimi and trailers.imdbid like omdb.imdbid where elokuvat.id=?',id,function(err, row){
-	
-   
+
+
 
 
         res.json({
@@ -109,9 +109,9 @@ app.get('/api/titles/:id', function(req, res, next) {
 	    "trailer":row.link
         });
 	console.log(row.link);
-	
+
     });
-    
+
 
 
 });

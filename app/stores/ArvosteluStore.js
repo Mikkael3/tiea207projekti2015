@@ -13,11 +13,12 @@ class ArvosteluStore {
 	}
 
 	onGetArvosanaSuccess(data) {
-		this.kolosseumKA = data.rows[0].ka;
+		if(data !== undefined)
+			this.kolosseumKA = data.ka;
 	}
 
 	onGetArvosanaFail(jqXhr) {
-		alert("error");
+
 		toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
 	}
 
