@@ -1104,7 +1104,6 @@ var Sarja = (function (_React$Component) {
 					_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" })
 				),
 				_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id }),
-				_react2['default'].createElement(_Trailer2['default'], null),
 				titles
 			);
 		}
@@ -1251,8 +1250,7 @@ var Title = (function (_React$Component) {
 					{ href: 'http://areena.yle.fi/' + this.state.id },
 					_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" })
 				),
-				_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id }),
-				_react2['default'].createElement(_Trailer2['default'], { trailer: this.state.trailer })
+				_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id })
 			);
 		}
 	}]);
@@ -1326,30 +1324,23 @@ var Trailer = (function (_React$Component) {
 		}, {
 				key: 'render',
 				value: function render() {
-						return _react2['default'].createElement(
-								'div',
-								null,
-								_react2['default'].createElement('link', { rel: 'stylesheet', type: 'text/css', href: '//cdn.traileraddict.com/css/rembed.css' }),
-								_react2['default'].createElement(
+						if (this.props.trailer !== "" || this.props.trailer !== undefined) {
+								return _react2['default'].createElement(
 										'div',
-										{ 'class': 'outer-embed-ta' },
-										_react2['default'].createElement('iframe', { size: '40%', src: '//v.traileraddict.com/8873', allowfullscreen: 'true', webkitallowfullscreen: 'true', mozallowfullscreen: 'true', scrolling: 'no', frameborder: '0', 'class': 'embed-ta' })
-								),
-								_react2['default'].createElement(
-										'p',
 										null,
 										_react2['default'].createElement(
 												'p',
 												null,
-												this.props.trailer
-										),
-										_react2['default'].createElement(
-												'a',
-												{ href: 'http://www.traileraddict.com' },
-												'TrailerAddict'
+												_react2['default'].createElement(
+														'a',
+														{ href: this.props.trailer },
+														'Traileri'
+												)
 										)
-								)
-						);
+								);
+						} else {
+								return _react2['default'].createElement('p', null);
+						}
 				}
 		}]);
 
@@ -1641,7 +1632,7 @@ var SarjaStore = (function () {
 			this.suominimi = data.suominimi;
 			this.imgid = data.imgid;
 			this.rating = data.rating;
-
+			this.trailer = data.trailer;
 			//this.bio = data.bio;
 		}
 	}, {
@@ -1671,7 +1662,7 @@ module.exports = exports['default'];
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
-	value: true
+			value: true
 });
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1691,39 +1682,37 @@ var _actionsTitleActions = require('../actions/TitleActions');
 var _actionsTitleActions2 = _interopRequireDefault(_actionsTitleActions);
 
 var TitleStore = (function () {
-	function TitleStore() {
-		_classCallCheck(this, TitleStore);
+			function TitleStore() {
+						_classCallCheck(this, TitleStore);
 
-		this.bindActions(_actionsTitleActions2['default']);
-		this.id = '';
-		this.originalnimi = '';
-		this.suominimi = '';
-		this.imgid = '';
-		this.rating = 0;
-		this.trailer = "";
-	}
+						this.bindActions(_actionsTitleActions2['default']);
+						this.id = '';
+						this.originalnimi = '';
+						this.suominimi = '';
+						this.imgid = '';
+						this.rating = 0;
+						this.trailer = "";
+			}
 
-	_createClass(TitleStore, [{
-		key: 'onGetTitleSuccess',
-		value: function onGetTitleSuccess(data) {
-			(0, _underscore.assign)(this, data);
-			this.id = data.id;
-			this.originalnimi = data.originalnimi;
-			this.suominimi = data.suominimi;
-			this.imgid = data.imgid;
-			this.rating = data.rating;
-			this.trailer = data.trailer;
+			_createClass(TitleStore, [{
+						key: 'onGetTitleSuccess',
+						value: function onGetTitleSuccess(data) {
+									(0, _underscore.assign)(this, data);
+									this.id = data.id;
+									this.originalnimi = data.originalnimi;
+									this.suominimi = data.suominimi;
+									this.imgid = data.imgid;
+									this.rating = data.rating;
+									this.trailer = data.trailer;
+						}
+			}, {
+						key: 'onGetTitleFail',
+						value: function onGetTitleFail(jqXhr) {
+									toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
+						}
+			}]);
 
-			//this.bio = data.bio;
-		}
-	}, {
-		key: 'onGetTitleFail',
-		value: function onGetTitleFail(jqXhr) {
-			toastr.error(jqXhr.responseJSON && jqXhr.responseJSON.message || jqXhr.responseText || jqXhr.statusText);
-		}
-	}]);
-
-	return TitleStore;
+			return TitleStore;
 })();
 
 exports['default'] = _alt2['default'].createStore(TitleStore);

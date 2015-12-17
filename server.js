@@ -89,12 +89,11 @@ app.get('/api/titles/all', function(req, res, next) {
 
 app.get('/api/titles/:id', function(req, res, next) {
     var id = req.params.id;
-    // var trailer = "";
-    db.get('SELECT link from trailers where imdbid in (select imdbid from omdb where originalnimi in(select originalnimi from elokuvat where id=?))',id,function(err, row){
-	   
-    });
 
     db.get('SELECT *  FROM elokuvat LEFT JOIN omdb  ON elokuvat.originalnimi=omdb.originalnimi where id = ?', id, function(err, row) {
+    //db.get('SELECT * from elokuvat left join omdb,trailers on  elokuvat.originalnimi like omdb.originalnimi and trailers.imdbid like omdb.imdbid where elokuvat.id=?',id,function(err, row){
+	
+   
 
 
         res.json({
@@ -109,8 +108,11 @@ app.get('/api/titles/:id', function(req, res, next) {
             "rating": row.rating,
 	    "trailer":row.link
         });
-	console.log(row);
+	console.log(row.link);
+	
     });
+    
+
 
 });
 

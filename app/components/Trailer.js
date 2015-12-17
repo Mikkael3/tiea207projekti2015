@@ -36,20 +36,19 @@ onChange(state) {
 }
 
 
-	render() {
+    render() {
+	if(this.props.trailer !== "" || this.props.trailer !== undefined){
 	    return (
-                   <div>
-		    <link rel="stylesheet" type="text/css" href="//cdn.traileraddict.com/css/rembed.css"></link>
-		    <div class="outer-embed-ta">
-		    <iframe size="40%"  src="//v.traileraddict.com/8873" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" frameborder="0" class="embed-ta">
-		    </iframe>
-		    </div>
+                    <div>
 		    <p>
-	            <p>{this.props.trailer}</p>
-		    <a href="http://www.traileraddict.com">TrailerAddict</a>
+	            <a href={this.props.trailer}>Traileri</a>
 		    </p>
 		    </div>
 	    );
+	}
+	else{
+	    return(<p></p>);
+	}
 	}
 
 

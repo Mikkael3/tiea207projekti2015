@@ -85,7 +85,7 @@ class Sarja extends React.Component {
 			</a>
 
 			<Arvostelu yleid={this.state.id} />
-			<Trailer/>
+
 			{titles}
 			</div>
 		);
