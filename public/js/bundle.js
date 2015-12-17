@@ -936,7 +936,7 @@ var Home = (function (_React$Component) {
 						_react2['default'].createElement(
 							'button',
 							{ className: 'btn btn-default', onClick: this.handleSortByReview },
-							this.state.sortedByRated ? 'Laskeva' : 'Nouseva'
+							this.state.sortedByRated ? 'Nouseva' : 'Laskeva'
 						)
 					)
 				),

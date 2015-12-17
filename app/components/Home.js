@@ -114,7 +114,7 @@ class Home extends React.Component {
 					<div className="controls col-md-3 col-md-offset-4">
 						<button className="btn btn-default" onClick={this.handleSort}>{this.state.sorted ? 'Palauta' : 'Järjestä'}</button>
 						<button className="btn btn-default" onClick={this.removeNoRating}>{this.state.rated ? 'Näytä kaikki' : 'Näytä vain arvostellut'}</button>
-						<button className="btn btn-default" onClick={this.handleSortByReview}>{this.state.sortedByRated ? 'Laskeva' : 'Nouseva'}</button>
+						<button className="btn btn-default" onClick={this.handleSortByReview}>{this.state.sortedByRated ? 'Nouseva' : 'Laskeva'}</button>
 					</div>
 					</div>
 
