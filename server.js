@@ -55,8 +55,9 @@ app.post('/api/arvostelu', function(req, res, next) {
           client.end();
         });
       });
-
+    }
 });
+
 
 app.get('/api/arvostelut/:id', function(req, res, next) {
     var id = req.params.id;
@@ -79,7 +80,9 @@ app.get('/api/arvostelut/:id', function(req, res, next) {
           client.end();
         });
       });
+    }
 });
+
 app.get('/api/titles/all', function(req, res, next) {
     db.all('Select * from elokuvat LEFT JOIN omdb ON elokuvat.originalnimi=omdb.originalnimi', function(err, row) {
         res.send(row);
