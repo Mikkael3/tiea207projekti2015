@@ -9,7 +9,8 @@ class TitleStore {
     	this.originalnimi = '';
     	this.suominimi = '';
         this.imgid = '';
-		this.rating = 0;
+	    this.rating = 0;
+	    this.trailer = "";
 	}
 
 	onGetTitleSuccess(data) {
@@ -18,7 +19,8 @@ class TitleStore {
 		this.originalnimi = data.originalnimi;
 		this.suominimi = data.suominimi;
 		this.imgid = data.imgid;
-		this.rating = data.rating;
+	    this.rating = data.rating;
+	    this.trailer = data.trailer;
 
 		//this.bio = data.bio;
 	}

@@ -45,7 +45,7 @@ onChange(state) {
 		    </iframe>
 		    </div>
 		    <p>
-	            <p>Sarja</p>
+	            <p>{this.props.trailer}</p>
 		    <a href="http://www.traileraddict.com">TrailerAddict</a>
 		    </p>
 		    </div>

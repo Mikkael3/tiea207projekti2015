@@ -40,7 +40,7 @@ class Title extends React.Component {
 
 
 	render() {
-
+                  
 		return (
 			<div className='content'>
 
@@ -58,7 +58,7 @@ class Title extends React.Component {
 
 			</a>
 			<Arvostelu yleid={this.state.id} />
-			<Trailer/>
+			<Trailer trailer={this.state.trailer}/>
 			</div>
 		);
 	}
