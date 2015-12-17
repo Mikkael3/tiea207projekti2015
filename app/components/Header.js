@@ -27,10 +27,12 @@ class Header extends React.Component {
 	render() {
 		return (
 			<header className="header">
-			<Link to='/'>
-				<img className="logo" src={'/img/yle.png'}/>
-			</Link>
-			<h1>Kolosseum</h1>
+			<div className="row">
+					<Link className="col-md-1" to='/'>
+						<img className="logo" src={'/img/yle.png'}/>
+					</Link>
+				<h1 className="col-md-6 col-md-offset-4 ">Kolosseum</h1>
+			</div>
 			</header>
 			);
 	}

@@ -73,13 +73,12 @@ class Home extends React.Component {
 					if(endTimeFmt === "Invalid date") endTimeFmt = "katsottavissa toistaiseksi";
 
 					return(
-						<div className="title col-md-4" key={title.id}>
-						<Link to={'/series/' + title.id}>
+						<div className="title col-md-2" key={title.id}>
+						<Link className=" " to={'/series/' + title.id}>
+						<div className="ribbon"><span>Sarja</span></div>
 							<img src={'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png"} />
-							<p>SARJA</p>
-							<p>{title.originalnimi}</p>
 							<p>{title.suominimi}</p>
-							<p>{title.rating}</p>
+							<p>Arvosana: {title.rating}</p>
 							<p>{endTimeFmt}</p>
 						</Link>
 					</div>
@@ -90,15 +89,16 @@ class Home extends React.Component {
 					var date = moment(title.endtime,'YYYY-MM-DD HH:mm Z');
 					var endTimeFmt = moment(date).format('LL');
 					if(endTimeFmt === "Invalid date") endTimeFmt = "katsottavissa toistaiseksi";
+					
 
 					return (
-						<div className="title col-md-4" key={title.id}>
-							<Link to={'/titles/' + title.id}>
+						<div className="title col-md-2" key={title.id}>
+							<Link className="" to={'/titles/' + title.id}>
 								<img src={'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png"} />
-								<p>{title.originalnimi}</p>
+
 								<p>{title.suominimi}</p>
-								<p>{title.rating}</p>
-								<p>{endTimeFmt}</p>
+								<p>Arvosana: {title.rating}</p>
+								<p> {endTimeFmt}</p>
 
 							</Link>
 						</div>
@@ -110,11 +110,12 @@ class Home extends React.Component {
 
 			return (
 					<div id='container'>
-
-					<div id="controls">
+					<div className="row">
+					<div className="controls col-md-3 col-md-offset-4">
 						<button className="btn btn-default" onClick={this.handleSort}>{this.state.sorted ? 'Palauta' : 'Järjestä'}</button>
-						<button onClick={this.removeNoRating}>{this.state.rated ? 'Näytä kaikki' : 'Näytä vain arvostellut'}</button>
-						<button onClick={this.handleSortByReview}>{this.state.sortedByRated ? 'Laskeva' : 'Nouseva'}</button>
+						<button className="btn btn-default" onClick={this.removeNoRating}>{this.state.rated ? 'Näytä kaikki' : 'Näytä vain arvostellut'}</button>
+						<button className="btn btn-default" onClick={this.handleSortByReview}>{this.state.sortedByRated ? 'Laskeva' : 'Nouseva'}</button>
+					</div>
 					</div>
 
 					{titles}

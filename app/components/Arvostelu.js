@@ -62,7 +62,7 @@ onChange(state) {
 			<input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Melko huono">2 stars</label>
 			<input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Huono">1 star</label>
 			</fieldset>
-      <input type="submit" id="arvostelunappula" value="Arvostele"></input>
+      <input className="btn" type="submit" id="arvostelunappula" value="Arvostele"></input>
 			</form>
       <span className='help-block'>{this.state.helpBlock}</span>
       </div>

@@ -27,8 +27,13 @@ class Footer extends React.Component {
 	render() {
 		return (
 			<footer id="footer">
-			<p>Hello from footer!</p>
-			<p/>
+				<div className="container">
+					<div className="row">
+						<div className="col md 6">
+						<p>Kolosseum</p>
+						</div>
+					</div>
+				</div>
 			</footer>
 			);
 	}

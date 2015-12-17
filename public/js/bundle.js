@@ -468,7 +468,7 @@ var Arvostelu = (function (_React$Component) {
               '1 star'
             )
           ),
-          _react2['default'].createElement('input', { type: 'submit', id: 'arvostelunappula', value: 'Arvostele' })
+          _react2['default'].createElement('input', { className: 'btn', type: 'submit', id: 'arvostelunappula', value: 'Arvostele' })
         ),
         _react2['default'].createElement(
           'span',
@@ -546,11 +546,22 @@ var Footer = (function (_React$Component) {
 				'footer',
 				{ id: 'footer' },
 				_react2['default'].createElement(
-					'p',
-					null,
-					'Hello from footer!'
-				),
-				_react2['default'].createElement('p', null)
+					'div',
+					{ className: 'container' },
+					_react2['default'].createElement(
+						'div',
+						{ className: 'row' },
+						_react2['default'].createElement(
+							'div',
+							{ className: 'col md 6' },
+							_react2['default'].createElement(
+								'p',
+								null,
+								'Kolosseum'
+							)
+						)
+					)
+				)
 			);
 		}
 	}]);
@@ -705,14 +716,18 @@ var Header = (function (_React$Component) {
 				'header',
 				{ className: 'header' },
 				_react2['default'].createElement(
-					_reactRouter.Link,
-					{ to: '/' },
-					_react2['default'].createElement('img', { className: 'logo', src: '/img/yle.png' })
-				),
-				_react2['default'].createElement(
-					'h1',
-					null,
-					'Kolosseum'
+					'div',
+					{ className: 'row' },
+					_react2['default'].createElement(
+						_reactRouter.Link,
+						{ className: 'col-md-1', to: '/' },
+						_react2['default'].createElement('img', { className: 'logo', src: '/img/yle.png' })
+					),
+					_react2['default'].createElement(
+						'h1',
+						{ className: 'col-md-6 col-md-offset-4 ' },
+						'Kolosseum'
+					)
 				)
 			);
 		}
@@ -831,21 +846,20 @@ var Home = (function (_React$Component) {
 
 					return _react2['default'].createElement(
 						'div',
-						{ className: 'title col-md-4', key: title.id },
+						{ className: 'title col-md-2', key: title.id },
 						_react2['default'].createElement(
 							_reactRouter.Link,
-							{ to: '/series/' + title.id },
+							{ className: ' ', to: '/series/' + title.id },
+							_react2['default'].createElement(
+								'div',
+								{ className: 'ribbon' },
+								_react2['default'].createElement(
+									'span',
+									null,
+									'Sarja'
+								)
+							),
 							_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png" }),
-							_react2['default'].createElement(
-								'p',
-								null,
-								'SARJA'
-							),
-							_react2['default'].createElement(
-								'p',
-								null,
-								title.originalnimi
-							),
 							_react2['default'].createElement(
 								'p',
 								null,
@@ -854,6 +868,7 @@ var Home = (function (_React$Component) {
 							_react2['default'].createElement(
 								'p',
 								null,
+								'Arvosana: ',
 								title.rating
 							),
 							_react2['default'].createElement(
@@ -872,16 +887,11 @@ var Home = (function (_React$Component) {
 
 					return _react2['default'].createElement(
 						'div',
-						{ className: 'title col-md-4', key: title.id },
+						{ className: 'title col-md-2', key: title.id },
 						_react2['default'].createElement(
 							_reactRouter.Link,
-							{ to: '/titles/' + title.id },
+							{ className: '', to: '/titles/' + title.id },
 							_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_200,h_200,c_fit/' + title.imgid + ".png" }),
-							_react2['default'].createElement(
-								'p',
-								null,
-								title.originalnimi
-							),
 							_react2['default'].createElement(
 								'p',
 								null,
@@ -890,11 +900,13 @@ var Home = (function (_React$Component) {
 							_react2['default'].createElement(
 								'p',
 								null,
+								'Arvosana: ',
 								title.rating
 							),
 							_react2['default'].createElement(
 								'p',
 								null,
+								' ',
 								endTimeFmt
 							)
 						)
@@ -907,21 +919,25 @@ var Home = (function (_React$Component) {
 				{ id: 'container' },
 				_react2['default'].createElement(
 					'div',
-					{ id: 'controls' },
+					{ className: 'row' },
 					_react2['default'].createElement(
-						'button',
-						{ className: 'btn btn-default', onClick: this.handleSort },
-						this.state.sorted ? 'Palauta' : 'Järjestä'
-					),
-					_react2['default'].createElement(
-						'button',
-						{ onClick: this.removeNoRating },
-						this.state.rated ? 'Näytä kaikki' : 'Näytä vain arvostellut'
-					),
-					_react2['default'].createElement(
-						'button',
-						{ onClick: this.handleSortByReview },
-						this.state.sortedByRated ? 'Laskeva' : 'Nouseva'
+						'div',
+						{ className: 'controls col-md-3 col-md-offset-4' },
+						_react2['default'].createElement(
+							'button',
+							{ className: 'btn btn-default', onClick: this.handleSort },
+							this.state.sorted ? 'Palauta' : 'Järjestä'
+						),
+						_react2['default'].createElement(
+							'button',
+							{ className: 'btn btn-default', onClick: this.removeNoRating },
+							this.state.rated ? 'Näytä kaikki' : 'Näytä vain arvostellut'
+						),
+						_react2['default'].createElement(
+							'button',
+							{ className: 'btn btn-default', onClick: this.handleSortByReview },
+							this.state.sortedByRated ? 'Laskeva' : 'Nouseva'
+						)
 					)
 				),
 				titles
@@ -1044,67 +1060,63 @@ var Sarja = (function (_React$Component) {
 
 			return _react2['default'].createElement(
 				'div',
-				{ className: 'content' },
+				{ className: 'container' },
 				_react2['default'].createElement(
-					'button',
-					{ onClick: this.getNewSarja.bind(this) },
-					'Näytä jaksot'
+					'div',
+					{ className: 'row' },
+					_react2['default'].createElement(
+						'div',
+						{ className: 'col-md-6' },
+						_react2['default'].createElement(
+							'a',
+							{ className: '', href: 'http://areena.yle.fi/' + this.state.id },
+							_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" })
+						),
+						_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id })
+					),
+					_react2['default'].createElement(
+						'div',
+						{ className: 'col-md-6' },
+						_react2['default'].createElement(
+							'h2',
+							null,
+							this.state.suominimi
+						),
+						_react2['default'].createElement(
+							'p',
+							null,
+							'Kuvaus: ',
+							this.state.kuvaus
+						),
+						_react2['default'].createElement(
+							'p',
+							null,
+							this.state.promotiontitle
+						),
+						_react2['default'].createElement(
+							'p',
+							null,
+							'Rating: ',
+							this.state.rating
+						),
+						_react2['default'].createElement(
+							'p',
+							null,
+							'Katseluaika: ',
+							this.state.endtime
+						)
+					)
 				),
 				_react2['default'].createElement(
-					'h2',
+					'div',
 					null,
-					'Originalnimi: ',
-					this.state.originalnimi
-				),
-				_react2['default'].createElement(
-					'h2',
-					null,
-					'Suominimi: ',
-					this.state.suominimi
-				),
-				_react2['default'].createElement(
-					'h2',
-					null,
-					'ID: ',
-					this.state.id
-				),
-				_react2['default'].createElement(
-					'p',
-					null,
-					'Kuvaus: ',
-					this.state.kuvaus
-				),
-				_react2['default'].createElement(
-					'p',
-					null,
-					'Promotion Title: ',
-					this.state.promotiontitle
-				),
-				_react2['default'].createElement(
-					'p',
-					null,
-					'Rating: ',
-					this.state.rating
-				),
-				_react2['default'].createElement(
-					'p',
-					null,
-					'Aloitusaika: ',
-					this.state.starttime
-				),
-				_react2['default'].createElement(
-					'p',
-					null,
-					'Lopetusaika: ',
-					this.state.endtime
-				),
-				_react2['default'].createElement(
-					'a',
-					{ href: 'http://areena.yle.fi/' + this.state.id },
-					_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" })
-				),
-				_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id }),
-				titles
+					_react2['default'].createElement(
+						'button',
+						{ onClick: this.getNewSarja.bind(this) },
+						'Näytä jaksot'
+					),
+					titles
+				)
 			);
 		}
 	}]);
@@ -1196,61 +1208,53 @@ var Title = (function (_React$Component) {
 
 			return _react2['default'].createElement(
 				'div',
-				{ className: 'content' },
+				{ className: 'container' },
 				_react2['default'].createElement(
-					'h2',
-					null,
-					'Originalnimi: ',
-					this.state.originalnimi
-				),
-				_react2['default'].createElement(
-					'h2',
-					null,
-					'Suominimi: ',
-					this.state.suominimi
-				),
-				_react2['default'].createElement(
-					'h2',
-					null,
-					'ID: ',
-					this.state.id
-				),
-				_react2['default'].createElement(
-					'p',
-					null,
-					'Kuvaus: ',
-					this.state.kuvaus
-				),
-				_react2['default'].createElement(
-					'p',
-					null,
-					'Promotion title: ',
-					this.state.promotiontitle
-				),
-				_react2['default'].createElement(
-					'p',
-					null,
-					'Rating: ',
-					this.state.rating
-				),
-				_react2['default'].createElement(
-					'p',
-					null,
-					'Aloitusaika: ',
-					this.state.starttime
-				),
-				_react2['default'].createElement(
-					'p',
-					null,
-					'Lopetusaika: ',
-					this.state.endtime
-				),
-				_react2['default'].createElement(
-					'a',
-					{ href: 'http://areena.yle.fi/' + this.state.id },
-					_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" })
-				),
-				_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id })
+					'div',
+					{ className: 'row' },
+					_react2['default'].createElement(
+						'div',
+						{ className: 'col-md-6' },
+						_react2['default'].createElement(
+							'a',
+							{ className: '', href: 'http://areena.yle.fi/' + this.state.id },
+							_react2['default'].createElement('img', { src: 'http://images.cdn.yle.fi/image/upload/w_400,h_400,c_fit/' + this.state.imgid + ".png" })
+						),
+						_react2['default'].createElement(_Arvostelu2['default'], { yleid: this.state.id })
+					),
+					_react2['default'].createElement(
+						'div',
+						{ className: 'col-md-6' },
+						_react2['default'].createElement(
+							'h2',
+							null,
+							this.state.suominimi
+						),
+						_react2['default'].createElement(
+							'p',
+							null,
+							'Kuvaus: ',
+							this.state.kuvaus
+						),
+						_react2['default'].createElement(
+							'p',
+							null,
+							this.state.promotiontitle
+						),
+						_react2['default'].createElement(
+							'p',
+							null,
+							'Arvosana: ',
+							this.state.rating
+						),
+						_react2['default'].createElement(
+							'p',
+							null,
+							'Katseluaika: ',
+							this.state.endtime
+						)
+					)
+				)
 			);
 		}
 	}]);
@@ -2022,7 +2026,7 @@ function getUserConfirmation(message, callback) {
 }
 
 /**
- * Returns true if the HTML5 history API is supported. Taken from Modernizr.
+ * Returns true if the HTML5 history API is supported. Taken from modernizr.
  *
  * https://github.com/Modernizr/Modernizr/blob/master/LICENSE
  * https://github.com/Modernizr/Modernizr/blob/master/feature-detects/history.js
@@ -2032,11 +2036,6 @@ function getUserConfirmation(message, callback) {
 function supportsHistory() {
   var ua = navigator.userAgent;
   if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) {
-    return false;
-  }
-  // FIXME: Work around our browser history not working correctly on Chrome
-  // iOS: https://github.com/rackt/react-router/issues/2565
-  if (ua.indexOf('CriOS') !== -1) {
     return false;
   }
   return window.history && 'pushState' in window.history;
@@ -2082,10 +2081,6 @@ var _createDOMHistory = require('./createDOMHistory');
 
 var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
 
-var _parsePath = require('./parsePath');
-
-var _parsePath2 = _interopRequireDefault(_parsePath);
-
 /**
  * Creates and returns a history object that uses HTML5's history API
  * (pushState, replaceState, and the popstate event) to manage history.
@@ -2122,9 +2117,7 @@ function createBrowserHistory() {
       if (isSupported) window.history.replaceState(_extends({}, historyState, { key: key }), null, path);
     }
 
-    var location = _parsePath2['default'](path);
-
-    return history.createLocation(_extends({}, location, { state: state }), undefined, key);
+    return history.createLocation(path, state, undefined, key);
   }
 
   function startPopStateListener(_ref) {
@@ -2237,7 +2230,7 @@ function createBrowserHistory() {
 exports['default'] = createBrowserHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":24,"./DOMStateStorage":26,"./DOMUtils":27,"./ExecutionEnvironment":28,"./createDOMHistory":30,"./parsePath":35,"_process":23,"invariant":40}],30:[function(require,module,exports){
+},{"./Actions":24,"./DOMStateStorage":26,"./DOMUtils":27,"./ExecutionEnvironment":28,"./createDOMHistory":30,"_process":23,"invariant":40}],30:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2281,7 +2274,6 @@ exports['default'] = createDOMHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
 },{"./DOMUtils":27,"./ExecutionEnvironment":28,"./createHistory":31,"_process":23,"invariant":40}],31:[function(require,module,exports){
-//import warning from 'warning'
 'use strict';
 
 exports.__esModule = true;
@@ -2305,10 +2297,6 @@ var _createLocation3 = _interopRequireDefault(_createLocation2);
 var _runTransitionHook = require('./runTransitionHook');
 
 var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
-
-var _parsePath = require('./parsePath');
-
-var _parsePath2 = _interopRequireDefault(_parsePath);
 
 var _deprecate = require('./deprecate');
 
@@ -2430,10 +2418,15 @@ function createHistory() {
       if (ok) {
         // treat PUSH to current path like REPLACE to be consistent with browsers
         if (nextLocation.action === _Actions.PUSH) {
-          var prevPath = createPath(location);
-          var nextPath = createPath(nextLocation);
+          var _getCurrentLocation = getCurrentLocation();
 
-          if (nextPath === prevPath) nextLocation.action = _Actions.REPLACE;
+          var pathname = _getCurrentLocation.pathname;
+          var search = _getCurrentLocation.search;
+
+          var currentPath = pathname + search;
+          var path = nextLocation.pathname + nextLocation.search;
+
+          if (currentPath === path) nextLocation.action = _Actions.REPLACE;
         }
 
         if (finishTransition(nextLocation) !== false) updateLocation(nextLocation);
@@ -2446,12 +2439,20 @@ function createHistory() {
     });
   }
 
-  function push(location) {
-    transitionTo(createLocation(location, _Actions.PUSH, createKey()));
+  function pushState(state, path) {
+    transitionTo(createLocation(path, state, _Actions.PUSH, createKey()));
   }
 
-  function replace(location) {
-    transitionTo(createLocation(location, _Actions.REPLACE, createKey()));
+  function push(path) {
+    pushState(null, path);
+  }
+
+  function replaceState(state, path) {
+    transitionTo(createLocation(path, state, _Actions.REPLACE, createKey()));
+  }
+
+  function replace(path) {
+    replaceState(null, path);
   }
 
   function goBack() {
@@ -2466,12 +2467,12 @@ function createHistory() {
     return createRandomKey(keyLength);
   }
 
-  function createPath(location) {
-    if (location == null || typeof location === 'string') return location;
+  function createPath(path) {
+    if (path == null || typeof path === 'string') return path;
 
-    var pathname = location.pathname;
-    var search = location.search;
-    var hash = location.hash;
+    var pathname = path.pathname;
+    var search = path.search;
+    var hash = path.hash;
 
     var result = pathname;
 
@@ -2482,29 +2483,14 @@ function createHistory() {
     return result;
   }
 
-  function createHref(location) {
-    return createPath(location);
+  function createHref(path) {
+    return createPath(path);
   }
 
-  function createLocation(location, action) {
-    var key = arguments.length <= 2 || arguments[2] === undefined ? createKey() : arguments[2];
+  function createLocation(path, state, action) {
+    var key = arguments.length <= 3 || arguments[3] === undefined ? createKey() : arguments[3];
 
-    if (typeof action === 'object') {
-      //warning(
-      //  false,
-      //  'The state (2nd) argument to history.createLocation is deprecated; use a ' +
-      //  'location descriptor instead'
-      //)
-
-      if (typeof location === 'string') location = _parsePath2['default'](location);
-
-      location = _extends({}, location, { state: action });
-
-      action = key;
-      key = arguments[3] || createKey();
-    }
-
-    return _createLocation3['default'](location, action, key);
+    return _createLocation3['default'](path, state, action, key);
   }
 
   // deprecated
@@ -2534,24 +2520,12 @@ function createHistory() {
     });
   }
 
-  // deprecated
-  function pushState(state, path) {
-    if (typeof path === 'string') path = _parsePath2['default'](path);
-
-    push(_extends({ state: state }, path));
-  }
-
-  // deprecated
-  function replaceState(state, path) {
-    if (typeof path === 'string') path = _parsePath2['default'](path);
-
-    replace(_extends({ state: state }, path));
-  }
-
   return {
     listenBefore: listenBefore,
     listen: listen,
     transitionTo: transitionTo,
+    pushState: pushState,
+    replaceState: replaceState,
     push: push,
     replace: replace,
     go: go,
@@ -2564,21 +2538,16 @@ function createHistory() {
 
     setState: _deprecate2['default'](setState, 'setState is deprecated; use location.key to save state instead'),
     registerTransitionHook: _deprecate2['default'](registerTransitionHook, 'registerTransitionHook is deprecated; use listenBefore instead'),
-    unregisterTransitionHook: _deprecate2['default'](unregisterTransitionHook, 'unregisterTransitionHook is deprecated; use the callback returned from listenBefore instead'),
-    pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
-    replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
+    unregisterTransitionHook: _deprecate2['default'](unregisterTransitionHook, 'unregisterTransitionHook is deprecated; use the callback returned from listenBefore instead')
   };
 }
 
 exports['default'] = createHistory;
 module.exports = exports['default'];
-},{"./Actions":24,"./AsyncUtils":25,"./createLocation":32,"./deprecate":33,"./parsePath":35,"./runTransitionHook":36,"deep-equal":37}],32:[function(require,module,exports){
-//import warning from 'warning'
+},{"./Actions":24,"./AsyncUtils":25,"./createLocation":32,"./deprecate":33,"./runTransitionHook":36,"deep-equal":37}],32:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -2589,31 +2558,16 @@ var _parsePath = require('./parsePath');
 var _parsePath2 = _interopRequireDefault(_parsePath);
 
 function createLocation() {
-  var location = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
-  var action = arguments.length <= 1 || arguments[1] === undefined ? _Actions.POP : arguments[1];
-  var key = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+  var path = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
+  var state = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+  var action = arguments.length <= 2 || arguments[2] === undefined ? _Actions.POP : arguments[2];
+  var key = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 
-  var _fourthArg = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
+  if (typeof path === 'string') path = _parsePath2['default'](path);
 
-  if (typeof location === 'string') location = _parsePath2['default'](location);
-
-  if (typeof action === 'object') {
-    //warning(
-    //  false,
-    //  'The state (2nd) argument to createLocation is deprecated; use a ' +
-    //  'location descriptor instead'
-    //)
-
-    location = _extends({}, location, { state: action });
-
-    action = key || _Actions.POP;
-    key = _fourthArg;
-  }
-
-  var pathname = location.pathname || '/';
-  var search = location.search || '';
-  var hash = location.hash || '';
-  var state = location.state || null;
+  var pathname = path.pathname || '/';
+  var search = path.search || '';
+  var hash = path.hash || '';
 
   return {
     pathname: pathname,
@@ -2628,22 +2582,28 @@ function createLocation() {
 exports['default'] = createLocation;
 module.exports = exports['default'];
 },{"./Actions":24,"./parsePath":35}],33:[function(require,module,exports){
-//import warning from 'warning'
-
-"use strict";
+(function (process){
+'use strict';
 
 exports.__esModule = true;
-function deprecate(fn) {
-  return fn;
-  //return function () {
-  //  warning(false, '[history] ' + message)
-  //  return fn.apply(this, arguments)
-  //}
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _warning = require('warning');
+
+var _warning2 = _interopRequireDefault(_warning);
+
+function deprecate(fn, message) {
+  return function () {
+    process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] ' + message) : undefined;
+    return fn.apply(this, arguments);
+  };
 }
 
-exports["default"] = deprecate;
-module.exports = exports["default"];
-},{}],34:[function(require,module,exports){
+exports['default'] = deprecate;
+module.exports = exports['default'];
+}).call(this,require('_process'))
+},{"_process":23,"warning":41}],34:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
