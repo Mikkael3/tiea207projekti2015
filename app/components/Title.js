@@ -1,3 +1,8 @@
+/*
+* Joonas Vilppunen, Markus Muranen, Niko Heikkinen
+* MIT Licence
+* 2015
+*/
 import React from 'react';
 import {Link} from 'react-router';
 import TitleStore from '../stores/TitleStore';
@@ -56,7 +61,7 @@ class Title extends React.Component {
 						<p>Kuvaus: {this.state.kuvaus}</p>
 
 						<p>{this.state.promotiontitle}</p>
-						<p>Arvosana: {this.state.rating}</p>						
+						<p>Arvosana: {this.state.rating}</p>
 						<p>Katseluaika: {this.state.endtime}</p>
 					</div>
 				</div>

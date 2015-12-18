@@ -1,3 +1,8 @@
+/*
+* Modified by:Joonas Vilppunen, Markus Muranen, Niko Heikkinen
+* MIT Licence
+* 2015
+*/
 var request = require('request');
 var myJSON = require('JSON');
 var lite = require('sqlite3').verbose();
@@ -66,7 +71,7 @@ function ajaKantaan(){
 	    {
 		kirjoitaYLE(offset);
 		offset = offset +100;
-	    }	    
+	    }
 	}
     });
 }
@@ -78,7 +83,7 @@ function kirjoitaYLE(off){
 	    console.log("ylessä " + err);
 	    kirjoitaYLE(off);
 	} else {
-	    
+
             for(var i = 0; i < 100; i++){
                 var smn = "";
                 var iid = "";
@@ -101,15 +106,15 @@ function kirjoitaYLE(off){
 		    }catch(err){continue;}
 		}
 
-	
+
                 try{
-                     
+
 		    iid =  body.data[i].image.id;
                     smn = body.data[i].title.fi;
 		    orgt = body.data[i].originalTitle.unknown;
 		    kuvaus = body.data[i].description.fi;
 		    pmtl = body.data[i].promotionTitle.fi;
-    
+
                 }
                 catch(err){
                 }
@@ -117,7 +122,7 @@ function kirjoitaYLE(off){
                     var m =  body.data[i].id;
 		}
                 catch(err){continue;}
-		
+
                 var oid = body.data[i].id;
 
 		try{
@@ -125,10 +130,10 @@ function kirjoitaYLE(off){
 			if(body.data[i].partOfSeries.subject[n].key != undefined)
 			    db.run('INSERT OR IGNORE INTO genres (id,genre) VALUES(?,?)',oid,body.data[i].partOfSeries.subject[n].key);
 		    }
-		    
+
 		}
 		catch(err){
-                   
+
 		}
 
 		if(smn == ""  || smn == null)
@@ -137,7 +142,7 @@ function kirjoitaYLE(off){
 		    orgt = '-';
 		db.run('INSERT OR IGNORE INTO elokuvat (id,originalnimi,suominimi,imgid,kuvaus,endtime,starttime,promotiontitle) VALUES(?,?,?,?,?,?,?,?)',oid,orgt,smn,iid,kuvaus,endt,stat,pmtl);
 		haeOmdb(orgt,smn);
-	    }  
+	    }
 	}});}
 
 //hakee ja kirja omdbsta saatavan tiedon
@@ -151,10 +156,10 @@ function haeOmdb(originalnimi,smn){
                 try{
 		    var a = (body.imdbID);
 		    var b = (body.imdbRating);
-		    
+
                 }
                 catch(err){
-		    return;  
+		    return;
                 }
 		db.run('INSERT OR IGNORE INTO omdb (originalnimi,rating,imdbid) VALUES(?,?,?)',originalnimi,body.imdbRating,body.imdbID);
 		haeTraileri(body.imdbID);
@@ -168,10 +173,10 @@ function haeOmdb(originalnimi,smn){
                 try{
 		    var a = (body.imdbID);
 		    var b = (body.imdbRating);
-		    
+
                 }
                 catch(err){
-		    return;  
+		    return;
                 }
 		db.run('INSERT OR IGNORE INTO omdb (originalnimi,rating,imdbid) VALUES(?,?,?)',smn,body.imdbRating,body.imdbID);
 		haeTraileri(body.imdbID);
@@ -195,7 +200,7 @@ function haeTraileri(imdbid){
 		link = xml.child('trailer').child('link').toString();
 	    }
             catch(err){
-		return;  
+		return;
             }
 	    if(link.length > 0)
 		db.run('INSERT OR IGNORE INTO trailers (imdbid,link) VALUES(?,?)',imdbid,link);
@@ -216,4 +221,3 @@ function getMyBodyXml(url, callback){
 }
 
 ajaKantaan();
-

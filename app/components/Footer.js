@@ -1,3 +1,8 @@
+/*
+* Joonas Vilppunen, Markus Muranen, Niko Heikkinen
+* MIT Licence
+* 2015
+*/
 import React from 'react';
 import {Link} from 'react-router';
 /*import FooterStore from '../stores/FooterStore';

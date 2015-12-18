@@ -1,3 +1,9 @@
+/*
+* Sahat Yalkabov
+* Modified by:Joonas Vilppunen, Markus Muranen, Niko Heikkinen
+* MIT Licence
+* 2015
+*/
 import React from 'react';
 import {Route} from 'react-router';
 import App from './components/App';

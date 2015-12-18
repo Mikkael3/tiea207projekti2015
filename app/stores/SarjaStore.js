@@ -1,3 +1,8 @@
+/*
+* Joonas Vilppunen, Markus Muranen, Niko Heikkinen
+* MIT Licence
+* 2015
+*/
 import {assign} from 'underscore';
 import alt from '../alt';
 import SarjaActions from '../actions/SarjaActions';

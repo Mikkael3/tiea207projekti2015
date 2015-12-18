@@ -1,3 +1,8 @@
+/*
+* Sahat Yalkabov
+* MIT Licence
+* 2015
+*/
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var gulpif = require('gulp-if');

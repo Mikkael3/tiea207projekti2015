@@ -1,3 +1,8 @@
+/*
+* Joonas Vilppunen, Markus Muranen, Niko Heikkinen
+* MIT Licence
+* 2015
+*/
 import alt from '../alt';
 import HomeActions from '../actions/HomeActions';
 import {sortBy,filter} from 'underscore';

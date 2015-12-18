@@ -1,3 +1,8 @@
+/*
+* Joonas Vilppunen, Markus Muranen, Niko Heikkinen
+* MIT Licence
+* 2015
+*/
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');

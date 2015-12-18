@@ -1,3 +1,8 @@
+/*
+* Joonas Vilppunen, Markus Muranen, Niko Heikkinen
+* MIT Licence
+* 2015
+*/
 import alt from '../alt';
 
 class HomeActions {
@@ -24,7 +29,7 @@ class HomeActions {
 	}
 
 	getTitles() {
-		
+
 		$.ajax({ url: '/api/titles/all'})
 		 .done((data) => {
 		 	this.actions.getTitlesSuccess(data)

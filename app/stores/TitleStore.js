@@ -1,3 +1,8 @@
+/*
+* Joonas Vilppunen, Markus Muranen, Niko Heikkinen
+* MIT Licence
+* 2015
+*/
 import {assign} from 'underscore';
 import alt from '../alt';
 import TitleActions from '../actions/TitleActions';
@@ -21,7 +26,7 @@ class TitleStore {
 	this.imgid = data.imgid;
 	this.rating = data.rating;
 	this.trailer = data.trailer;
-	
+
 	}
 
 	onGetTitleFail(jqXhr) {

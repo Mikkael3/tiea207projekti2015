@@ -1,3 +1,8 @@
+/*
+* Sahat Yalkabov
+* MIT Licence
+* 2015
+*/
 import React from 'react';
 import Router from 'react-router';
 import ReactDOM from 'react-dom';
