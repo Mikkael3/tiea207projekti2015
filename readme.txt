@@ -1,3 +1,5 @@
+Kolosseum-projekti
+Yhdistää Yle Areenan sekä IMDB:n arvosanat yhdelle sivulle.
 
 http://sahatyalkabov.com/create-a-character-voting-app-using-react-nodejs-mongodb-and-socketio/
 Thanks for the tutorial and code.
